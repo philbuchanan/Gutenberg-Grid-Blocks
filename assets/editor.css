@@ -1,0 +1,6 @@
+.o-col,
+.o-block-grid__item {
+  border: 1px dashed #eee;
+  margin-left: -14px;
+  margin-right: -14px;
+}
