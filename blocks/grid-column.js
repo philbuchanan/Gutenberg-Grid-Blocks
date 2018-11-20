@@ -23,15 +23,15 @@
 			},
 			tiny: {
 				type: 'number',
-				default: null,
+				default: '',
 			},
 			small: {
 				type: 'number',
-				default: null,
+				default: '',
 			},
 			medium: {
 				type: 'number',
-				default: null,
+				default: '',
 			},
 			large: {
 				type: 'number',
@@ -39,7 +39,7 @@
 			},
 			full: {
 				type: 'number',
-				default: null,
+				default: '',
 			},
 		},
 		edit: function(props) {
