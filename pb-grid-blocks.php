@@ -85,7 +85,7 @@ class PB_Grid_Blocks {
 
 		// Styles
 		wp_enqueue_style(
-			'pb-accordions-editor-styles',
+			'pb-grid-blocks-editor-styles',
 			plugins_url('assets/editor.css', __FILE__),
 			array('wp-edit-blocks'),
 			$this->get_plugin_version()
