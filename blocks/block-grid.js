@@ -17,23 +17,23 @@
 				source: 'children',
 				selector: '.o-block-grid',
 			},
-			tiny: {
+			xs: {
 				type: 'number',
 				default: '',
 			},
-			small: {
+			sm: {
 				type: 'number',
 				default: '',
 			},
-			medium: {
+			md: {
 				type: 'number',
 				default: '',
 			},
-			large: {
+			lg: {
 				type: 'number',
 				default: 3,
 			},
-			full: {
+			xl: {
 				type: 'number',
 				default: '',
 			},
@@ -50,11 +50,11 @@
 							className: 'block-grid-settings'
 						},
 						el(components.RangeControl, {
-							label: i18n.__('Tiny'),
-							value: attributes.tiny,
+							label: i18n.__('Extra Small'),
+							value: attributes.xs,
 							onChange: function(value) {
 								props.setAttributes({
-									tiny: value,
+									xs: value,
 								});
 							},
 							min: 1,
@@ -62,21 +62,21 @@
 						}),
 						el(components.RangeControl, {
 							label: i18n.__('Small'),
-							value: attributes.small,
+							value: attributes.sm,
 							onChange: function(value) {
 								props.setAttributes({
-									small: value,
+									sm: value,
 								});
 							},
 							min: 1,
 							max: 6
 						}),
 						el(components.RangeControl, {
-							label: i18n.__('Medium'),
-							value: attributes.medium,
+						label: i18n.__('Medium'),
+							value: attributes.md,
 							onChange: function(value) {
 								props.setAttributes({
-									medium: value,
+									md: value,
 								});
 							},
 							min: 1,
@@ -84,21 +84,21 @@
 						}),
 						el(components.RangeControl, {
 							label: i18n.__('Large'),
-							value: attributes.large,
+							value: attributes.lg,
 							onChange: function(value) {
 								props.setAttributes({
-									large: value,
+									lg: value,
 								});
 							},
 							min: 1,
 							max: 6
 						}),
 						el(components.RangeControl, {
-							label: i18n.__('Full'),
-							value: attributes.full,
+							label: i18n.__('Extra Large'),
+							value: attributes.xl,
 							onChange: function(value) {
 								props.setAttributes({
-									full: value,
+									xl: value,
 								});
 							},
 							min: 1,
@@ -125,11 +125,11 @@
 				'o-block-grid'
 			];
 
-			if (attributes.tiny)   classes.push('o-block-grid-' + attributes.tiny);
-			if (attributes.small)  classes.push('o-block-grid-' + attributes.small + '-small');
-			if (attributes.medium) classes.push('o-block-grid-' + attributes.medium + '-medium');
-			if (attributes.large)  classes.push('o-block-grid-' + attributes.large + '-large');
-			if (attributes.full)   classes.push('o-block-grid-' + attributes.full + '-full');
+			if (attributes.xs) classes.push('o-block-grid-' + attributes.xs);
+			if (attributes.sm) classes.push('o-block-grid-' + attributes.sm + '-sm');
+			if (attributes.md) classes.push('o-block-grid-' + attributes.md + '-md');
+			if (attributes.lg) classes.push('o-block-grid-' + attributes.lg + '-lg');
+			if (attributes.xl) classes.push('o-block-grid-' + attributes.xl + '-xl');
 
 			return (
 				el('div',

@@ -21,23 +21,23 @@
 				source: 'children',
 				selector: '.o-col',
 			},
-			tiny: {
+			xs: {
 				type: 'number',
 				default: '',
 			},
-			small: {
+			sm: {
 				type: 'number',
 				default: '',
 			},
-			medium: {
+			md: {
 				type: 'number',
 				default: '',
 			},
-			large: {
+			lg: {
 				type: 'number',
 				default: 6,
 			},
-			full: {
+			xl: {
 				type: 'number',
 				default: '',
 			},
@@ -54,11 +54,11 @@
 							className: 'grid-column-settings'
 						},
 						el(components.RangeControl, {
-							label: i18n.__('Tiny Span'),
-							value: attributes.tiny,
+							label: i18n.__('Extra Small Span'),
+							value: attributes.xs,
 							onChange: function(value) {
 								props.setAttributes({
-									tiny: value,
+									xs: value,
 								});
 							},
 							min: 1,
@@ -66,10 +66,10 @@
 						}),
 						el(components.RangeControl, {
 							label: i18n.__('Small Span'),
-							value: attributes.small,
+							value: attributes.sm,
 							onChange: function(value) {
 								props.setAttributes({
-									small: value,
+									sm: value,
 								});
 							},
 							min: 1,
@@ -77,10 +77,10 @@
 						}),
 						el(components.RangeControl, {
 							label: i18n.__('Medium Span'),
-							value: attributes.medium,
+							value: attributes.md,
 							onChange: function(value) {
 								props.setAttributes({
-									medium: value,
+									md: value,
 								});
 							},
 							min: 1,
@@ -88,21 +88,21 @@
 						}),
 						el(components.RangeControl, {
 							label: i18n.__('Large Span'),
-							value: attributes.large,
+							value: attributes.lg,
 							onChange: function(value) {
 								props.setAttributes({
-									large: value,
+									lg: value,
 								});
 							},
 							min: 1,
 							max: 12
 						}),
 						el(components.RangeControl, {
-							label: i18n.__('Full Span'),
-							value: attributes.full,
+							label: i18n.__('Extra Large Span'),
+							value: attributes.xl,
 							onChange: function(value) {
 								props.setAttributes({
-									full: value,
+									xl: value,
 								});
 							},
 							min: 1,
@@ -125,11 +125,11 @@
 				'o-col'
 			];
 
-			if (attributes.tiny)   classes.push('u-' + attributes.tiny + 'of12');
-			if (attributes.small)  classes.push('u-' + attributes.small + 'of12-small');
-			if (attributes.medium) classes.push('u-' + attributes.medium + 'of12-medium');
-			if (attributes.large)  classes.push('u-' + attributes.large + 'of12-large');
-			if (attributes.full)   classes.push('u-' + attributes.full + 'of12-full');
+			if (attributes.xs) classes.push('u-' + attributes.xs + 'of12');
+			if (attributes.sm) classes.push('u-' + attributes.sm + 'of12-sm');
+			if (attributes.md) classes.push('u-' + attributes.md + 'of12-md');
+			if (attributes.lg) classes.push('u-' + attributes.lg + 'of12-lg');
+			if (attributes.xl) classes.push('u-' + attributes.xl + 'of12-xl');
 
 			return (
 				el('div',
