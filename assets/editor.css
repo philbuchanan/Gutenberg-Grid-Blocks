@@ -1,6 +1,53 @@
-.o-col,
-.o-block-grid__item {
-  border: 1px dashed #eee;
-  margin-left: -14px;
-  margin-right: -14px;
+[data-type="pb/grid-row"] .o-row,
+[data-type="pb/grid-column"] .o-col,
+[data-type="pb/block-grid"] .o-block-grid,
+[data-type="pb/block-grid-item"] .o-block-grid__item {
+  border: 1px dashed #ddd;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+[data-type="pb/grid-row"] .o-row,
+[data-type="pb/block-grid"] .o-block-grid {
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  background-size: 12px 12px;
+  padding-top: 0;
+  padding-bottom: 6px;
+}
+
+[data-type="pb/grid-row"] .o-row .block-list-appender__toggle,
+[data-type="pb/block-grid"] .o-block-grid .block-list-appender__toggle {
+  outline: none;
+}
+
+[data-type="pb/grid-row"] .o-row .block-list-appender__toggle:after,
+[data-type="pb/block-grid"] .o-block-grid .block-list-appender__toggle:after {
+  margin-left: 5px;
+}
+
+[data-type="pb/grid-row"].is-selected .o-row,
+[data-type="pb/block-grid"].is-selected .o-block-grid {
+  border-color: #00a0d2;
+}
+
+[data-type="pb/grid-row"] .o-row {
+  background-image: url("grid-row.svg");
+}
+
+[data-type="pb/grid-row"] .o-row .block-list-appender__toggle:after {
+  content: "Add Grid Column";
+}
+
+[data-type="pb/block-grid"] .o-block-grid {
+  background-image: url("block-grid.svg");
+}
+
+[data-type="pb/block-grid"] .o-block-grid .block-list-appender__toggle:after {
+  content: "Add Block Grid Item";
+}
+
+[data-type="pb/grid-column"].is-selected .o-col,
+[data-type="pb/block-grid-item"].is-selected .o-block-grid__item {
+  border-color: #00a0d2;
 }

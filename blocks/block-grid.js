@@ -43,7 +43,7 @@
 
 			return [
 				el(
-					editor.InspectorControls, {},
+					editor.InspectorControls, {key: 'block-grid-controls'},
 					el(components.PanelBody,
 						{
 							title: i18n.__('Block Grid Settings'),
@@ -108,6 +108,7 @@
 				),
 				el('div',
 					{
+						key: 'block-grid-container',
 						className: 'o-block-grid',
 					},
 					el(editor.InnerBlocks, {

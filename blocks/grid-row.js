@@ -9,10 +9,6 @@
 				height: 24
 			},
 			el('path', {
-				d: 'M0 0h24v24H0V0z',
-				fill: 'none'
-			}),
-			el('path', {
 				d: 'M21 4H3L2 5v14l1 1h18l1-1V5l-1-1zM8 18H4V6h4v12zm6 0h-4V6h4v12zm6 0h-4V6h4v12z'
 			}),
 		),
@@ -37,6 +33,7 @@
 			return [
 				el('div',
 					{
+						key: 'grid-row-container',
 						className: 'o-row',
 					},
 					el(editor.InnerBlocks, {

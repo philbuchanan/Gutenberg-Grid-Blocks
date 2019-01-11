@@ -28,6 +28,7 @@
 			return [
 				el('div',
 					{
+						key: 'block-grid-item-container',
 						className: 'o-block-grid__item',
 					},
 					el(editor.InnerBlocks),

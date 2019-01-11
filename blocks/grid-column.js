@@ -45,9 +45,17 @@
 		edit: function(props) {
 			var attributes = props.attributes;
 
+			classes = [
+				'o-col'
+			];
+
+			if (attributes.lg) classes.push('u-' + attributes.lg + 'of12-lg');
+
 			return [
 				el(
-					editor.InspectorControls, {},
+					editor.InspectorControls, {
+						key: 'grid-column-control'
+					},
 					el(components.PanelBody,
 						{
 							title: i18n.__('Grid Column Spans'),
@@ -112,7 +120,8 @@
 				),
 				el('div',
 					{
-						className: 'o-col',
+						key: 'grid-column-container',
+						className: classes.join(' '),
 					},
 					el(editor.InnerBlocks),
 				),
@@ -134,6 +143,7 @@
 			return (
 				el('div',
 					{
+						key: 'grid-column-container',
 						className: classes.join(' '),
 					},
 					el(editor.InnerBlocks.Content, {})
