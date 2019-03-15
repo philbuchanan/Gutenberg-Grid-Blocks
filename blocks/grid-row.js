@@ -16,9 +16,37 @@ const {
 const {
 	PanelBody,
 	RangeControl,
+	ToggleControl,
+	SelectControl,
 	SVG,
 	Path,
 } = wp.components;
+
+const getRowColumns = (attributes) => {
+	classes = [
+		'o-row'
+	];
+
+	if (attributes.centerContentVertically) {
+		classes.push('u-align-items-center');
+	}
+
+	if (attributes.alignColumnsHorizontally) {
+		switch(attributes.alignColumnsHorizontally) {
+			case 'center':
+				classes.push('u-justify-content-center');
+				break;
+			case 'space-between':
+				classes.push('u-justify-content-space-between');
+				break;
+			case 'space-around':
+				classes.push('u-justify-content-space-around');
+				break;
+		}
+	}
+
+	return classes.join(' ');
+};
 
 const allowedBlocks = [
 	'pb/column'
@@ -51,12 +79,22 @@ registerBlockType('pb/row', {
 			type: 'number',
 			default: 2,
 		},
+		centerContentVertically: {
+			type: 'boolean',
+			default: false,
+		},
+		alignColumnsHorizontally: {
+			type: 'string',
+			default: '',
+		},
 	},
 	edit: (props) => {
 		const {
 			className,
 			attributes: {
 				columns,
+				centerContentVertically,
+				alignColumnsHorizontally,
 			},
 			setAttributes,
 		} = props;
@@ -78,6 +116,46 @@ registerBlockType('pb/row', {
 							min={ 2 }
 							max={ 6 }
 						/>
+						<ToggleControl
+							label={ __('Center Content Vertically') }
+							checked={ centerContentVertically }
+							onChange={
+								(value) => {
+									setAttributes({
+										centerContentVertically: value,
+									});
+								}
+							}
+						/>
+						<SelectControl
+							label={ __('Align Columns Horiztonally') }
+							value={ alignColumnsHorizontally }
+							onChange={
+								(value) => {
+									setAttributes({
+										alignColumnsHorizontally: value,
+									});
+								}
+							}
+							options={[
+								{
+									value: '',
+									label: __('Default'),
+								},
+								{
+									value: 'center',
+									label: __('Center Columns'),
+								},
+								{
+									value: 'space-between',
+									label: __('Space Between Columns'),
+								},
+								{
+									value: 'space-around',
+									label: __('Space Around Columns'),
+								},
+							]}
+						/>
 					</PanelBody>
 				</InspectorControls>
 				<div className={ 'o-row o-row--columns-' + columns }>
@@ -92,7 +170,7 @@ registerBlockType('pb/row', {
 	},
 	save: (props) => {
 		return (
-			<div className="o-row">
+			<div className={ getRowColumns(props.attributes) }>
 				<InnerBlocks.Content />
 			</div>
 		);
