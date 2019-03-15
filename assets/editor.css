@@ -1,11 +1,6 @@
-[data-type="pb/row"] .editor-block-list__layout {
+[data-type="pb/row"] .o-row > .editor-inner-blocks > .editor-block-list__layout {
   display: flex;
   flex-wrap: nowrap;
-}
-
-[data-type="pb/column"] .editor-block-list__block-edit {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
 }
 
 [data-type="pb/column"] .editor-block-list__block-edit .wp-block {

@@ -113,7 +113,7 @@ registerBlockType('pb/row', {
 									});
 								}
 							}
-							min={ 2 }
+							min={ 1 }
 							max={ 6 }
 						/>
 						<ToggleControl
