@@ -1,53 +1,38 @@
-(function(blocks, editor, i18n, element, components, _) {
-	var el = element.createElement;
+const {__, setLocaleData} = wp.i18n;
 
-	blocks.registerBlockType('pb/block-grid-item', {
-		title: i18n.__('Block Grid Item'),
-		icon: 'plus',
-		category: 'layout',
-		keywords: [
-			'blockgrid',
-			'grid',
-			'columns',
-		],
-		parent: [
-			'pb/block-grid'
-		],
-		supports: {},
-		className: false,
-		attributes: {
-			content: {
-				type: 'array',
-				source: 'children',
-				selector: '.o-block-grid__item',
-			},
-		},
-		edit: function(props) {
-			var attributes = props.attributes;
+const {
+	registerBlockType,
+} = wp.blocks;
 
-			return [
-				el('div',
-					{
-						key: 'block-grid-item-container',
-						className: 'o-block-grid__item',
-					},
-					el(editor.InnerBlocks),
-				),
-			];
-		},
-		save: function(props) {
-			return (
-				el('div', {className: 'o-block-grid__item'},
-					el(editor.InnerBlocks.Content, {})
-				)
-			);
-		},
-	});
-})(
-	window.wp.blocks,
-	window.wp.editor,
-	window.wp.i18n,
-	window.wp.element,
-	window.wp.components,
-	window._,
-);
+const {
+	InnerBlocks,
+} = wp.editor;
+
+const {
+	SVG,
+	Path,
+} = wp.components;
+
+registerBlockType('pb/block-grid-item', {
+	title: __('Block Grid Item'),
+	icon: <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20">
+			<Path d="M18,1H2A1,1,0,0,0,1,2V18a1,1,0,0,0,1,1H18a1,1,0,0,0,1-1V2A1,1,0,0,0,18,1ZM17,17H3V3H17Z" />
+		</SVG>,
+	parent: ['pb/block-grid-item'],
+	category: 'layout',
+	className: false,
+	edit: (props) => {
+		return (
+			<div className="o-block-grid__item">
+				<InnerBlocks templateLock={ false } />
+			</div>
+		);
+	},
+	save: (props) => {
+		return (
+			<div className="o-block-grid__item">
+				<InnerBlocks.Content />
+			</div>
+		);
+	},
+});

@@ -1,161 +1,165 @@
-(function(blocks, editor, i18n, element, components, _) {
-	var el = element.createElement;
+const {__, setLocaleData} = wp.i18n;
 
-	blocks.registerBlockType('pb/grid-column', {
-		title: i18n.__('Grid Column'),
-		icon: 'plus',
-		category: 'layout',
-		keywords: [
-			'row',
-			'grid',
-			'columns',
-		],
-		supports: {},
-		parent: [
-			'pb/grid-row'
-		],
-		className: false,
-		attributes: {
-			content: {
-				type: 'array',
-				source: 'children',
-				selector: '.o-col',
-			},
-			xs: {
-				type: 'number',
-				default: '',
-			},
-			sm: {
-				type: 'number',
-				default: '',
-			},
-			md: {
-				type: 'number',
-				default: '',
-			},
-			lg: {
-				type: 'number',
-				default: 6,
-			},
-			xl: {
-				type: 'number',
-				default: '',
-			},
+const {
+	registerBlockType,
+} = wp.blocks;
+
+const {
+	Fragment,
+} = wp.element;
+
+const {
+	InspectorControls,
+	InnerBlocks,
+} = wp.editor;
+
+const {
+	PanelBody,
+	RangeControl,
+	SVG,
+	Path,
+} = wp.components;
+
+const getColumnClasses = (attributes) => {
+	classes = [
+		'o-col'
+	];
+
+	if (attributes.xs) classes.push('u-' + attributes.xs + 'of12');
+	if (attributes.sm) classes.push('u-' + attributes.sm + 'of12-sm');
+	if (attributes.md) classes.push('u-' + attributes.md + 'of12-md');
+	if (attributes.lg) classes.push('u-' + attributes.lg + 'of12-lg');
+	if (attributes.xl) classes.push('u-' + attributes.xl + 'of12-xl');
+
+	return classes.join(' ');
+};
+
+registerBlockType('pb/column', {
+	title: __('Grid Column'),
+	icon: <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+			<Path fill="none" d="M0 0h24v24H0V0z" />
+			<Path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16zm0-11.47L17.74 9 12 13.47 6.26 9 12 4.53z" />
+		</SVG>,
+	category: 'layout',
+	parent: ['pb/row'],
+	className: false,
+	attributes: {
+		xs: {
+			type: 'number',
+			default: '',
 		},
-		edit: function(props) {
-			var attributes = props.attributes;
-
-			classes = [
-				'o-col'
-			];
-
-			if (attributes.lg) classes.push('u-' + attributes.lg + 'of12-lg');
-
-			return [
-				el(
-					editor.InspectorControls, {
-						key: 'grid-column-control'
-					},
-					el(components.PanelBody,
-						{
-							title: i18n.__('Grid Column Spans'),
-							className: 'grid-column-settings'
-						},
-						el(components.RangeControl, {
-							label: i18n.__('Extra Small Span'),
-							value: attributes.xs,
-							onChange: function(value) {
-								props.setAttributes({
-									xs: value,
-								});
-							},
-							min: 1,
-							max: 12
-						}),
-						el(components.RangeControl, {
-							label: i18n.__('Small Span'),
-							value: attributes.sm,
-							onChange: function(value) {
-								props.setAttributes({
-									sm: value,
-								});
-							},
-							min: 1,
-							max: 12
-						}),
-						el(components.RangeControl, {
-							label: i18n.__('Medium Span'),
-							value: attributes.md,
-							onChange: function(value) {
-								props.setAttributes({
-									md: value,
-								});
-							},
-							min: 1,
-							max: 12
-						}),
-						el(components.RangeControl, {
-							label: i18n.__('Large Span'),
-							value: attributes.lg,
-							onChange: function(value) {
-								props.setAttributes({
-									lg: value,
-								});
-							},
-							min: 1,
-							max: 12
-						}),
-						el(components.RangeControl, {
-							label: i18n.__('Extra Large Span'),
-							value: attributes.xl,
-							onChange: function(value) {
-								props.setAttributes({
-									xl: value,
-								});
-							},
-							min: 1,
-							max: 12
-						}),
-					),
-				),
-				el('div',
-					{
-						key: 'grid-column-container',
-						className: classes.join(' '),
-					},
-					el(editor.InnerBlocks),
-				),
-			];
+		sm: {
+			type: 'number',
+			default: '',
 		},
-		save: function(props) {
-			var attributes = props.attributes;
-
-			classes = [
-				'o-col'
-			];
-
-			if (attributes.xs) classes.push('u-' + attributes.xs + 'of12');
-			if (attributes.sm) classes.push('u-' + attributes.sm + 'of12-sm');
-			if (attributes.md) classes.push('u-' + attributes.md + 'of12-md');
-			if (attributes.lg) classes.push('u-' + attributes.lg + 'of12-lg');
-			if (attributes.xl) classes.push('u-' + attributes.xl + 'of12-xl');
-
-			return (
-				el('div',
-					{
-						key: 'grid-column-container',
-						className: classes.join(' '),
-					},
-					el(editor.InnerBlocks.Content, {})
-				)
-			);
+		md: {
+			type: 'number',
+			default: '',
 		},
-	});
-})(
-	window.wp.blocks,
-	window.wp.editor,
-	window.wp.i18n,
-	window.wp.element,
-	window.wp.components,
-	window._,
-);
+		lg: {
+			type: 'number',
+			default: 6,
+		},
+		xl: {
+			type: 'number',
+			default: '',
+		},
+	},
+	edit: (props) => {
+		const {
+			className,
+			attributes: {
+				xs,
+				sm,
+				md,
+				lg,
+				xl,
+			},
+			setAttributes,
+		} = props;
+
+		return (
+			<Fragment>
+				<InspectorControls>
+					<PanelBody title={ __('Column Settings') }>
+						<RangeControl
+							label={ __('Extra Small Span') }
+							value={ xs }
+							onChange={
+								(spanCount) => {
+									setAttributes({
+										xs: spanCount,
+									});
+								}
+							}
+							min={ 1 }
+							max={ 11 }
+						/>
+						<RangeControl
+							label={ __('Small Span') }
+							value={ sm }
+							onChange={
+								(spanCount) => {
+									setAttributes({
+										sm: spanCount,
+									});
+								}
+							}
+							min={ 1 }
+							max={ 11 }
+						/>
+						<RangeControl
+							label={ __('Medium Span') }
+							value={ md }
+							onChange={
+								(spanCount) => {
+									setAttributes({
+										md: spanCount,
+									});
+								}
+							}
+							min={ 1 }
+							max={ 11 }
+						/>
+						<RangeControl
+							label={ __('Large Span') }
+							value={ lg }
+							onChange={
+								(spanCount) => {
+									setAttributes({
+										lg: spanCount,
+									});
+								}
+							}
+							min={ 1 }
+							max={ 11 }
+						/>
+						<RangeControl
+							label={ __('Extra Large Span') }
+							value={ xl }
+							onChange={
+								(spanCount) => {
+									setAttributes({
+										xl: spanCount,
+									});
+								}
+							}
+							min={ 1 }
+							max={ 11 }
+						/>
+					</PanelBody>
+				</InspectorControls>
+				<div className={ getColumnClasses(props.attributes) }>
+					<InnerBlocks templateLock={ false } />
+				</div>
+			</Fragment>
+		);
+	},
+	save: (props) => {
+		return (
+			<div className={ getColumnClasses(props.attributes) }>
+				<InnerBlocks.Content />
+			</div>
+		);
+	},
+});

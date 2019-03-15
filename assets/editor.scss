@@ -1,58 +1,63 @@
 // # Editor Styles
 // -----------------------------------------------------------------------------
 
-[data-type="pb/grid-row"] .o-row,
-[data-type="pb/grid-column"] .o-col,
-[data-type="pb/block-grid"] .o-block-grid,
-[data-type="pb/block-grid-item"] .o-block-grid__item {
-	border: 1px dashed #ddd;
-	border-radius: 10px;
-	padding: 20px;
+
+
+// ## Grid Rows and Columns
+// -----------------------------------------------------------------------------
+
+[data-type="pb/row"] {
+	.editor-block-list__layout {
+		display: flex;
+		flex-wrap: nowrap;
+	}
 }
 
-[data-type="pb/grid-row"] .o-row,
-[data-type="pb/block-grid"] .o-block-grid {
-	background-repeat: no-repeat;
-	background-position: 10px 10px;
-	background-size: 12px 12px;
-	padding-top: 0;
-	padding-bottom: 6px;
+[data-type="pb/column"] {
+	.editor-block-list__block-edit {
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
 
-	.block-list-appender__toggle {
-		outline: none;
-
-		&:after {
-			margin-left: 5px;
+		.wp-block {
+			width: 100%;
 		}
 	}
 }
 
-[data-type="pb/grid-row"].is-selected .o-row,
-[data-type="pb/block-grid"].is-selected .o-block-grid {
-	border-color: #00a0d2;
+@for $i from 2 through 6 {
+	.o-row--columns-#{$i} .editor-block-list__layout  > [data-type="pb/column"] {
+		width: 100% / $i;
+	}
 }
 
-[data-type="pb/grid-row"] .o-row {
-	background-image: url("grid-row.svg");
 
-	.block-list-appender__toggle {
-		&:after {
-			content: "Add Grid Column";
+
+// ## Block Grid
+// -----------------------------------------------------------------------------
+
+[data-type="pb/block-grid"] {
+	.editor-block-list__layout {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
+[data-type="pb/block-grid-item"] {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+
+	.editor-block-list__block-edit {
+		margin-top: 0 !important;
+		margin-bottom: 16px !important;
+
+		.wp-block {
+			width: 100%;
 		}
 	}
 }
 
-[data-type="pb/block-grid"] .o-block-grid {
-	background-image: url("block-grid.svg");
-
-	.block-list-appender__toggle {
-		&:after {
-			content: "Add Block Grid Item";
-		}
+@for $i from 2 through 6 {
+	.o-block-grid-#{$i} .editor-block-list__layout  > [data-type="pb/block-grid-item"] {
+		width: 100% / $i;
 	}
-}
-
-[data-type="pb/grid-column"].is-selected .o-col,
-[data-type="pb/block-grid-item"].is-selected .o-block-grid__item {
-	border-color: #00a0d2;
 }

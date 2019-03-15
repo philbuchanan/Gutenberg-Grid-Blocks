@@ -45,45 +45,14 @@ class PB_Grid_Blocks {
 	 * Enqueue the block's assets for the wp-admin editor
 	 */
 	public function enqueue_block_editor_assets() {
-		// Row/column grid
 		wp_enqueue_script(
-			'pb-grid-row-editor-scripts',
-			plugins_url('blocks/grid-row.js', __FILE__),
+			'pb-grid-blocks-editor-scripts',
+			plugins_url('js/blocks.build.js', __FILE__),
 			array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'underscore'),
 			$this->get_plugin_version(),
 			true
 		);
 
-		wp_enqueue_script(
-			'pb-grid-column-editor-scripts',
-			plugins_url('blocks/grid-column.js', __FILE__),
-			array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'underscore'),
-			$this->get_plugin_version(),
-			true
-		);
-
-
-
-		// Block Brid
-		wp_enqueue_script(
-			'pb-blockgrid-editor-scripts',
-			plugins_url('blocks/block-grid.js', __FILE__),
-			array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'underscore'),
-			$this->get_plugin_version(),
-			true
-		);
-
-		wp_enqueue_script(
-			'pb-blockgrid-item-editor-scripts',
-			plugins_url('blocks/block-grid-item.js', __FILE__),
-			array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'underscore'),
-			$this->get_plugin_version(),
-			true
-		);
-
-
-
-		// Styles
 		wp_enqueue_style(
 			'pb-grid-blocks-editor-styles',
 			plugins_url('assets/editor.css', __FILE__),
