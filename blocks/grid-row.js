@@ -16,7 +16,6 @@ const {
 const {
 	PanelBody,
 	RangeControl,
-	ToggleControl,
 	SelectControl,
 	SVG,
 	Path,
@@ -105,6 +104,7 @@ registerBlockType('pb/row', {
 					<PanelBody title={ __('Row Settings') }>
 						<RangeControl
 							label={ __('Number of Columns') }
+							help={ __('Be careful: If you reduce the number of columns, you may loose your existing content.') }
 							value={ columns }
 							onChange={
 								(nextColumns) => {
@@ -116,9 +116,11 @@ registerBlockType('pb/row', {
 							min={ 1 }
 							max={ 6 }
 						/>
-						<ToggleControl
-							label={ __('Center Content Vertically') }
-							checked={ centerContentVertically }
+					</PanelBody>
+					<PanelBody title={ __('Content Alignment') }>
+						<SelectControl
+							label={ __('Align Column Content') }
+							value={ centerContentVertically }
 							onChange={
 								(value) => {
 									setAttributes({
@@ -126,6 +128,16 @@ registerBlockType('pb/row', {
 									});
 								}
 							}
+							options={[
+								{
+									value: '',
+									label: __('Default'),
+								},
+								{
+									value: 'center',
+									label: __('Center Content'),
+								},
+							]}
 						/>
 						<SelectControl
 							label={ __('Align Columns Horiztonally') }

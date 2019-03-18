@@ -15,6 +15,7 @@ const {
 
 const {
 	PanelBody,
+	SelectControl,
 	RangeControl,
 } = wp.components;
 
@@ -28,6 +29,20 @@ const getBlockGridClasses = (attributes) => {
 	if (attributes.md) classes.push('o-block-grid-' + attributes.md + '-md');
 	if (attributes.lg) classes.push('o-block-grid-' + attributes.lg + '-lg');
 	if (attributes.xl) classes.push('o-block-grid-' + attributes.xl + '-xl');
+
+	if (attributes.alignColumnsHorizontally) {
+		switch(attributes.alignColumnsHorizontally) {
+			case 'center':
+				classes.push('u-justify-content-center');
+				break;
+			case 'space-between':
+				classes.push('u-justify-content-space-between');
+				break;
+			case 'space-around':
+				classes.push('u-justify-content-space-around');
+				break;
+		}
+	}
 
 	return classes.join(' ');
 };
@@ -61,6 +76,10 @@ registerBlockType('pb/block-grid', {
 			type: 'number',
 			default: 3
 		},
+		alignColumnsHorizontally: {
+			type: 'string',
+			default: '',
+		},
 		xs: {
 			type: 'number',
 			default: '',
@@ -87,6 +106,7 @@ registerBlockType('pb/block-grid', {
 			className,
 			attributes: {
 				gridItems,
+				alignColumnsHorizontally,
 				xs,
 				sm,
 				md,
@@ -102,7 +122,7 @@ registerBlockType('pb/block-grid', {
 					<PanelBody title={ __('Number of Block Grid Items') }>
 						<RangeControl
 							label={ __('How many block items do you want?') }
-							help={ __('BE CAREFUL: If you reduce this, you may losse your existing content.') }
+							help={ __('Be careful: If you reduce the number of block items, you may loose your existing content.') }
 							value={ gridItems }
 							onChange={
 								(count) => {
@@ -113,6 +133,37 @@ registerBlockType('pb/block-grid', {
 							}
 							min={ 2 }
 							max={ 30 }
+						/>
+					</PanelBody>
+					<PanelBody title={ __('Content Alignment') }>
+						<SelectControl
+							label={ __('Align Items Horiztonally') }
+							value={ alignColumnsHorizontally }
+							onChange={
+								(value) => {
+									setAttributes({
+										alignColumnsHorizontally: value,
+									});
+								}
+							}
+							options={[
+								{
+									value: '',
+									label: __('Default'),
+								},
+								{
+									value: 'center',
+									label: __('Center Columns'),
+								},
+								{
+									value: 'space-between',
+									label: __('Space Between Columns'),
+								},
+								{
+									value: 'space-around',
+									label: __('Space Around Columns'),
+								},
+							]}
 						/>
 					</PanelBody>
 					<PanelBody title={ __('Block Grid Items per Line') }>
