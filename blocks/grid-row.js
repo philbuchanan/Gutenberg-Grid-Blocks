@@ -72,7 +72,9 @@ registerBlockType('pb/row', {
 		'grid',
 		'columns',
 	],
-	className: false,
+	supports: {
+		className: false,
+	},
 	attributes: {
 		columns: {
 			type: 'number',

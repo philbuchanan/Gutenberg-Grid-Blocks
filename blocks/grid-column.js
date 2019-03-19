@@ -42,7 +42,9 @@ registerBlockType('pb/column', {
 		</SVG>,
 	category: 'layout',
 	parent: ['pb/row'],
-	className: false,
+	supports: {
+		className: false,
+	},
 	attributes: {
 		xs: {
 			type: 'number',

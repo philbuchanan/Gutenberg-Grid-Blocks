@@ -20,7 +20,9 @@ registerBlockType('pb/block-grid-item', {
 		</SVG>,
 	parent: ['pb/block-grid-item'],
 	category: 'layout',
-	className: false,
+	supports: {
+		className: false,
+	},
 	edit: (props) => {
 		return (
 			<div className="o-block-grid__item">

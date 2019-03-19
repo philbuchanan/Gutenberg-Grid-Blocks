@@ -70,7 +70,9 @@ registerBlockType('pb/block-grid', {
 		'grid',
 		'columns',
 	],
-	className: false,
+	supports: {
+		className: false,
+	},
 	attributes: {
 		gridItems: {
 			type: 'number',
