@@ -30,8 +30,8 @@ const getBlockGridClasses = (attributes) => {
 	if (attributes.lg) classes.push('o-block-grid-' + attributes.lg + '-lg');
 	if (attributes.xl) classes.push('o-block-grid-' + attributes.xl + '-xl');
 
-	if (attributes.alignColumnsHorizontally) {
-		switch(attributes.alignColumnsHorizontally) {
+	if (attributes.alignItemsHorizontally) {
+		switch(attributes.alignItemsHorizontally) {
 			case 'center':
 				classes.push('u-justify-content-center');
 				break;
@@ -76,7 +76,7 @@ registerBlockType('pb/block-grid', {
 			type: 'number',
 			default: 3
 		},
-		alignColumnsHorizontally: {
+		alignItemsHorizontally: {
 			type: 'string',
 			default: '',
 		},
@@ -106,7 +106,7 @@ registerBlockType('pb/block-grid', {
 			className,
 			attributes: {
 				gridItems,
-				alignColumnsHorizontally,
+				alignItemsHorizontally,
 				xs,
 				sm,
 				md,
@@ -135,33 +135,33 @@ registerBlockType('pb/block-grid', {
 							max={ 30 }
 						/>
 					</PanelBody>
-					<PanelBody title={ __('Content Alignment') }>
+					<PanelBody title={ __('Item Alignment') }>
 						<SelectControl
 							label={ __('Align Items Horiztonally') }
-							value={ alignColumnsHorizontally }
+							value={ alignItemsHorizontally }
 							onChange={
 								(value) => {
 									setAttributes({
-										alignColumnsHorizontally: value,
+										alignItemsHorizontally: value,
 									});
 								}
 							}
 							options={[
 								{
 									value: '',
-									label: __('Default'),
+									label: __('Left Align Items (default)'),
 								},
 								{
 									value: 'center',
-									label: __('Center Columns'),
+									label: __('Center Items'),
 								},
 								{
 									value: 'space-between',
-									label: __('Space Between Columns'),
+									label: __('Space Between Items'),
 								},
 								{
 									value: 'space-around',
-									label: __('Space Around Columns'),
+									label: __('Space Around Items'),
 								},
 							]}
 						/>

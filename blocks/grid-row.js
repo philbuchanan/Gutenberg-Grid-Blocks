@@ -117,9 +117,9 @@ registerBlockType('pb/row', {
 							max={ 6 }
 						/>
 					</PanelBody>
-					<PanelBody title={ __('Content Alignment') }>
+					<PanelBody title={ __('Column & Content Alignment') }>
 						<SelectControl
-							label={ __('Align Column Content') }
+							label={ __('Align Column Content Vertically') }
 							value={ centerContentVertically }
 							onChange={
 								(value) => {
@@ -131,7 +131,7 @@ registerBlockType('pb/row', {
 							options={[
 								{
 									value: '',
-									label: __('Default'),
+									label: __('Top Align Content (default)'),
 								},
 								{
 									value: 'center',
@@ -152,7 +152,7 @@ registerBlockType('pb/row', {
 							options={[
 								{
 									value: '',
-									label: __('Default'),
+									label: __('Left Align Columns (default)'),
 								},
 								{
 									value: 'center',
