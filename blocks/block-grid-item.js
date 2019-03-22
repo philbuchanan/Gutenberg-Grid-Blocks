@@ -22,6 +22,7 @@ registerBlockType('pb/block-grid-item', {
 	category: 'layout',
 	supports: {
 		className: false,
+		inserter: false,
 	},
 	edit: (props) => {
 		return (

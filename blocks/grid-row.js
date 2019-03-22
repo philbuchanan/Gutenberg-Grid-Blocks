@@ -62,7 +62,7 @@ const getColumnsTemplate = (columns) => {
 };
 
 registerBlockType('pb/row', {
-	title: __('Grid Row'),
+	title: __('Columns'),
 	icon: <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 			<Path d="M21 4H3L2 5v14l1 1h18l1-1V5l-1-1zM8 18H4V6h4v12zm6 0h-4V6h4v12zm6 0h-4V6h4v12z" />
 		</SVG>,
@@ -70,7 +70,7 @@ registerBlockType('pb/row', {
 	keywords: [
 		'row',
 		'grid',
-		'columns',
+		'span',
 	],
 	supports: {
 		className: false,

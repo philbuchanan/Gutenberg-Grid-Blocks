@@ -44,6 +44,7 @@ registerBlockType('pb/column', {
 	parent: ['pb/row'],
 	supports: {
 		className: false,
+		inserter: false,
 	},
 	attributes: {
 		xs: {
