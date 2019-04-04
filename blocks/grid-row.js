@@ -22,12 +22,19 @@ const {
 } = wp.components;
 
 const getRowColumns = (attributes) => {
-	classes = [
+	var classes = [
 		'o-row'
 	];
 
-	if (attributes.centerContentVertically) {
-		classes.push('u-align-items-center');
+	if (attributes.alignContentVertically) {
+		switch(attributes.alignContentVertically) {
+			case 'center':
+				classes.push('u-align-items-center');
+				break;
+			case 'end':
+				classes.push('u-align-items-end');
+				break;
+		}
 	}
 
 	if (attributes.alignColumnsHorizontally) {
@@ -40,6 +47,9 @@ const getRowColumns = (attributes) => {
 				break;
 			case 'space-around':
 				classes.push('u-justify-content-space-around');
+				break;
+			case 'end':
+				classes.push('u-justify-content-end');
 				break;
 		}
 	}
@@ -81,8 +91,8 @@ registerBlockType('pb/row', {
 			default: 2,
 		},
 		centerContentVertically: {
-			type: 'boolean',
-			default: false,
+			type: 'sting',
+			default: '',
 		},
 		alignColumnsHorizontally: {
 			type: 'string',
@@ -94,7 +104,7 @@ registerBlockType('pb/row', {
 			className,
 			attributes: {
 				columns,
-				centerContentVertically,
+				alignContentVertically,
 				alignColumnsHorizontally,
 			},
 			setAttributes,
@@ -122,11 +132,11 @@ registerBlockType('pb/row', {
 					<PanelBody title={ __('Column & Content Alignment') }>
 						<SelectControl
 							label={ __('Align Column Content Vertically') }
-							value={ centerContentVertically }
+							value={ alignContentVertically }
 							onChange={
 								(value) => {
 									setAttributes({
-										centerContentVertically: value,
+										alignContentVertically: value,
 									});
 								}
 							}
@@ -138,6 +148,10 @@ registerBlockType('pb/row', {
 								{
 									value: 'center',
 									label: __('Center Content'),
+								},
+								{
+									value: 'end',
+									label: __('Bottom Align Content'),
 								},
 							]}
 						/>
@@ -159,6 +173,10 @@ registerBlockType('pb/row', {
 								{
 									value: 'center',
 									label: __('Center Columns'),
+								},
+								{
+									value: 'end',
+									label: __('Right Align Columns'),
 								},
 								{
 									value: 'space-between',

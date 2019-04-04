@@ -20,7 +20,7 @@ const {
 } = wp.components;
 
 const getBlockGridClasses = (attributes) => {
-	classes = [
+	var classes = [
 		'o-block-grid'
 	];
 
@@ -29,6 +29,17 @@ const getBlockGridClasses = (attributes) => {
 	if (attributes.md) classes.push('o-block-grid-' + attributes.md + '-md');
 	if (attributes.lg) classes.push('o-block-grid-' + attributes.lg + '-lg');
 	if (attributes.xl) classes.push('o-block-grid-' + attributes.xl + '-xl');
+
+	if (attributes.alignItemsVertically) {
+		switch(attributes.alignItemsVertically) {
+			case 'center':
+				classes.push('u-align-items-center');
+				break;
+			case 'end':
+				classes.push('u-align-items-end');
+				break;
+		}
+	}
 
 	if (attributes.alignItemsHorizontally) {
 		switch(attributes.alignItemsHorizontally) {
@@ -78,6 +89,10 @@ registerBlockType('pb/block-grid', {
 			type: 'number',
 			default: 3
 		},
+		alignItemsVertically: {
+			type: 'string',
+			default: '',
+		},
 		alignItemsHorizontally: {
 			type: 'string',
 			default: '',
@@ -108,6 +123,7 @@ registerBlockType('pb/block-grid', {
 			className,
 			attributes: {
 				gridItems,
+				alignItemsVertically,
 				alignItemsHorizontally,
 				xs,
 				sm,
@@ -139,31 +155,27 @@ registerBlockType('pb/block-grid', {
 					</PanelBody>
 					<PanelBody title={ __('Item Alignment') }>
 						<SelectControl
-							label={ __('Align Items Horiztonally') }
-							value={ alignItemsHorizontally }
+							label={ __('Align Items Vertically') }
+							value={ alignItemsVertically }
 							onChange={
 								(value) => {
 									setAttributes({
-										alignItemsHorizontally: value,
+										alignItemsVertically: value,
 									});
 								}
 							}
 							options={[
 								{
 									value: '',
-									label: __('Left Align Items (default)'),
+									label: __('Top Align Items (default)'),
 								},
 								{
 									value: 'center',
 									label: __('Center Items'),
 								},
 								{
-									value: 'space-between',
-									label: __('Space Between Items'),
-								},
-								{
-									value: 'space-around',
-									label: __('Space Around Items'),
+									value: 'center',
+									label: __('Bottom Align Items'),
 								},
 							]}
 						/>

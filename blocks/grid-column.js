@@ -21,7 +21,7 @@ const {
 } = wp.components;
 
 const getColumnClasses = (attributes) => {
-	classes = [
+	var classes = [
 		'o-col'
 	];
 
