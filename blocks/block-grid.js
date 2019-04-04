@@ -140,7 +140,7 @@ registerBlockType('pb/block-grid', {
 					<PanelBody title={ __('Number of Block Grid Items', 'pb') }>
 						<RangeControl
 							label={ __('How many block items do you want?', 'pb') }
-							help={ __('Be careful: If you reduce the number of block items, you may loose your existing content.', 'pb') }
+							help={ __('Be careful: If you reduce the number of block items, you will loose your existing content in the items removed.', 'pb') }
 							value={ gridItems }
 							onChange={
 								(count) => {
@@ -153,34 +153,8 @@ registerBlockType('pb/block-grid', {
 							max={ 30 }
 						/>
 					</PanelBody>
-					<PanelBody title={ __('Item Alignment', 'pb') }>
-						<SelectControl
-							label={ __('Align Items Vertically', 'pb') }
-							value={ alignItemsVertically }
-							onChange={
-								(value) => {
-									setAttributes({
-										alignItemsVertically: value,
-									});
-								}
-							}
-							options={[
-								{
-									value: '',
-									label: __('Top Align Items (default)', 'pb'),
-								},
-								{
-									value: 'center',
-									label: __('Center Items', 'pb'),
-								},
-								{
-									value: 'center',
-									label: __('Bottom Align Items', 'pb'),
-								},
-							]}
-						/>
-					</PanelBody>
-					<PanelBody title={ __('Block Grid Items per Line', 'pb') }>
+					<PanelBody title={ __('Block Grid Items / Line', 'pb') }>
+						<p>{ __('How many items should display in a single row at each screen size?', 'pb') }</p>
 						<RangeControl
 							label={ __('Extra Small', 'pb') }
 							value={ xs }
@@ -245,6 +219,36 @@ registerBlockType('pb/block-grid', {
 							}
 							min={ 1 }
 							max={ 6 }
+						/>
+					</PanelBody>
+					<PanelBody
+						title={ __('Item Alignment', 'pb') }
+						initialOpen={ false }
+					>
+						<SelectControl
+							label={ __('Align Items Vertically', 'pb') }
+							value={ alignItemsVertically }
+							onChange={
+								(value) => {
+									setAttributes({
+										alignItemsVertically: value,
+									});
+								}
+							}
+							options={[
+								{
+									value: '',
+									label: __('Top Align Items (default)', 'pb'),
+								},
+								{
+									value: 'center',
+									label: __('Center Items', 'pb'),
+								},
+								{
+									value: 'center',
+									label: __('Bottom Align Items', 'pb'),
+								},
+							]}
 						/>
 					</PanelBody>
 				</InspectorControls>

@@ -1,6 +1,6 @@
 {
   "name": "pb-grid-blocks",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Gutenberg blocks to create complex grid layouts.",
   "main": "js/blocks.build.js",
   "scripts": {

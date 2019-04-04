@@ -113,10 +113,10 @@ registerBlockType('pb/row', {
 		return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={ __('Row Settings', 'pb') }>
+					<PanelBody title={ __('Number of Columns', 'pb') }>
 						<RangeControl
-							label={ __('Number of Columns', 'pb') }
-							help={ __('Be careful: If you reduce the number of columns, you may loose your existing content.', 'pb') }
+							label={ __('How many column containers do you want?', 'pb') }
+							help={ __('Be careful: If you reduce the number of column containers, you will loose your existing content in the containers removed.', 'pb') }
 							value={ columns }
 							onChange={
 								(nextColumns) => {
@@ -129,7 +129,10 @@ registerBlockType('pb/row', {
 							max={ 6 }
 						/>
 					</PanelBody>
-					<PanelBody title={ __('Column & Content Alignment', 'pb') }>
+					<PanelBody
+						title={ __('Column & Content Alignment', 'pb') }
+						initialOpen={ false }
+					>
 						<SelectControl
 							label={ __('Align Column Content Vertically', 'pb') }
 							value={ alignContentVertically }
