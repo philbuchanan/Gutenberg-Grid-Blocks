@@ -72,15 +72,15 @@ const getColumnsTemplate = (columns) => {
 };
 
 registerBlockType('pb/row', {
-	title: __('Columns'),
+	title: __('Columns', 'pb'),
 	icon: <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 			<Path d="M21 4H3L2 5v14l1 1h18l1-1V5l-1-1zM8 18H4V6h4v12zm6 0h-4V6h4v12zm6 0h-4V6h4v12z" />
 		</SVG>,
 	category: 'layout',
 	keywords: [
-		'row',
-		'grid',
-		'span',
+		__('row', 'pb'),
+		__('grid', 'pb'),
+		__('span', 'pb'),
 	],
 	supports: {
 		className: false,
@@ -113,10 +113,10 @@ registerBlockType('pb/row', {
 		return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={ __('Row Settings') }>
+					<PanelBody title={ __('Row Settings', 'pb') }>
 						<RangeControl
-							label={ __('Number of Columns') }
-							help={ __('Be careful: If you reduce the number of columns, you may loose your existing content.') }
+							label={ __('Number of Columns', 'pb') }
+							help={ __('Be careful: If you reduce the number of columns, you may loose your existing content.', 'pb') }
 							value={ columns }
 							onChange={
 								(nextColumns) => {
@@ -129,9 +129,9 @@ registerBlockType('pb/row', {
 							max={ 6 }
 						/>
 					</PanelBody>
-					<PanelBody title={ __('Column & Content Alignment') }>
+					<PanelBody title={ __('Column & Content Alignment', 'pb') }>
 						<SelectControl
-							label={ __('Align Column Content Vertically') }
+							label={ __('Align Column Content Vertically', 'pb') }
 							value={ alignContentVertically }
 							onChange={
 								(value) => {
@@ -143,20 +143,20 @@ registerBlockType('pb/row', {
 							options={[
 								{
 									value: '',
-									label: __('Top Align Content (default)'),
+									label: __('Top Align Content (default)', 'pb'),
 								},
 								{
 									value: 'center',
-									label: __('Center Content'),
+									label: __('Center Content', 'pb'),
 								},
 								{
 									value: 'end',
-									label: __('Bottom Align Content'),
+									label: __('Bottom Align Content', 'pb'),
 								},
 							]}
 						/>
 						<SelectControl
-							label={ __('Align Columns Horiztonally') }
+							label={ __('Align Columns Horiztonally', 'pb') }
 							value={ alignColumnsHorizontally }
 							onChange={
 								(value) => {
@@ -168,23 +168,23 @@ registerBlockType('pb/row', {
 							options={[
 								{
 									value: '',
-									label: __('Left Align Columns (default)'),
+									label: __('Left Align Columns (default)', 'pb'),
 								},
 								{
 									value: 'center',
-									label: __('Center Columns'),
+									label: __('Center Columns', 'pb'),
 								},
 								{
 									value: 'end',
-									label: __('Right Align Columns'),
+									label: __('Right Align Columns', 'pb'),
 								},
 								{
 									value: 'space-between',
-									label: __('Space Between Columns'),
+									label: __('Space Between Columns', 'pb'),
 								},
 								{
 									value: 'space-around',
-									label: __('Space Around Columns'),
+									label: __('Space Around Columns', 'pb'),
 								},
 							]}
 						/>

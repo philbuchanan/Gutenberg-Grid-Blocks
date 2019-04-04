@@ -73,13 +73,13 @@ const getBlockGridTemplate = (gridItems) => {
 };
 
 registerBlockType('pb/block-grid', {
-	title: __('Block Grid'),
+	title: __('Block Grid', 'pb'),
 	icon: 'grid-view',
 	category: 'layout',
 	keywords: [
-		'blockgrid',
-		'grid',
-		'columns',
+		__('blockgrid', 'pb'),
+		__('grid', 'pb'),
+		__('columns', 'pb'),
 	],
 	supports: {
 		className: false,
@@ -137,10 +137,10 @@ registerBlockType('pb/block-grid', {
 		return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={ __('Number of Block Grid Items') }>
+					<PanelBody title={ __('Number of Block Grid Items', 'pb') }>
 						<RangeControl
-							label={ __('How many block items do you want?') }
-							help={ __('Be careful: If you reduce the number of block items, you may loose your existing content.') }
+							label={ __('How many block items do you want?', 'pb') }
+							help={ __('Be careful: If you reduce the number of block items, you may loose your existing content.', 'pb') }
 							value={ gridItems }
 							onChange={
 								(count) => {
@@ -153,9 +153,9 @@ registerBlockType('pb/block-grid', {
 							max={ 30 }
 						/>
 					</PanelBody>
-					<PanelBody title={ __('Item Alignment') }>
+					<PanelBody title={ __('Item Alignment', 'pb') }>
 						<SelectControl
-							label={ __('Align Items Vertically') }
+							label={ __('Align Items Vertically', 'pb') }
 							value={ alignItemsVertically }
 							onChange={
 								(value) => {
@@ -167,22 +167,22 @@ registerBlockType('pb/block-grid', {
 							options={[
 								{
 									value: '',
-									label: __('Top Align Items (default)'),
+									label: __('Top Align Items (default)', 'pb'),
 								},
 								{
 									value: 'center',
-									label: __('Center Items'),
+									label: __('Center Items', 'pb'),
 								},
 								{
 									value: 'center',
-									label: __('Bottom Align Items'),
+									label: __('Bottom Align Items', 'pb'),
 								},
 							]}
 						/>
 					</PanelBody>
-					<PanelBody title={ __('Block Grid Items per Line') }>
+					<PanelBody title={ __('Block Grid Items per Line', 'pb') }>
 						<RangeControl
-							label={ __('Extra Small') }
+							label={ __('Extra Small', 'pb') }
 							value={ xs }
 							onChange={
 								(spanCount) => {
@@ -195,7 +195,7 @@ registerBlockType('pb/block-grid', {
 							max={ 6 }
 						/>
 						<RangeControl
-							label={ __('Small') }
+							label={ __('Small', 'pb') }
 							value={ sm }
 							onChange={
 								(spanCount) => {
@@ -208,7 +208,7 @@ registerBlockType('pb/block-grid', {
 							max={ 6 }
 						/>
 						<RangeControl
-							label={ __('Medium') }
+							label={ __('Medium', 'pb') }
 							value={ md }
 							onChange={
 								(spanCount) => {
@@ -221,7 +221,7 @@ registerBlockType('pb/block-grid', {
 							max={ 6 }
 						/>
 						<RangeControl
-							label={ __('Large') }
+							label={ __('Large', 'pb') }
 							value={ lg }
 							onChange={
 								(spanCount) => {
@@ -234,7 +234,7 @@ registerBlockType('pb/block-grid', {
 							max={ 6 }
 						/>
 						<RangeControl
-							label={ __('Extra Large') }
+							label={ __('Extra Large', 'pb') }
 							value={ xl }
 							onChange={
 								(spanCount) => {

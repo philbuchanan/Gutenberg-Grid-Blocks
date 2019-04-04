@@ -35,7 +35,7 @@ const getColumnClasses = (attributes) => {
 };
 
 registerBlockType('pb/column', {
-	title: __('Grid Column'),
+	title: __('Grid Column', 'pb'),
 	icon: <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 			<Path fill="none" d="M0 0h24v24H0V0z" />
 			<Path d="M11.99 18.54l-7.37-5.73L3 14.07l9 7 9-7-1.63-1.27zM12 16l7.36-5.73L21 9l-9-7-9 7 1.63 1.27L12 16zm0-11.47L17.74 9 12 13.47 6.26 9 12 4.53z" />
@@ -84,9 +84,9 @@ registerBlockType('pb/column', {
 		return (
 			<Fragment>
 				<InspectorControls>
-					<PanelBody title={ __('Column Settings') }>
+					<PanelBody title={ __('Column Settings', 'pb') }>
 						<RangeControl
-							label={ __('Extra Small Span') }
+							label={ __('Extra Small Span', 'pb') }
 							value={ xs }
 							onChange={
 								(spanCount) => {
@@ -99,7 +99,7 @@ registerBlockType('pb/column', {
 							max={ 11 }
 						/>
 						<RangeControl
-							label={ __('Small Span') }
+							label={ __('Small Span', 'pb') }
 							value={ sm }
 							onChange={
 								(spanCount) => {
@@ -112,7 +112,7 @@ registerBlockType('pb/column', {
 							max={ 11 }
 						/>
 						<RangeControl
-							label={ __('Medium Span') }
+							label={ __('Medium Span', 'pb') }
 							value={ md }
 							onChange={
 								(spanCount) => {
@@ -125,7 +125,7 @@ registerBlockType('pb/column', {
 							max={ 11 }
 						/>
 						<RangeControl
-							label={ __('Large Span') }
+							label={ __('Large Span', 'pb') }
 							value={ lg }
 							onChange={
 								(spanCount) => {
@@ -138,7 +138,7 @@ registerBlockType('pb/column', {
 							max={ 11 }
 						/>
 						<RangeControl
-							label={ __('Extra Large Span') }
+							label={ __('Extra Large Span', 'pb') }
 							value={ xl }
 							onChange={
 								(spanCount) => {
