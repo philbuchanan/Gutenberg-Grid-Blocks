@@ -245,7 +245,7 @@ registerBlockType('pb/block-grid', {
 									label: __('Center Items', 'pb'),
 								},
 								{
-									value: 'center',
+									value: 'end',
 									label: __('Bottom Align Items', 'pb'),
 								},
 							]}
