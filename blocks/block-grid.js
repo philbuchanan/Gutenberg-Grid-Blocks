@@ -46,11 +46,8 @@ const getBlockGridClasses = (attributes) => {
 			case 'center':
 				classes.push('u-justify-content-center');
 				break;
-			case 'space-between':
-				classes.push('u-justify-content-space-between');
-				break;
-			case 'space-around':
-				classes.push('u-justify-content-space-around');
+			case 'end':
+				classes.push('u-justify-content-end');
 				break;
 		}
 	}
@@ -247,6 +244,31 @@ registerBlockType('pb/block-grid', {
 								{
 									value: 'end',
 									label: __('Bottom Align Items', 'pb'),
+								},
+							]}
+						/>
+						<SelectControl
+							label={ __('Align Items Horiztonally', 'pb') }
+							value={ alignItemsHorizontally }
+							onChange={
+								(value) => {
+									setAttributes({
+										alignItemsHorizontally: value,
+									});
+								}
+							}
+							options={[
+								{
+									value: '',
+									label: __('Left Align Items (default)', 'pb'),
+								},
+								{
+									value: 'center',
+									label: __('Center Items', 'pb'),
+								},
+								{
+									value: 'end',
+									label: __('Right Align Items', 'pb'),
 								},
 							]}
 						/>
