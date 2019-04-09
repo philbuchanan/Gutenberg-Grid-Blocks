@@ -6,10 +6,7 @@ module.exports = {
 
 	// entry is the source script
 	entry: [
-		'./blocks/grid-row.js',
-		'./blocks/grid-column.js',
-		'./blocks/block-grid.js',
-		'./blocks/block-grid-item.js',
+		'./blocks/index.js',
 	],
 
 	// output is where to write the built file
