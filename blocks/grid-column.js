@@ -18,10 +18,16 @@ const {
 
 const {
 	PanelBody,
-	RangeControl,
 	SVG,
 	Path,
 } = wp.components;
+
+
+
+/**
+ * Internal dependencies
+ */
+import NumberControl from './number-control';
 
 
 
@@ -104,6 +110,7 @@ registerBlockType('pb/column', {
 			className,
 			attributes,
 			setAttributes,
+			instanceId,
 		} = props;
 
 		return (
@@ -111,9 +118,8 @@ registerBlockType('pb/column', {
 				<InspectorControls>
 					<PanelBody title={ __('Column Spans', 'pb') }>
 						<p>{ __('How many columns of the 12-column grid should this container span at each screen size?', 'pb') }</p>
-						<RangeControl
+						<NumberControl
 							label={ __('Extra Small Span', 'pb') }
-							value={ attributes.xs }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -121,12 +127,10 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.xs }
 						/>
-						<RangeControl
+						<NumberControl
 							label={ __('Small Span', 'pb') }
-							value={ attributes.sm }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -134,12 +138,10 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.sm }
 						/>
-						<RangeControl
+						<NumberControl
 							label={ __('Medium Span', 'pb') }
-							value={ attributes.md }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -147,12 +149,10 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.md }
 						/>
-						<RangeControl
+						<NumberControl
 							label={ __('Large Span', 'pb') }
-							value={ attributes.lg }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -160,12 +160,10 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.lg }
 						/>
-						<RangeControl
-							label={ __('Extra Large Span', 'pb') }
-							value={ attributes.xl }
+						<NumberControl
+							label={ __('Extral Large Span', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -173,8 +171,7 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.xl }
 						/>
 					</PanelBody>
 					<PanelBody
@@ -182,9 +179,8 @@ registerBlockType('pb/column', {
 						initialOpen={ false }
 					>
 						<p>{ __('How many columns of the 12-column grid should this container be offset by at each screen size?', 'pb') }</p>
-						<RangeControl
+						<NumberControl
 							label={ __('Extra Small Offset', 'pb') }
-							value={ attributes.offsetxs }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -192,12 +188,10 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.offsetxs }
 						/>
-						<RangeControl
+						<NumberControl
 							label={ __('Small Offset', 'pb') }
-							value={ attributes.offsetsm }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -205,12 +199,10 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.offsetsm }
 						/>
-						<RangeControl
+						<NumberControl
 							label={ __('Medium Offset', 'pb') }
-							value={ attributes.offsetmd }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -218,12 +210,10 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.offsetmd }
 						/>
-						<RangeControl
+						<NumberControl
 							label={ __('Large Offset', 'pb') }
-							value={ attributes.offsetlg }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -231,12 +221,10 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.offsetlg }
 						/>
-						<RangeControl
-							label={ __('Extra Large Offset', 'pb') }
-							value={ attributes.offsetxl }
+						<NumberControl
+							label={ __('Extral Large Offset', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -244,8 +232,7 @@ registerBlockType('pb/column', {
 									});
 								}
 							}
-							min={ 1 }
-							max={ 11 }
+							value={ attributes.offsetxl }
 						/>
 					</PanelBody>
 				</InspectorControls>

@@ -20,7 +20,6 @@ const {
 	PanelBody,
 	BaseControl,
 	Toolbar,
-	RangeControl,
 	SVG,
 	Path,
 } = wp.components;
@@ -30,6 +29,8 @@ const {
 /**
  * Internal dependncies
  */
+import NumberControl from './number-control';
+
 import {
 	alignmentControls,
 	getAlignmentClasses,
@@ -78,11 +79,7 @@ registerBlockType('pb/row', {
 	edit: (props) => {
 		const {
 			className,
-			attributes: {
-				columns,
-				alignVertically,
-				alignHorizontally,
-			},
+			attributes,
 			setAttributes,
 		} = props;
 
@@ -92,7 +89,7 @@ registerBlockType('pb/row', {
 			return {
 				icon: activeAlignment.icon,
 				title: activeAlignment.title,
-				isActive: alignVertically === value,
+				isActive: attributes.alignVertically === value,
 				onClick: () => setAttributes({
 					'alignVertically': value,
 				}),
@@ -105,7 +102,7 @@ registerBlockType('pb/row', {
 			return {
 				icon: alignment.icon,
 				title: alignment.title,
-				isActive: alignHorizontally === value,
+				isActive: attributes.alignHorizontally === value,
 				onClick: () => setAttributes({
 					'alignHorizontally': value,
 				}),
@@ -116,10 +113,10 @@ registerBlockType('pb/row', {
 			<Fragment>
 				<InspectorControls>
 					<PanelBody title={ __('Number of Columns', 'pb') }>
-						<RangeControl
+						<NumberControl
 							label={ __('How many column containers do you want?', 'pb') }
 							help={ __('Be careful: If you reduce the number of column containers, you will loose your existing content in the containers removed.', 'pb') }
-							value={ columns }
+							value={ attributes.columns }
 							onChange={
 								(nextColumns) => {
 									setAttributes({
@@ -127,7 +124,6 @@ registerBlockType('pb/row', {
 									});
 								}
 							}
-							min={ 1 }
 							max={ 6 }
 						/>
 					</PanelBody>
@@ -157,9 +153,9 @@ registerBlockType('pb/row', {
 						</BaseControl>
 					</PanelBody>
 				</InspectorControls>
-				<div className={ 'o-row o-row--columns-' + columns }>
+				<div className={ 'o-row o-row--columns-' + attributes.columns }>
 					<InnerBlocks
-						template={ getColumnsTemplate(columns) }
+						template={ getColumnsTemplate(attributes.columns) }
 						templateLock="all"
 						allowedBlocks={[
 							'pb/column'

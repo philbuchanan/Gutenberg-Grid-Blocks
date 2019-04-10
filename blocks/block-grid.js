@@ -20,7 +20,6 @@ const {
 	PanelBody,
 	BaseControl,
 	Toolbar,
-	RangeControl,
 } = wp.components;
 
 
@@ -28,6 +27,8 @@ const {
 /**
  * Internal dependncies
  */
+import NumberControl from './number-control';
+
 import {
 	alignmentControls,
 	getAlignmentClasses,
@@ -106,16 +107,7 @@ registerBlockType('pb/block-grid', {
 	edit: (props) => {
 		const {
 			className,
-			attributes: {
-				gridItems,
-				alignVertically,
-				alignHorizontally,
-				xs,
-				sm,
-				md,
-				lg,
-				xl,
-			},
+			attributes,
 			setAttributes,
 		} = props;
 
@@ -125,7 +117,7 @@ registerBlockType('pb/block-grid', {
 			return {
 				icon: activeAlignment.icon,
 				title: activeAlignment.title,
-				isActive: alignVertically === value,
+				isActive: attributes.alignVertically === value,
 				onClick: () => setAttributes({
 					'alignVertically': value,
 				}),
@@ -138,7 +130,7 @@ registerBlockType('pb/block-grid', {
 			return {
 				icon: alignment.icon,
 				title: alignment.title,
-				isActive: alignHorizontally === value,
+				isActive: attributes.alignHorizontally === value,
 				onClick: () => setAttributes({
 					'alignHorizontally': value,
 				}),
@@ -149,10 +141,10 @@ registerBlockType('pb/block-grid', {
 			<Fragment>
 				<InspectorControls>
 					<PanelBody title={ __('Number of Block Grid Items', 'pb') }>
-						<RangeControl
+						<NumberControl
 							label={ __('How many block items do you want?', 'pb') }
 							help={ __('Be careful: If you reduce the number of block items, you will loose your existing content in the items removed.', 'pb') }
-							value={ gridItems }
+							value={ attributes.gridItems }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -166,69 +158,64 @@ registerBlockType('pb/block-grid', {
 					</PanelBody>
 					<PanelBody title={ __('Block Grid Items / Line', 'pb') }>
 						<p>{ __('How many items should display in a single row at each screen size?', 'pb') }</p>
-						<RangeControl
+						<NumberControl
 							label={ __('Extra Small', 'pb') }
-							value={ xs }
 							onChange={
-								(spanCount) => {
+								(count) => {
 									setAttributes({
-										xs: spanCount,
+										xs: count,
 									});
 								}
 							}
-							min={ 1 }
+							value={ attributes.xs }
 							max={ 6 }
 						/>
-						<RangeControl
+						<NumberControl
 							label={ __('Small', 'pb') }
-							value={ sm }
 							onChange={
-								(spanCount) => {
+								(count) => {
 									setAttributes({
-										sm: spanCount,
+										sm: count,
 									});
 								}
 							}
-							min={ 1 }
+							value={ attributes.sm }
 							max={ 6 }
 						/>
-						<RangeControl
+						<NumberControl
 							label={ __('Medium', 'pb') }
-							value={ md }
 							onChange={
-								(spanCount) => {
+								(count) => {
 									setAttributes({
-										md: spanCount,
+										md: count,
 									});
 								}
 							}
-							min={ 1 }
+							value={ attributes.md }
 							max={ 6 }
 						/>
-						<RangeControl
+						<NumberControl
 							label={ __('Large', 'pb') }
-							value={ lg }
 							onChange={
-								(spanCount) => {
+								(count) => {
 									setAttributes({
-										lg: spanCount,
+										lg: count,
 									});
 								}
 							}
-							min={ 1 }
+							value={ attributes.lg }
 							max={ 6 }
 						/>
-						<RangeControl
-							label={ __('Extra Large', 'pb') }
-							value={ xl }
+						<NumberControl
+							label={ __('Extral Large', 'pb') }
 							onChange={
-								(spanCount) => {
+								(count) => {
 									setAttributes({
-										xl: spanCount,
+										xl: count,
 									});
 								}
 							}
-							min={ 1 }
+							value={ attributes.xl }
 							max={ 6 }
 						/>
 					</PanelBody>
@@ -258,9 +245,9 @@ registerBlockType('pb/block-grid', {
 						</BaseControl>
 					</PanelBody>
 				</InspectorControls>
-				<div className={ 'o-block-grid o-block-grid-' + lg }>
+				<div className={ 'o-block-grid o-block-grid-' + attributes.lg }>
 					<InnerBlocks
-						template={ getBlockGridTemplate(gridItems) }
+						template={ getBlockGridTemplate(attributes.gridItems) }
 						templateLock="all"
 						allowedBlocks={[
 							'pb/block-grid-item'
