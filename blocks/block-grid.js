@@ -29,63 +29,14 @@ const {
  * Internal dependncies
  */
 import {
-	alignTop,
-	alignCenterVertical,
-	alignBottom,
-	alignLeft,
-	alignCenterHorizontal,
-	alignRight,
-	spaceBetween,
-	spaceAround,
-} from './icons';
+	alignmentControls,
+	getAlignmentClasses,
+} from './alignments';
 
-const BLOCK_ALIGNMENTS_CONTROLS = {
-	top: {
-		icon: alignTop,
-		title: __('Top Align Content (default)', 'pb'),
-		value: '',
-	},
-	centerVertical: {
-		icon: alignCenterVertical,
-		title: __('Center Content', 'pb'),
-		value: 'center',
-	},
-	bottom: {
-		icon: alignBottom,
-		title: __('Bottom Align Content', 'pb'),
-		value: 'end',
-	},
-	left: {
-		icon: alignLeft,
-		title: __('Left Align Columns (default)', 'pb'),
-		value: '',
-	},
-	centerHorizontal: {
-		icon: alignCenterHorizontal,
-		title: __('Center Columns', 'pb'),
-		value: 'center',
-	},
-	right: {
-		icon: alignRight,
-		title: __('Right Align Columns', 'pb'),
-		value: 'end',
-	},
-	spaceBetween: {
-		icon: spaceBetween,
-		title: __('Space Between Columns', 'pb'),
-		value: 'space-between',
-	},
-	spaceAround: {
-		icon: spaceAround,
-		title: __('Space Around Columns', 'pb'),
-		value: 'space-around',
-	},
-};
+
 
 const getBlockGridClasses = (attributes) => {
-	var classes = [
-		'o-block-grid'
-	];
+	var classes = [];
 
 	if (attributes.xs) classes.push('o-block-grid-' + attributes.xs);
 	if (attributes.sm) classes.push('o-block-grid-' + attributes.sm + '-sm');
@@ -93,40 +44,8 @@ const getBlockGridClasses = (attributes) => {
 	if (attributes.lg) classes.push('o-block-grid-' + attributes.lg + '-lg');
 	if (attributes.xl) classes.push('o-block-grid-' + attributes.xl + '-xl');
 
-	if (attributes.alignItemsVertically) {
-		switch(attributes.alignItemsVertically) {
-			case 'center':
-				classes.push('u-align-items-center');
-				break;
-			case 'end':
-				classes.push('u-align-items-end');
-				break;
-		}
-	}
-
-	if (attributes.alignItemsHorizontally) {
-		switch(attributes.alignItemsHorizontally) {
-			case 'center':
-				classes.push('u-justify-content-center');
-				break;
-			case 'space-between':
-				classes.push('u-justify-content-space-between');
-				break;
-			case 'space-around':
-				classes.push('u-justify-content-space-around');
-				break;
-			case 'end':
-				classes.push('u-justify-content-end');
-				break;
-		}
-	}
-
-	return classes.join(' ');
+	return classes;
 };
-
-const allowedBlocks = [
-	'pb/block-grid-item'
-];
 
 const getBlockGridTemplate = (gridItems) => {
 	var template = [];
@@ -155,13 +74,13 @@ registerBlockType('pb/block-grid', {
 			type: 'number',
 			default: 3
 		},
-		alignItemsVertically: {
+		alignVertically: {
 			type: 'string',
-			default: '',
+			default: 'top',
 		},
-		alignItemsHorizontally: {
+		alignHorizontally: {
 			type: 'string',
-			default: '',
+			default: 'left',
 		},
 		xs: {
 			type: 'number',
@@ -189,8 +108,8 @@ registerBlockType('pb/block-grid', {
 			className,
 			attributes: {
 				gridItems,
-				alignItemsVertically,
-				alignItemsHorizontally,
+				alignVertically,
+				alignHorizontally,
 				xs,
 				sm,
 				md,
@@ -201,51 +120,27 @@ registerBlockType('pb/block-grid', {
 		} = props;
 
 		function verticalControl(value) {
-			var activeAlignment = BLOCK_ALIGNMENTS_CONTROLS[value];
-
-			// Set control active state
-			var isActive = false;
-
-			if (alignItemsVertically !== undefined) {
-				isActive = alignItemsVertically === activeAlignment.value;
-			}
-			else {
-				if (value === 'top') {
-					isActive = true;
-				}
-			}
+			var activeAlignment = alignmentControls[value];
 
 			return {
 				icon: activeAlignment.icon,
 				title: activeAlignment.title,
-				isActive: isActive,
+				isActive: alignVertically === value,
 				onClick: () => setAttributes({
-					'alignItemsVertically': activeAlignment.value,
+					'alignVertically': value,
 				}),
 			};
 		}
 
 		function horizontalControl(value) {
-			var activeAlignment = BLOCK_ALIGNMENTS_CONTROLS[value];
-
-			// Set control active state
-			var isActive = false;
-
-			if (alignItemsHorizontally !== undefined) {
-				isActive = alignItemsHorizontally === activeAlignment.value;
-			}
-			else {
-				if (value === 'top') {
-					isActive = true;
-				}
-			}
+			var alignment = alignmentControls[value];
 
 			return {
-				icon: activeAlignment.icon,
-				title: activeAlignment.title,
-				isActive: isActive,
+				icon: alignment.icon,
+				title: alignment.title,
+				isActive: alignHorizontally === value,
 				onClick: () => setAttributes({
-					'alignItemsHorizontally': activeAlignment.value,
+					'alignHorizontally': value,
 				}),
 			};
 		}
@@ -338,19 +233,10 @@ registerBlockType('pb/block-grid', {
 						/>
 					</PanelBody>
 					<PanelBody
-						title={ __('Item Alignment', 'pb') }
+						title={ __('Alignment', 'pb') }
 						initialOpen={ false }
 					>
-						<BaseControl label={ __('Align Items Vertically', 'pb') }>
-							<Toolbar controls={
-								[
-									'top',
-									'centerVertical',
-									'bottom',
-								].map(verticalControl)
-							} />
-						</BaseControl>
-						<BaseControl label={ __('Align Items Horiztonally', 'pb') }>
+						<BaseControl label={ __('Align Horiztonally', 'pb') }>
 							<Toolbar controls={
 								[
 									'left',
@@ -361,13 +247,24 @@ registerBlockType('pb/block-grid', {
 								].map(horizontalControl)
 							} />
 						</BaseControl>
+						<BaseControl label={ __('Align Vertically', 'pb') }>
+							<Toolbar controls={
+								[
+									'top',
+									'centerVertical',
+									'bottom',
+								].map(verticalControl)
+							} />
+						</BaseControl>
 					</PanelBody>
 				</InspectorControls>
 				<div className={ 'o-block-grid o-block-grid-' + lg }>
 					<InnerBlocks
 						template={ getBlockGridTemplate(gridItems) }
 						templateLock="all"
-						allowedBlocks={ allowedBlocks }
+						allowedBlocks={[
+							'pb/block-grid-item'
+						]}
 					/>
 				</div>
 			</Fragment>
@@ -375,7 +272,7 @@ registerBlockType('pb/block-grid', {
 	},
 	save: (props) => {
 		return (
-			<div className={ getBlockGridClasses(props.attributes) }>
+			<div className={ ['o-block-grid', ...getBlockGridClasses(props.attributes), ...getAlignmentClasses(props.attributes)].join(' ') }>
 				<InnerBlocks.Content />
 			</div>
 		);

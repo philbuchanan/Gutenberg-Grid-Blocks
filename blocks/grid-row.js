@@ -1,3 +1,6 @@
+/**
+ * WordPress dependencies
+ */
 const {__, setLocaleData} = wp.i18n;
 
 const {
@@ -28,98 +31,11 @@ const {
  * Internal dependncies
  */
 import {
-	alignTop,
-	alignCenterVertical,
-	alignBottom,
-	alignLeft,
-	alignCenterHorizontal,
-	alignRight,
-	spaceBetween,
-	spaceAround,
-} from './icons';
+	alignmentControls,
+	getAlignmentClasses,
+} from './alignments';
 
-const BLOCK_ALIGNMENTS_CONTROLS = {
-	top: {
-		icon: alignTop,
-		title: __('Top Align Content (default)', 'pb'),
-		value: '',
-	},
-	centerVertical: {
-		icon: alignCenterVertical,
-		title: __('Center Content', 'pb'),
-		value: 'center',
-	},
-	bottom: {
-		icon: alignBottom,
-		title: __('Bottom Align Content', 'pb'),
-		value: 'end',
-	},
-	left: {
-		icon: alignLeft,
-		title: __('Left Align Columns (default)', 'pb'),
-		value: '',
-	},
-	centerHorizontal: {
-		icon: alignCenterHorizontal,
-		title: __('Center Columns', 'pb'),
-		value: 'center',
-	},
-	right: {
-		icon: alignRight,
-		title: __('Right Align Columns', 'pb'),
-		value: 'end',
-	},
-	spaceBetween: {
-		icon: spaceBetween,
-		title: __('Space Between Columns', 'pb'),
-		value: 'space-between',
-	},
-	spaceAround: {
-		icon: spaceAround,
-		title: __('Space Around Columns', 'pb'),
-		value: 'space-around',
-	},
-};
 
-const getRowColumns = (attributes) => {
-	var classes = [
-		'o-row'
-	];
-
-	if (attributes.centerContentVertically) {
-		switch(attributes.centerContentVertically) {
-			case 'center':
-				classes.push('u-align-items-center');
-				break;
-			case 'end':
-				classes.push('u-align-items-end');
-				break;
-		}
-	}
-
-	if (attributes.alignColumnsHorizontally) {
-		switch(attributes.alignColumnsHorizontally) {
-			case 'center':
-				classes.push('u-justify-content-center');
-				break;
-			case 'space-between':
-				classes.push('u-justify-content-space-between');
-				break;
-			case 'space-around':
-				classes.push('u-justify-content-space-around');
-				break;
-			case 'end':
-				classes.push('u-justify-content-end');
-				break;
-		}
-	}
-
-	return classes.join(' ');
-};
-
-const allowedBlocks = [
-	'pb/column'
-];
 
 const getColumnsTemplate = (columns) => {
 	var template = [];
@@ -150,13 +66,13 @@ registerBlockType('pb/row', {
 			type: 'number',
 			default: 2,
 		},
-		centerContentVertically: {
+		alignVertically: {
 			type: 'sting',
-			default: '',
+			default: 'top',
 		},
-		alignColumnsHorizontally: {
+		alignHorizontally: {
 			type: 'string',
-			default: '',
+			default: 'left',
 		},
 	},
 	edit: (props) => {
@@ -164,58 +80,34 @@ registerBlockType('pb/row', {
 			className,
 			attributes: {
 				columns,
-				centerContentVertically,
-				alignColumnsHorizontally,
+				alignVertically,
+				alignHorizontally,
 			},
 			setAttributes,
 		} = props;
 
 		function verticalControl(value) {
-			var activeAlignment = BLOCK_ALIGNMENTS_CONTROLS[value];
-
-			// Set control active state
-			var isActive = false;
-
-			if (centerContentVertically !== undefined) {
-				isActive = centerContentVertically === activeAlignment.value;
-			}
-			else {
-				if (value === 'top') {
-					isActive = true;
-				}
-			}
+			var activeAlignment = alignmentControls[value];
 
 			return {
 				icon: activeAlignment.icon,
 				title: activeAlignment.title,
-				isActive: isActive,
+				isActive: alignVertically === value,
 				onClick: () => setAttributes({
-					'centerContentVertically': activeAlignment.value,
+					'alignVertically': value,
 				}),
 			};
 		}
 
 		function horizontalControl(value) {
-			var activeAlignment = BLOCK_ALIGNMENTS_CONTROLS[value];
-
-			// Set control active state
-			var isActive = false;
-
-			if (alignColumnsHorizontally !== undefined) {
-				isActive = alignColumnsHorizontally === activeAlignment.value;
-			}
-			else {
-				if (value === 'top') {
-					isActive = true;
-				}
-			}
+			var alignment = alignmentControls[value];
 
 			return {
-				icon: activeAlignment.icon,
-				title: activeAlignment.title,
-				isActive: isActive,
+				icon: alignment.icon,
+				title: alignment.title,
+				isActive: alignHorizontally === value,
 				onClick: () => setAttributes({
-					'alignColumnsHorizontally': activeAlignment.value,
+					'alignHorizontally': value,
 				}),
 			};
 		}
@@ -240,19 +132,10 @@ registerBlockType('pb/row', {
 						/>
 					</PanelBody>
 					<PanelBody
-						title={ __('Column & Content Alignment', 'pb') }
+						title={ __('Alignment', 'pb') }
 						initialOpen={ false }
 					>
-						<BaseControl label={ __('Align Column Content Vertically', 'pb') }>
-							<Toolbar controls={
-								[
-									'top',
-									'centerVertical',
-									'bottom',
-								].map(verticalControl)
-							} />
-						</BaseControl>
-						<BaseControl label={ __('Align Columns Horiztonally', 'pb') }>
+						<BaseControl label={ __('Align Horiztonally', 'pb') }>
 							<Toolbar controls={
 								[
 									'left',
@@ -263,13 +146,24 @@ registerBlockType('pb/row', {
 								].map(horizontalControl)
 							} />
 						</BaseControl>
+						<BaseControl label={ __('Align Vertically', 'pb') }>
+							<Toolbar controls={
+								[
+									'top',
+									'centerVertical',
+									'bottom',
+								].map(verticalControl)
+							} />
+						</BaseControl>
 					</PanelBody>
 				</InspectorControls>
 				<div className={ 'o-row o-row--columns-' + columns }>
 					<InnerBlocks
 						template={ getColumnsTemplate(columns) }
 						templateLock="all"
-						allowedBlocks={ allowedBlocks }
+						allowedBlocks={[
+							'pb/column'
+						]}
 					/>
 				</div>
 			</Fragment>
@@ -277,7 +171,7 @@ registerBlockType('pb/row', {
 	},
 	save: (props) => {
 		return (
-			<div className={ getRowColumns(props.attributes) }>
+			<div className={ ['o-row', ...getAlignmentClasses(props.attributes)].join(' ') }>
 				<InnerBlocks.Content />
 			</div>
 		);
