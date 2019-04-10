@@ -1,3 +1,6 @@
+/**
+ * WordPress dependencies
+ */
 const {__, setLocaleData} = wp.i18n;
 
 const {
@@ -15,9 +18,69 @@ const {
 
 const {
 	PanelBody,
-	SelectControl,
+	BaseControl,
+	Toolbar,
 	RangeControl,
 } = wp.components;
+
+
+
+/**
+ * Internal dependncies
+ */
+import {
+	alignTop,
+	alignCenterVertical,
+	alignBottom,
+	alignLeft,
+	alignCenterHorizontal,
+	alignRight,
+	spaceBetween,
+	spaceAround,
+} from './icons';
+
+const BLOCK_ALIGNMENTS_CONTROLS = {
+	top: {
+		icon: alignTop,
+		title: __('Top Align Content (default)', 'pb'),
+		value: '',
+	},
+	centerVertical: {
+		icon: alignCenterVertical,
+		title: __('Center Content', 'pb'),
+		value: 'center',
+	},
+	bottom: {
+		icon: alignBottom,
+		title: __('Bottom Align Content', 'pb'),
+		value: 'end',
+	},
+	left: {
+		icon: alignLeft,
+		title: __('Left Align Columns (default)', 'pb'),
+		value: '',
+	},
+	centerHorizontal: {
+		icon: alignCenterHorizontal,
+		title: __('Center Columns', 'pb'),
+		value: 'center',
+	},
+	right: {
+		icon: alignRight,
+		title: __('Right Align Columns', 'pb'),
+		value: 'end',
+	},
+	spaceBetween: {
+		icon: spaceBetween,
+		title: __('Space Between Columns', 'pb'),
+		value: 'space-between',
+	},
+	spaceAround: {
+		icon: spaceAround,
+		title: __('Space Around Columns', 'pb'),
+		value: 'space-around',
+	},
+};
 
 const getBlockGridClasses = (attributes) => {
 	var classes = [
@@ -45,6 +108,12 @@ const getBlockGridClasses = (attributes) => {
 		switch(attributes.alignItemsHorizontally) {
 			case 'center':
 				classes.push('u-justify-content-center');
+				break;
+			case 'space-between':
+				classes.push('u-justify-content-space-between');
+				break;
+			case 'space-around':
+				classes.push('u-justify-content-space-around');
 				break;
 			case 'end':
 				classes.push('u-justify-content-end');
@@ -130,6 +199,56 @@ registerBlockType('pb/block-grid', {
 			},
 			setAttributes,
 		} = props;
+
+		function verticalControl(value) {
+			var activeAlignment = BLOCK_ALIGNMENTS_CONTROLS[value];
+
+			// Set control active state
+			var isActive = false;
+
+			if (alignItemsVertically !== undefined) {
+				isActive = alignItemsVertically === activeAlignment.value;
+			}
+			else {
+				if (value === 'top') {
+					isActive = true;
+				}
+			}
+
+			return {
+				icon: activeAlignment.icon,
+				title: activeAlignment.title,
+				isActive: isActive,
+				onClick: () => setAttributes({
+					'alignItemsVertically': activeAlignment.value,
+				}),
+			};
+		}
+
+		function horizontalControl(value) {
+			var activeAlignment = BLOCK_ALIGNMENTS_CONTROLS[value];
+
+			// Set control active state
+			var isActive = false;
+
+			if (alignItemsHorizontally !== undefined) {
+				isActive = alignItemsHorizontally === activeAlignment.value;
+			}
+			else {
+				if (value === 'top') {
+					isActive = true;
+				}
+			}
+
+			return {
+				icon: activeAlignment.icon,
+				title: activeAlignment.title,
+				isActive: isActive,
+				onClick: () => setAttributes({
+					'alignItemsHorizontally': activeAlignment.value,
+				}),
+			};
+		}
 
 		return (
 			<Fragment>
@@ -222,56 +341,26 @@ registerBlockType('pb/block-grid', {
 						title={ __('Item Alignment', 'pb') }
 						initialOpen={ false }
 					>
-						<SelectControl
-							label={ __('Align Items Vertically', 'pb') }
-							value={ alignItemsVertically }
-							onChange={
-								(value) => {
-									setAttributes({
-										alignItemsVertically: value,
-									});
-								}
-							}
-							options={[
-								{
-									value: '',
-									label: __('Top Align Items (default)', 'pb'),
-								},
-								{
-									value: 'center',
-									label: __('Center Items', 'pb'),
-								},
-								{
-									value: 'end',
-									label: __('Bottom Align Items', 'pb'),
-								},
-							]}
-						/>
-						<SelectControl
-							label={ __('Align Items Horiztonally', 'pb') }
-							value={ alignItemsHorizontally }
-							onChange={
-								(value) => {
-									setAttributes({
-										alignItemsHorizontally: value,
-									});
-								}
-							}
-							options={[
-								{
-									value: '',
-									label: __('Left Align Items (default)', 'pb'),
-								},
-								{
-									value: 'center',
-									label: __('Center Items', 'pb'),
-								},
-								{
-									value: 'end',
-									label: __('Right Align Items', 'pb'),
-								},
-							]}
-						/>
+						<BaseControl label={ __('Align Items Vertically', 'pb') }>
+							<Toolbar controls={
+								[
+									'top',
+									'centerVertical',
+									'bottom',
+								].map(verticalControl)
+							} />
+						</BaseControl>
+						<BaseControl label={ __('Align Items Horiztonally', 'pb') }>
+							<Toolbar controls={
+								[
+									'left',
+									'centerHorizontal',
+									'right',
+									'spaceBetween',
+									'spaceAround',
+								].map(horizontalControl)
+							} />
+						</BaseControl>
 					</PanelBody>
 				</InspectorControls>
 				<div className={ 'o-block-grid o-block-grid-' + lg }>

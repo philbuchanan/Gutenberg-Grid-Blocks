@@ -1,3 +1,6 @@
+/**
+ * WordPress dependencies
+ */
 const {__, setLocaleData} = wp.i18n;
 
 const {
@@ -19,6 +22,8 @@ const {
 	SVG,
 	Path,
 } = wp.components;
+
+
 
 const getColumnClasses = (attributes) => {
 	var classes = [

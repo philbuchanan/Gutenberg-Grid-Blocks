@@ -1,3 +1,6 @@
+/**
+ * WordPress dependencies
+ */
 const {__, setLocaleData} = wp.i18n;
 
 const {

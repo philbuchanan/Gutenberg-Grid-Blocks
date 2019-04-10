@@ -15,19 +15,79 @@ const {
 
 const {
 	PanelBody,
+	BaseControl,
+	Toolbar,
 	RangeControl,
-	SelectControl,
 	SVG,
 	Path,
 } = wp.components;
+
+
+
+/**
+ * Internal dependncies
+ */
+import {
+	alignTop,
+	alignCenterVertical,
+	alignBottom,
+	alignLeft,
+	alignCenterHorizontal,
+	alignRight,
+	spaceBetween,
+	spaceAround,
+} from './icons';
+
+const BLOCK_ALIGNMENTS_CONTROLS = {
+	top: {
+		icon: alignTop,
+		title: __('Top Align Content (default)', 'pb'),
+		value: '',
+	},
+	centerVertical: {
+		icon: alignCenterVertical,
+		title: __('Center Content', 'pb'),
+		value: 'center',
+	},
+	bottom: {
+		icon: alignBottom,
+		title: __('Bottom Align Content', 'pb'),
+		value: 'end',
+	},
+	left: {
+		icon: alignLeft,
+		title: __('Left Align Columns (default)', 'pb'),
+		value: '',
+	},
+	centerHorizontal: {
+		icon: alignCenterHorizontal,
+		title: __('Center Columns', 'pb'),
+		value: 'center',
+	},
+	right: {
+		icon: alignRight,
+		title: __('Right Align Columns', 'pb'),
+		value: 'end',
+	},
+	spaceBetween: {
+		icon: spaceBetween,
+		title: __('Space Between Columns', 'pb'),
+		value: 'space-between',
+	},
+	spaceAround: {
+		icon: spaceAround,
+		title: __('Space Around Columns', 'pb'),
+		value: 'space-around',
+	},
+};
 
 const getRowColumns = (attributes) => {
 	var classes = [
 		'o-row'
 	];
 
-	if (attributes.alignContentVertically) {
-		switch(attributes.alignContentVertically) {
+	if (attributes.centerContentVertically) {
+		switch(attributes.centerContentVertically) {
 			case 'center':
 				classes.push('u-align-items-center');
 				break;
@@ -104,11 +164,61 @@ registerBlockType('pb/row', {
 			className,
 			attributes: {
 				columns,
-				alignContentVertically,
+				centerContentVertically,
 				alignColumnsHorizontally,
 			},
 			setAttributes,
 		} = props;
+
+		function verticalControl(value) {
+			var activeAlignment = BLOCK_ALIGNMENTS_CONTROLS[value];
+
+			// Set control active state
+			var isActive = false;
+
+			if (centerContentVertically !== undefined) {
+				isActive = centerContentVertically === activeAlignment.value;
+			}
+			else {
+				if (value === 'top') {
+					isActive = true;
+				}
+			}
+
+			return {
+				icon: activeAlignment.icon,
+				title: activeAlignment.title,
+				isActive: isActive,
+				onClick: () => setAttributes({
+					'centerContentVertically': activeAlignment.value,
+				}),
+			};
+		}
+
+		function horizontalControl(value) {
+			var activeAlignment = BLOCK_ALIGNMENTS_CONTROLS[value];
+
+			// Set control active state
+			var isActive = false;
+
+			if (alignColumnsHorizontally !== undefined) {
+				isActive = alignColumnsHorizontally === activeAlignment.value;
+			}
+			else {
+				if (value === 'top') {
+					isActive = true;
+				}
+			}
+
+			return {
+				icon: activeAlignment.icon,
+				title: activeAlignment.title,
+				isActive: isActive,
+				onClick: () => setAttributes({
+					'alignColumnsHorizontally': activeAlignment.value,
+				}),
+			};
+		}
 
 		return (
 			<Fragment>
@@ -133,64 +243,26 @@ registerBlockType('pb/row', {
 						title={ __('Column & Content Alignment', 'pb') }
 						initialOpen={ false }
 					>
-						<SelectControl
-							label={ __('Align Column Content Vertically', 'pb') }
-							value={ alignContentVertically }
-							onChange={
-								(value) => {
-									setAttributes({
-										alignContentVertically: value,
-									});
-								}
-							}
-							options={[
-								{
-									value: '',
-									label: __('Top Align Content (default)', 'pb'),
-								},
-								{
-									value: 'center',
-									label: __('Center Content', 'pb'),
-								},
-								{
-									value: 'end',
-									label: __('Bottom Align Content', 'pb'),
-								},
-							]}
-						/>
-						<SelectControl
-							label={ __('Align Columns Horiztonally', 'pb') }
-							value={ alignColumnsHorizontally }
-							onChange={
-								(value) => {
-									setAttributes({
-										alignColumnsHorizontally: value,
-									});
-								}
-							}
-							options={[
-								{
-									value: '',
-									label: __('Left Align Columns (default)', 'pb'),
-								},
-								{
-									value: 'center',
-									label: __('Center Columns', 'pb'),
-								},
-								{
-									value: 'end',
-									label: __('Right Align Columns', 'pb'),
-								},
-								{
-									value: 'space-between',
-									label: __('Space Between Columns', 'pb'),
-								},
-								{
-									value: 'space-around',
-									label: __('Space Around Columns', 'pb'),
-								},
-							]}
-						/>
+						<BaseControl label={ __('Align Column Content Vertically', 'pb') }>
+							<Toolbar controls={
+								[
+									'top',
+									'centerVertical',
+									'bottom',
+								].map(verticalControl)
+							} />
+						</BaseControl>
+						<BaseControl label={ __('Align Columns Horiztonally', 'pb') }>
+							<Toolbar controls={
+								[
+									'left',
+									'centerHorizontal',
+									'right',
+									'spaceBetween',
+									'spaceAround',
+								].map(horizontalControl)
+							} />
+						</BaseControl>
 					</PanelBody>
 				</InspectorControls>
 				<div className={ 'o-row o-row--columns-' + columns }>
