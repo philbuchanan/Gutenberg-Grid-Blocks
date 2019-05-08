@@ -1,10 +1,10 @@
 /**
  * WordPress dependencies
  */
+const {__, setLocaleData} = wp.i18n;
+
 const {
-	compose,
 	withInstanceId,
-	withState,
 } = wp.compose;
 
 
@@ -13,7 +13,8 @@ const {
  * Internal dependencies
  */
 const {
-	BaseControl
+	BaseControl,
+	Button,
 } = wp.components;
 
 
@@ -27,11 +28,12 @@ function NumberControl({
 	help,
 	min,
 	max,
+	allowReset,
 	...props
 }) {
-	const id = `inspector-text-control-${ instanceId }`;
+	const id = `number-control-${ instanceId }`;
 	const onChangeValue = (event) => {
-		onChange((event.target.value === '') ? undefined : parseInt(event.target.value));
+		onChange((event.target.value === '') ? '' : parseInt(event.target.value));
 	};
 
 	return (
@@ -50,16 +52,25 @@ function NumberControl({
 				min={ !!min ? min : 1 }
 				max={ !!max ? max : 11 }
 				step={ 1 }
+				style={
+					{
+						'width': '70px',
+						'marginRight': '10px',
+					}
+				}
 				{ ...props }
-				style={ {'width': '70px'} }
 			/>
+			{ !!allowReset &&
+				<Button
+					isLink
+					isDestructive
+					onClick={ () => onChange('') }
+				>
+					{ __('Reset', 'pb') }
+				</Button>
+			}
 		</BaseControl>
 	);
 }
 
-export default compose([
-	withInstanceId,
-	withState({
-		currentInput: null,
-	}),
-])(NumberControl);
+export default withInstanceId(NumberControl);

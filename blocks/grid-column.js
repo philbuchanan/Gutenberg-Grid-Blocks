@@ -128,6 +128,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.xs }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Small Span', 'pb') }
@@ -139,6 +140,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.sm }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Medium Span', 'pb') }
@@ -150,6 +152,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.md }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Large Span', 'pb') }
@@ -161,6 +164,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.lg }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Extral Large Span', 'pb') }
@@ -172,6 +176,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.xl }
+							allowReset={ true }
 						/>
 					</PanelBody>
 					<PanelBody
@@ -189,6 +194,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.offsetxs }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Small Offset', 'pb') }
@@ -200,6 +206,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.offsetsm }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Medium Offset', 'pb') }
@@ -211,6 +218,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.offsetmd }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Large Offset', 'pb') }
@@ -222,6 +230,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.offsetlg }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Extral Large Offset', 'pb') }
@@ -233,6 +242,7 @@ registerBlockType('pb/column', {
 								}
 							}
 							value={ attributes.offsetxl }
+							allowReset={ true }
 						/>
 					</PanelBody>
 				</InspectorControls>

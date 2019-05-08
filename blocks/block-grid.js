@@ -169,6 +169,7 @@ registerBlockType('pb/block-grid', {
 							}
 							value={ attributes.xs }
 							max={ 6 }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Small', 'pb') }
@@ -181,6 +182,7 @@ registerBlockType('pb/block-grid', {
 							}
 							value={ attributes.sm }
 							max={ 6 }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Medium', 'pb') }
@@ -193,6 +195,7 @@ registerBlockType('pb/block-grid', {
 							}
 							value={ attributes.md }
 							max={ 6 }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Large', 'pb') }
@@ -205,6 +208,7 @@ registerBlockType('pb/block-grid', {
 							}
 							value={ attributes.lg }
 							max={ 6 }
+							allowReset={ true }
 						/>
 						<NumberControl
 							label={ __('Extral Large', 'pb') }
@@ -217,6 +221,7 @@ registerBlockType('pb/block-grid', {
 							}
 							value={ attributes.xl }
 							max={ 6 }
+							allowReset={ true }
 						/>
 					</PanelBody>
 					<PanelBody
