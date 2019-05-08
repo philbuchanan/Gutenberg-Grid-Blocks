@@ -153,7 +153,7 @@ registerBlockType('pb/row', {
 						</BaseControl>
 					</PanelBody>
 				</InspectorControls>
-				<div className={ 'o-row o-row--columns-' + attributes.columns }>
+				<div className={ ['o-row', 'o-row--columns-' + attributes.columns, ...getAlignmentClasses(props.attributes)].join(' ') }>
 					<InnerBlocks
 						template={ getColumnsTemplate(attributes.columns) }
 						templateLock="all"

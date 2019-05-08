@@ -263,7 +263,7 @@ registerBlockType('pb/block-grid', {
 						</BaseControl>
 					</PanelBody>
 				</InspectorControls>
-				<div className={ 'o-block-grid o-block-grid-' + attributes.lg }>
+				<div className={ ['o-block-grid o-block-grid-' + attributes.lg, ...getAlignmentClasses(props.attributes)].join(' ') }>
 					<InnerBlocks
 						template={ getBlockGridTemplate(attributes.gridItems) }
 						templateLock="all"
