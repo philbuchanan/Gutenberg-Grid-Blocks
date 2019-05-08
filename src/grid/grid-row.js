@@ -12,6 +12,10 @@ const {
 } = wp.element;
 
 const {
+	select,
+} = wp.data;
+
+const {
 	InspectorControls,
 	InnerBlocks,
 } = wp.blockEditor;
@@ -81,7 +85,18 @@ registerBlockType('pb/row', {
 			className,
 			attributes,
 			setAttributes,
+			clientId,
 		} = props;
+
+		function getColumnSpanClasses() {
+			var columnClasses = [];
+
+			select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks.map((item, index) => {
+				columnClasses.push('o-row--column-' + (index + 1) + '-span-' + item.attributes.lg);
+			});
+
+			return columnClasses;
+		}
 
 		function verticalControl(value) {
 			var activeAlignment = alignmentControls[value];
@@ -153,7 +168,7 @@ registerBlockType('pb/row', {
 						</BaseControl>
 					</PanelBody>
 				</InspectorControls>
-				<div className={ 'o-row o-row--columns-' + attributes.columns }>
+				<div className={ ['o-row', 'o-row--columns-' + attributes.columns, ...getColumnSpanClasses(), ...getAlignmentClasses(props.attributes)].join(' ') }>
 					<InnerBlocks
 						template={ getColumnsTemplate(attributes.columns) }
 						templateLock="all"
