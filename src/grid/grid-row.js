@@ -29,12 +29,12 @@ const {
 /**
  * Internal dependncies
  */
-import NumberControl from './number-control';
+import NumberControl from '../number-control';
 
 import {
 	alignmentControls,
 	getAlignmentClasses,
-} from './alignments';
+} from '../alignments';
 
 
 

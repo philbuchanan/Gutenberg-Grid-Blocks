@@ -2,18 +2,14 @@
   "name": "pb-grid-blocks",
   "version": "2.0.0",
   "description": "Gutenberg blocks to create complex grid layouts.",
-  "main": "js/blocks.build.js",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "webpack --watch",
-    "build": "NODE_ENV=production webpack"
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
   },
   "author": "pbuchanan",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "7.3.4",
-    "@babel/plugin-transform-react-jsx": "7.3.0",
-    "babel-loader": "8.0.5",
-    "webpack": "4.29.6",
-    "webpack-cli": "3.2.3"
+    "@wordpress/scripts": "3.1.0"
   }
 }

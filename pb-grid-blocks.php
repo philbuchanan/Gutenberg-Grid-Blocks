@@ -14,12 +14,18 @@ if (!class_exists('PB_Grid_Blocks')) :
 
 class PB_Grid_Blocks {
 
+	public $plugin_version;
+
+
+
 	/**
 	 * Class constructor
 	 * Sets up the plugin, including: textdomain and registering scripts.
 	 */
 	function __construct() {
 		$basename = plugin_basename(__FILE__);
+
+		$this->plugin_version = $this->get_plugin_version();
 
 		// Load text domain
 		load_plugin_textdomain('pb', false, dirname($basename) . '/languages/');
@@ -46,16 +52,10 @@ class PB_Grid_Blocks {
 	 */
 	public function enqueue_block_editor_assets() {
 		wp_enqueue_script(
-			'pb-blacklist-blocks',
-			plugins_url('js/blacklist.js', __FILE__),
-			array('wp-blocks', 'wp-dom-ready', 'wp-edit-post')
-		);
-
-		wp_enqueue_script(
 			'pb-grid-blocks-editor-scripts',
-			plugins_url('js/blocks.build.js', __FILE__),
+			plugins_url('build/index.js', __FILE__),
 			array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'underscore'),
-			$this->get_plugin_version(),
+			$this->plugin_version,
 			true
 		);
 
@@ -63,7 +63,7 @@ class PB_Grid_Blocks {
 			'pb-grid-blocks-editor-styles',
 			plugins_url('assets/editor.css', __FILE__),
 			array('wp-edit-blocks'),
-			$this->get_plugin_version()
+			$this->plugin_version
 		);
 	}
 
