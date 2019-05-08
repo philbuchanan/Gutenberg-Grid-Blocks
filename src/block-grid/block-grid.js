@@ -34,6 +34,14 @@ import {
 	getAlignmentClasses,
 } from '../alignments';
 
+import {
+	xsScreen,
+	smScreen,
+	mdScreen,
+	lgScreen,
+	xlScreen,
+} from '../icons';
+
 
 
 const getBlockGridClasses = (attributes) => {
@@ -159,7 +167,7 @@ registerBlockType('pb/block-grid', {
 					<PanelBody title={ __('Block Grid Items / Line', 'pb') }>
 						<p>{ __('How many items should display in a single row at each screen size?', 'pb') }</p>
 						<NumberControl
-							label={ __('Extra Small', 'pb') }
+							label={ __('Extra Small Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -170,9 +178,10 @@ registerBlockType('pb/block-grid', {
 							value={ attributes.xs }
 							max={ 6 }
 							allowReset={ true }
+							icon={ xsScreen }
 						/>
 						<NumberControl
-							label={ __('Small', 'pb') }
+							label={ __('Small Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -183,9 +192,10 @@ registerBlockType('pb/block-grid', {
 							value={ attributes.sm }
 							max={ 6 }
 							allowReset={ true }
+							icon={ smScreen }
 						/>
 						<NumberControl
-							label={ __('Medium', 'pb') }
+							label={ __('Medium Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -196,9 +206,10 @@ registerBlockType('pb/block-grid', {
 							value={ attributes.md }
 							max={ 6 }
 							allowReset={ true }
+							icon={ mdScreen }
 						/>
 						<NumberControl
-							label={ __('Large', 'pb') }
+							label={ __('Large Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -209,9 +220,10 @@ registerBlockType('pb/block-grid', {
 							value={ attributes.lg }
 							max={ 6 }
 							allowReset={ true }
+							icon={ lgScreen }
 						/>
 						<NumberControl
-							label={ __('Extral Large', 'pb') }
+							label={ __('Extral Large Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -222,6 +234,7 @@ registerBlockType('pb/block-grid', {
 							value={ attributes.xl }
 							max={ 6 }
 							allowReset={ true }
+							icon={ xlScreen }
 						/>
 					</PanelBody>
 					<PanelBody

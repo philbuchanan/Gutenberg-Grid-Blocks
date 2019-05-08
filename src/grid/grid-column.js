@@ -29,6 +29,14 @@ const {
  */
 import NumberControl from '../number-control';
 
+import {
+	xsScreen,
+	smScreen,
+	mdScreen,
+	lgScreen,
+	xlScreen,
+} from '../icons';
+
 
 
 const getColumnClasses = (attributes) => {
@@ -119,7 +127,7 @@ registerBlockType('pb/column', {
 					<PanelBody title={ __('Column Spans', 'pb') }>
 						<p>{ __('How many columns of the 12-column grid should this container span at each screen size?', 'pb') }</p>
 						<NumberControl
-							label={ __('Extra Small Span', 'pb') }
+							label={ __('Extra Small Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -129,9 +137,10 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.xs }
 							allowReset={ true }
+							icon={ xsScreen }
 						/>
 						<NumberControl
-							label={ __('Small Span', 'pb') }
+							label={ __('Small Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -141,9 +150,10 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.sm }
 							allowReset={ true }
+							icon={ smScreen }
 						/>
 						<NumberControl
-							label={ __('Medium Span', 'pb') }
+							label={ __('Medium Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -153,9 +163,10 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.md }
 							allowReset={ true }
+							icon={ mdScreen }
 						/>
 						<NumberControl
-							label={ __('Large Span', 'pb') }
+							label={ __('Large Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -165,9 +176,10 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.lg }
 							allowReset={ true }
+							icon={ lgScreen }
 						/>
 						<NumberControl
-							label={ __('Extral Large Span', 'pb') }
+							label={ __('Extral Large Screens', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -177,6 +189,7 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.xl }
 							allowReset={ true }
+							icon={ xlScreen }
 						/>
 					</PanelBody>
 					<PanelBody
@@ -185,7 +198,7 @@ registerBlockType('pb/column', {
 					>
 						<p>{ __('How many columns of the 12-column grid should this container be offset by at each screen size?', 'pb') }</p>
 						<NumberControl
-							label={ __('Extra Small Offset', 'pb') }
+							label={ __('Extra Small Screen Offset', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -195,9 +208,10 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.offsetxs }
 							allowReset={ true }
+							icon={ xsScreen }
 						/>
 						<NumberControl
-							label={ __('Small Offset', 'pb') }
+							label={ __('Small Screen Offset', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -207,9 +221,10 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.offsetsm }
 							allowReset={ true }
+							icon={ smScreen }
 						/>
 						<NumberControl
-							label={ __('Medium Offset', 'pb') }
+							label={ __('Medium Screen Offset', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -219,9 +234,10 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.offsetmd }
 							allowReset={ true }
+							icon={ mdScreen }
 						/>
 						<NumberControl
-							label={ __('Large Offset', 'pb') }
+							label={ __('Large Screen Offset', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -231,9 +247,10 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.offsetlg }
 							allowReset={ true }
+							icon={ lgScreen }
 						/>
 						<NumberControl
-							label={ __('Extral Large Offset', 'pb') }
+							label={ __('Extral Large Screen Offset', 'pb') }
 							onChange={
 								(count) => {
 									setAttributes({
@@ -243,6 +260,7 @@ registerBlockType('pb/column', {
 							}
 							value={ attributes.offsetxl }
 							allowReset={ true }
+							icon={ xlScreen }
 						/>
 					</PanelBody>
 				</InspectorControls>

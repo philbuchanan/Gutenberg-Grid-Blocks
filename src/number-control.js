@@ -15,6 +15,7 @@ const {
 const {
 	BaseControl,
 	Button,
+	Icon,
 } = wp.components;
 
 
@@ -29,6 +30,7 @@ function NumberControl({
 	min,
 	max,
 	allowReset,
+	icon,
 	...props
 }) {
 	const id = `number-control-${ instanceId }`;
@@ -43,7 +45,15 @@ function NumberControl({
 			help={ help }
 			className={ className }
 		>
+			{ !!icon &&
+				<Icon
+					icon={ icon }
+					size={ 20 }
+					className="c-number-control__icon"
+				/>
+			}
 			<input
+				className="c-number-control__input"
 				type="number"
 				id={ id }
 				value={ value }
@@ -52,12 +62,6 @@ function NumberControl({
 				min={ !!min ? min : 1 }
 				max={ !!max ? max : 11 }
 				step={ 1 }
-				style={
-					{
-						'width': '70px',
-						'marginRight': '10px',
-					}
-				}
 				{ ...props }
 			/>
 			{ !!allowReset &&

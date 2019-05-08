@@ -65,3 +65,15 @@
 .o-block-grid-6 .editor-block-list__layout > [data-type="pb/block-grid-item"] {
   width: 16.66667%;
 }
+
+.c-number-control__input {
+  width: 70px;
+  margin-right: 20px;
+}
+
+.c-number-control__icon {
+  fill: #555d66;
+  position: relative;
+  top: 6px;
+  margin-right: 6px;
+}
