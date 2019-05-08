@@ -27,7 +27,7 @@ const {
 /**
  * Internal dependencies
  */
-import NumberControl from './number-control';
+import NumberControl from '../number-control';
 
 
 
