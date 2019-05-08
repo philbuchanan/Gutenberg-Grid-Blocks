@@ -9,7 +9,7 @@ const {
 
 const {
 	InnerBlocks,
-} = wp.editor;
+} = wp.blockEditor;
 
 const {
 	SVG,
