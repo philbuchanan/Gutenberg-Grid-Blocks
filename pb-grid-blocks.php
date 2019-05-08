@@ -54,7 +54,13 @@ class PB_Grid_Blocks {
 		wp_enqueue_script(
 			'pb-grid-blocks-editor-scripts',
 			plugins_url('build/index.js', __FILE__),
-			array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'underscore'),
+			array(
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-block-editor',
+				'underscore'
+			),
 			$this->plugin_version,
 			true
 		);
