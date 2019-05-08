@@ -56,10 +56,11 @@ class PB_Grid_Blocks {
 			plugins_url('build/index.js', __FILE__),
 			array(
 				'wp-blocks',
+				'wp-data',
 				'wp-i18n',
 				'wp-element',
 				'wp-block-editor',
-				'underscore'
+				'underscore',
 			),
 			$this->plugin_version,
 			true
