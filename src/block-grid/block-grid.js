@@ -237,10 +237,7 @@ registerBlockType('pb/block-grid', {
 							icon={ xlScreen }
 						/>
 					</PanelBody>
-					<PanelBody
-						title={ __('Alignment', 'pb') }
-						initialOpen={ false }
-					>
+					<PanelBody title={ __('Alignment', 'pb') }>
 						<BaseControl label={ __('Align Horiztonally', 'pb') }>
 							<Toolbar controls={
 								[
