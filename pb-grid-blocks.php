@@ -57,6 +57,7 @@ class PB_Grid_Blocks {
 			array(
 				'wp-blocks',
 				'wp-data',
+				'wp-compose',
 				'wp-i18n',
 				'wp-element',
 				'wp-block-editor',
