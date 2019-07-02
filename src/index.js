@@ -1,5 +1,4 @@
 import './blacklist/blacklist';
 
-import './grid/grid-row.js';
-import './grid-column/';
+import './grid/';
 import './block-grid/';
