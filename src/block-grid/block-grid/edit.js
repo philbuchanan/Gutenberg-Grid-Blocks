@@ -38,7 +38,7 @@ const {
 /**
  * Internal dependncies
  */
-import NumberControl from '../../number-control';
+import NumberControl from '../../components/number-control';
 
 import getBlockGridClasses from './classes';
 
@@ -72,7 +72,6 @@ function GridBlockEdit({
 	className,
 	attributes,
 	setAttributes,
-	hasChildBlocks,
 }) {
 	function verticalControl(value) {
 		var activeAlignment = alignmentControls[value];
@@ -228,18 +227,4 @@ function GridBlockEdit({
 	);
 }
 
-export default compose(
-	withSelect( (select, ownProps) => {
-		const {
-			clientId,
-		} = ownProps;
-
-		const {
-			getBlockOrder,
-		} = select('core/block-editor');
-
-		return {
-			hasChildBlocks: getBlockOrder(clientId).length > 0,
-		};
-	} ),
-)(GridBlockEdit);
+export default GridBlockEdit;

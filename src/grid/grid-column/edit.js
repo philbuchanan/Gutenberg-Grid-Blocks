@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-const {__, setLocaleData} = wp.i18n;
+const { __ } = wp.i18n;
 
 const {
 	withDispatch,
@@ -30,9 +30,7 @@ const {
 /**
  * Internal dependencies
  */
-import NumberControl from '../number-control';
-
-import getColumnClasses from './classes.js';
+import NumberControl from '../../components/number-control';
 
 import {
 	xsScreen,
@@ -40,7 +38,9 @@ import {
 	mdScreen,
 	lgScreen,
 	xlScreen,
-} from '../icons';
+} from '../../icons';
+
+import getColumnClasses from './classes';
 
 
 
@@ -49,7 +49,6 @@ function GridColumnItemEdit({
 	attributes,
 	setAttributes,
 	instanceId,
-	hasChildBlocks,
 }) {
 	return (
 		<Fragment>
@@ -197,29 +196,10 @@ function GridColumnItemEdit({
 			<div className={ getColumnClasses(attributes) }>
 				<InnerBlocks
 					templateLock={ false }
-					renderAppender={ (
-						hasChildBlocks ?
-							undefined :
-							() => <InnerBlocks.ButtonBlockAppender />
-					) }
 				/>
 			</div>
 		</Fragment>
 	);
 }
 
-export default compose(
-	withSelect( (select, ownProps) => {
-		const {
-			clientId,
-		} = ownProps;
-
-		const {
-			getBlockOrder,
-		} = select('core/block-editor');
-
-		return {
-			hasChildBlocks: getBlockOrder(clientId).length > 0,
-		};
-	} ),
-)(GridColumnItemEdit);
+export default GridColumnItemEdit;

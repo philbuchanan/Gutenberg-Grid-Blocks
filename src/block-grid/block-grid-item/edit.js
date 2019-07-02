@@ -32,7 +32,6 @@ function GridBlockItemEdit({
 	clientId,
 	removeBlock,
 	attributes,
-	hasChildBlocks,
 }) {
 	return (
 		<Fragment>
@@ -49,11 +48,6 @@ function GridBlockItemEdit({
 			<div className="o-block-grid__item">
 				<InnerBlocks
 					templateLock={ false }
-					renderAppender={ (
-						hasChildBlocks ?
-							undefined :
-							() => <InnerBlocks.ButtonBlockAppender />
-					) }
 				/>
 			</div>
 		</Fragment>
@@ -61,19 +55,6 @@ function GridBlockItemEdit({
 }
 
 export default compose(
-	withSelect((select, ownProps) => {
-		const {
-			clientId,
-		} = ownProps;
-
-		const {
-			getBlockOrder,
-		} = select('core/block-editor');
-
-		return {
-			hasChildBlocks: getBlockOrder(clientId).length > 0,
-		};
-	} ),
 	withDispatch((dispatch) => {
 		return {
 			removeBlock: dispatch('core/block-editor').removeBlock,
