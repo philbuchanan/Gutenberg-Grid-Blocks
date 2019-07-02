@@ -36,23 +36,6 @@
 	}
 }
 
-.o-row {
-	> .editor-inner-blocks > .editor-block-list__layout {
-		[data-block] {
-			margin-top: 0;
-			margin-bottom: 0;
-		}
-
-		> [data-type="pb/column"],
-		> [data-type="pb/column"] > .editor-block-list__block-edit,
-		> [data-type="pb/column"] > .editor-block-list__block-edit > div[data-block] {
-			display: flex;
-			flex-direction: column;
-			flex: 1;
-		}
-	}
-}
-
 
 
 // ## Block Grid
@@ -94,14 +77,6 @@
 		[data-block] {
 			margin-top: 0;
 			margin-bottom: 0;
-		}
-
-		> [data-type="pb/block-grid-item"],
-		> [data-type="pb/block-grid-item"] > .editor-block-list__block-edit,
-		> [data-type="pb/block-grid-item"] > .editor-block-list__block-edit > div[data-block] {
-			display: flex;
-			flex-direction: column;
-			flex: 1;
 		}
 	}
 }

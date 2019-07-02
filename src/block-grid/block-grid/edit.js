@@ -1,9 +1,10 @@
 /**
  * WordPress dependencies
  */
-const {__, setLocaleData} = wp.i18n;
+const { __ } = wp.i18n;
 
 const {
+	dispatch,
 	withDispatch,
 	withSelect
 } = wp.data;
@@ -37,14 +38,14 @@ const {
 /**
  * Internal dependncies
  */
-import NumberControl from '../number-control';
+import NumberControl from '../../number-control';
 
 import getBlockGridClasses from './classes';
 
 import {
 	alignmentControls,
 	getAlignmentClasses,
-} from '../alignments';
+} from '../../alignments';
 
 import {
 	xsScreen,
@@ -52,7 +53,7 @@ import {
 	mdScreen,
 	lgScreen,
 	xlScreen,
-} from '../icons';
+} from '../../icons';
 
 const getBlockGridTemplate = (gridItems) => {
 	var template = [];
@@ -69,7 +70,6 @@ const getBlockGridTemplate = (gridItems) => {
 function GridBlockEdit({
 	clientId,
 	className,
-	insertBlock,
 	attributes,
 	setAttributes,
 	hasChildBlocks,

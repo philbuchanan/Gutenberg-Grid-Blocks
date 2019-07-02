@@ -1,15 +1,7 @@
 /**
  * WordPress dependencies
  */
-const {__, setLocaleData} = wp.i18n;
-
-const {
-	registerBlockType,
-} = wp.blocks;
-
-const {
-	InnerBlocks,
-} = wp.blockEditor;
+const { __ } = wp.i18n;
 
 const {
 	SVG,
@@ -18,14 +10,7 @@ const {
 
 
 
-/**
- * Internal dependencies
- */
-import edit from './edit';
-
-
-
-registerBlockType('pb/block-grid-item', {
+export default {
 	title: __('Block Grid Item', 'pb'),
 
 	icon: <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20">
@@ -42,14 +27,4 @@ registerBlockType('pb/block-grid-item', {
 		reusable: false,
 		html: false,
 	},
-
-	edit: edit,
-
-	save: (props) => {
-		return (
-			<div className="o-block-grid__item">
-				<InnerBlocks.Content />
-			</div>
-		);
-	},
-});
+};

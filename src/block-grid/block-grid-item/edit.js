@@ -61,7 +61,7 @@ function GridBlockItemEdit({
 }
 
 export default compose(
-	withSelect( (select, ownProps) => {
+	withSelect((select, ownProps) => {
 		const {
 			clientId,
 		} = ownProps;
@@ -74,9 +74,9 @@ export default compose(
 			hasChildBlocks: getBlockOrder(clientId).length > 0,
 		};
 	} ),
-	withDispatch( (dispatch) => {
+	withDispatch((dispatch) => {
 		return {
 			removeBlock: dispatch('core/block-editor').removeBlock,
 		};
-	} )
+	})
 )(GridBlockItemEdit);
