@@ -91,7 +91,7 @@ registerBlockType('pb/row', {
 		function getColumnSpanClasses() {
 			var columnClasses = [];
 
-			select('core/editor').getBlocksByClientId(clientId)[0].innerBlocks.map((item, index) => {
+			select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks.map((item, index) => {
 				columnClasses.push('o-row--column-' + (index + 1) + '-span-' + item.attributes.lg);
 			});
 
