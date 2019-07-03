@@ -65,7 +65,10 @@ function GridColumnItemEdit({
 							}
 						}
 						value={ attributes.xs }
+						parentAttributes={ attributes }
+						size="xs"
 						allowReset={ true }
+						showPercentage={ true }
 						icon={ xsScreen }
 					/>
 					<NumberControl
@@ -78,7 +81,10 @@ function GridColumnItemEdit({
 							}
 						}
 						value={ attributes.sm }
+						parentAttributes={ attributes }
+						size="sm"
 						allowReset={ true }
+						showPercentage={ true }
 						icon={ smScreen }
 					/>
 					<NumberControl
@@ -91,7 +97,10 @@ function GridColumnItemEdit({
 							}
 						}
 						value={ attributes.md }
+						parentAttributes={ attributes }
+						size="md"
 						allowReset={ true }
+						showPercentage={ true }
 						icon={ mdScreen }
 					/>
 					<NumberControl
@@ -104,7 +113,10 @@ function GridColumnItemEdit({
 							}
 						}
 						value={ attributes.lg }
+						parentAttributes={ attributes }
+						size="lg"
 						allowReset={ true }
+						showPercentage={ true }
 						icon={ lgScreen }
 					/>
 					<NumberControl
@@ -117,7 +129,10 @@ function GridColumnItemEdit({
 							}
 						}
 						value={ attributes.xl }
+						parentAttributes={ attributes }
+						size="xl"
 						allowReset={ true }
+						showPercentage={ true }
 						icon={ xlScreen }
 					/>
 				</PanelBody>
@@ -138,6 +153,7 @@ function GridColumnItemEdit({
 						value={ attributes.offsetxs }
 						allowReset={ true }
 						icon={ xsScreen }
+						max={ 11 }
 					/>
 					<NumberControl
 						label={ __('Small Screen Offset', 'pb') }
@@ -151,6 +167,7 @@ function GridColumnItemEdit({
 						value={ attributes.offsetsm }
 						allowReset={ true }
 						icon={ smScreen }
+						max={ 11 }
 					/>
 					<NumberControl
 						label={ __('Medium Screen Offset', 'pb') }
@@ -164,6 +181,7 @@ function GridColumnItemEdit({
 						value={ attributes.offsetmd }
 						allowReset={ true }
 						icon={ mdScreen }
+						max={ 11 }
 					/>
 					<NumberControl
 						label={ __('Large Screen Offset', 'pb') }
@@ -177,6 +195,7 @@ function GridColumnItemEdit({
 						value={ attributes.offsetlg }
 						allowReset={ true }
 						icon={ lgScreen }
+						max={ 11 }
 					/>
 					<NumberControl
 						label={ __('Extral Large Screen Offset', 'pb') }
@@ -190,6 +209,7 @@ function GridColumnItemEdit({
 						value={ attributes.offsetxl }
 						allowReset={ true }
 						icon={ xlScreen }
+						max={ 11 }
 					/>
 				</PanelBody>
 			</InspectorControls>

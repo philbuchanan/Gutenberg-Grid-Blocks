@@ -902,7 +902,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 var _wp$i18n = wp.i18n,
     __ = _wp$i18n.__,
-    setLocaleData = _wp$i18n.setLocaleData;
+    sprintf = _wp$i18n.sprintf;
 var withInstanceId = wp.compose.withInstanceId;
 /**
  * Internal dependencies
@@ -922,14 +922,53 @@ function NumberControl(_ref) {
       help = _ref.help,
       min = _ref.min,
       max = _ref.max,
+      size = _ref.size,
+      parentAttributes = _ref.parentAttributes,
+      showPercentage = _ref.showPercentage,
       allowReset = _ref.allowReset,
       icon = _ref.icon,
-      props = _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default()(_ref, ["className", "label", "value", "instanceId", "onChange", "help", "min", "max", "allowReset", "icon"]);
+      props = _babel_runtime_helpers_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_1___default()(_ref, ["className", "label", "value", "instanceId", "onChange", "help", "min", "max", "size", "parentAttributes", "showPercentage", "allowReset", "icon"]);
 
   var id = "number-control-".concat(instanceId);
 
   var onChangeValue = function onChangeValue(event) {
     onChange(event.target.value === '' ? '' : parseInt(event.target.value));
+  };
+
+  var getPercentageWidth = function getPercentageWidth(value) {
+    var width = 100;
+
+    if (value) {
+      width = Math.round(value / 12 * 100);
+    } else {
+      var values = [parentAttributes.xs, parentAttributes.sm, parentAttributes.md, parentAttributes.lg, parentAttributes.xl];
+      var sizes = {
+        xs: 0,
+        sm: 1,
+        md: 2,
+        lg: 3,
+        xl: 4
+      };
+      /**
+       * If no value is set, larger screens inherit their column spans
+       * from smaller screens. We need to loop over each screen size to
+       * find the next largest screen size that has a span (`value`) set.
+       */
+
+      for (var i = sizes[size]; i >= 0; i -= 1) {
+        if (values[i]) {
+          width = Math.round(values[i] / 12 * 100);
+          /**
+           * If this screen size has a value, we can break out of the
+           * loop. We'll use this value to calculate the width.
+           */
+
+          break;
+        }
+      }
+    }
+
+    return sprintf(__('%d%% wide', 'pb'), width);
   };
 
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(BaseControl, {
@@ -949,14 +988,17 @@ function NumberControl(_ref) {
     onChange: onChangeValue,
     "aria-describedby": !!help ? id + '__help' : undefined,
     min: !!min ? min : 1,
-    max: !!max ? max : 11,
+    max: !!max ? max : 12,
     step: 1
-  }, props)), !!allowReset && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Button, {
+  }, props)), !!showPercentage && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", {
+    className: "c-number-control__percentage"
+  }, getPercentageWidth(value)), !!allowReset && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Button, {
     isLink: true,
     isDestructive: true,
     onClick: function onClick() {
       return onChange('');
-    }
+    },
+    className: "c-number-control__reset"
   }, __('Reset', 'pb')));
 }
 
@@ -1042,7 +1084,10 @@ function GridColumnItemEdit(_ref) {
       });
     },
     value: attributes.xs,
+    parentAttributes: attributes,
+    size: "xs",
     allowReset: true,
+    showPercentage: true,
     icon: _icons__WEBPACK_IMPORTED_MODULE_2__["xsScreen"]
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_number_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     label: __('Small Screens', 'pb'),
@@ -1052,7 +1097,10 @@ function GridColumnItemEdit(_ref) {
       });
     },
     value: attributes.sm,
+    parentAttributes: attributes,
+    size: "sm",
     allowReset: true,
+    showPercentage: true,
     icon: _icons__WEBPACK_IMPORTED_MODULE_2__["smScreen"]
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_number_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     label: __('Medium Screens', 'pb'),
@@ -1062,7 +1110,10 @@ function GridColumnItemEdit(_ref) {
       });
     },
     value: attributes.md,
+    parentAttributes: attributes,
+    size: "md",
     allowReset: true,
+    showPercentage: true,
     icon: _icons__WEBPACK_IMPORTED_MODULE_2__["mdScreen"]
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_number_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     label: __('Large Screens', 'pb'),
@@ -1072,7 +1123,10 @@ function GridColumnItemEdit(_ref) {
       });
     },
     value: attributes.lg,
+    parentAttributes: attributes,
+    size: "lg",
     allowReset: true,
+    showPercentage: true,
     icon: _icons__WEBPACK_IMPORTED_MODULE_2__["lgScreen"]
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_number_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     label: __('Extral Large Screens', 'pb'),
@@ -1082,7 +1136,10 @@ function GridColumnItemEdit(_ref) {
       });
     },
     value: attributes.xl,
+    parentAttributes: attributes,
+    size: "xl",
     allowReset: true,
+    showPercentage: true,
     icon: _icons__WEBPACK_IMPORTED_MODULE_2__["xlScreen"]
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelBody, {
     title: __('Column Offsets', 'pb'),
@@ -1096,7 +1153,8 @@ function GridColumnItemEdit(_ref) {
     },
     value: attributes.offsetxs,
     allowReset: true,
-    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["xsScreen"]
+    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["xsScreen"],
+    max: 11
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_number_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     label: __('Small Screen Offset', 'pb'),
     onChange: function onChange(count) {
@@ -1106,7 +1164,8 @@ function GridColumnItemEdit(_ref) {
     },
     value: attributes.offsetsm,
     allowReset: true,
-    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["smScreen"]
+    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["smScreen"],
+    max: 11
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_number_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     label: __('Medium Screen Offset', 'pb'),
     onChange: function onChange(count) {
@@ -1116,7 +1175,8 @@ function GridColumnItemEdit(_ref) {
     },
     value: attributes.offsetmd,
     allowReset: true,
-    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["mdScreen"]
+    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["mdScreen"],
+    max: 11
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_number_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     label: __('Large Screen Offset', 'pb'),
     onChange: function onChange(count) {
@@ -1126,7 +1186,8 @@ function GridColumnItemEdit(_ref) {
     },
     value: attributes.offsetlg,
     allowReset: true,
-    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["lgScreen"]
+    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["lgScreen"],
+    max: 11
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_components_number_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
     label: __('Extral Large Screen Offset', 'pb'),
     onChange: function onChange(count) {
@@ -1136,7 +1197,8 @@ function GridColumnItemEdit(_ref) {
     },
     value: attributes.offsetxl,
     allowReset: true,
-    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["xlScreen"]
+    icon: _icons__WEBPACK_IMPORTED_MODULE_2__["xlScreen"],
+    max: 11
   }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: Object(_classes__WEBPACK_IMPORTED_MODULE_3__["default"])(attributes)
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks, {

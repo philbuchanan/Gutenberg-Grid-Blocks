@@ -379,8 +379,13 @@
 }
 
 .c-number-control__input {
+  width: 50px;
+}
+
+.c-number-control__percentage {
+  display: inline-block;
   width: 70px;
-  margin-right: 20px;
+  margin-left: 10px;
 }
 
 .c-number-control__icon {
@@ -388,4 +393,8 @@
   position: relative;
   top: 6px;
   margin-right: 6px;
+}
+
+.components-button.is-link.c-number-control__reset {
+  margin-left: 20px;
 }
