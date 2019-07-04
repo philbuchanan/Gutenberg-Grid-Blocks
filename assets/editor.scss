@@ -46,10 +46,6 @@
 		display: flex;
 		flex-wrap: wrap;
 	}
-
-	.block-list-appender {
-		width: 100%;
-	}
 }
 
 [data-type="pb/block-grid-item"] {
@@ -58,7 +54,6 @@
 
 	.block-editor-block-list__block-edit {
 		margin-top: 0 !important;
-		margin-bottom: 0 !important;
 
 		.wp-block {
 			width: 100%;

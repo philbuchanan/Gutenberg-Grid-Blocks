@@ -36,12 +36,18 @@ import {
 
 
 
-export default function({
+export default ({
 	className,
 	attributes,
 	setAttributes,
 	clientId,
-}) {
+}) => {
+	const {
+		columns,
+		alignVertically,
+		alignHorizontally,
+	} = attributes;
+
 	const getColumnsTemplate = (columns) => {
 		var template = [];
 
@@ -68,7 +74,7 @@ export default function({
 		return {
 			icon: activeAlignment.icon,
 			title: activeAlignment.title,
-			isActive: attributes.alignVertically === value,
+			isActive: alignVertically === value,
 			onClick: () => setAttributes({
 				'alignVertically': value,
 			}),
@@ -81,7 +87,7 @@ export default function({
 		return {
 			icon: alignment.icon,
 			title: alignment.title,
-			isActive: attributes.alignHorizontally === value,
+			isActive: alignHorizontally === value,
 			onClick: () => setAttributes({
 				'alignHorizontally': value,
 			}),
@@ -95,7 +101,7 @@ export default function({
 					<NumberControl
 						label={ __('How many column containers do you want?', 'pb') }
 						help={ __('Be careful: If you reduce the number of column containers, you will loose your existing content in the containers removed.', 'pb') }
-						value={ attributes.columns }
+						value={ columns }
 						onChange={
 							(nextColumns) => {
 								setAttributes({
@@ -129,9 +135,9 @@ export default function({
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ ['o-row', 'o-row--columns-' + attributes.columns, ...getColumnSpanClasses(), ...getAlignmentClasses(attributes)].join(' ') }>
+			<div className={ ['o-row', 'o-row--columns-' + columns, ...getColumnSpanClasses(), ...getAlignmentClasses(attributes)].join(' ') }>
 				<InnerBlocks
-					template={ getColumnsTemplate(attributes.columns) }
+					template={ getColumnsTemplate(columns) }
 					templateLock="all"
 					allowedBlocks={[
 						'pb/column'

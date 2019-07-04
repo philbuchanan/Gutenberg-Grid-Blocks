@@ -44,12 +44,25 @@ import getColumnClasses from './classes';
 
 
 
-function GridColumnItemEdit({
+export default ({
 	className,
 	attributes,
 	setAttributes,
 	instanceId,
-}) {
+}) => {
+	const {
+		xs,
+		sm,
+		md,
+		lg,
+		xl,
+		offsetxs,
+		offsetsm,
+		offsetmd,
+		offsetlg,
+		offsetxl,
+	} = attributes;
+
 	return (
 		<Fragment>
 			<InspectorControls>
@@ -57,14 +70,8 @@ function GridColumnItemEdit({
 					<p>{ __('How many columns of the 12-column grid should this container span at each screen size?', 'pb') }</p>
 					<NumberControl
 						label={ __('Extra Small Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									xs: count,
-								});
-							}
-						}
-						value={ attributes.xs }
+						onChange={ (xs) => setAttributes({xs}) }
+						value={ xs }
 						parentAttributes={ attributes }
 						size="xs"
 						allowReset={ true }
@@ -73,14 +80,8 @@ function GridColumnItemEdit({
 					/>
 					<NumberControl
 						label={ __('Small Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									sm: count,
-								});
-							}
-						}
-						value={ attributes.sm }
+						onChange={ (sm) => setAttributes({sm}) }
+						value={ sm }
 						parentAttributes={ attributes }
 						size="sm"
 						allowReset={ true }
@@ -89,14 +90,8 @@ function GridColumnItemEdit({
 					/>
 					<NumberControl
 						label={ __('Medium Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									md: count,
-								});
-							}
-						}
-						value={ attributes.md }
+						onChange={ (md) => setAttributes({md}) }
+						value={ md }
 						parentAttributes={ attributes }
 						size="md"
 						allowReset={ true }
@@ -105,14 +100,8 @@ function GridColumnItemEdit({
 					/>
 					<NumberControl
 						label={ __('Large Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									lg: count,
-								});
-							}
-						}
-						value={ attributes.lg }
+						onChange={ (lg) => setAttributes({lg}) }
+						value={ lg }
 						parentAttributes={ attributes }
 						size="lg"
 						allowReset={ true }
@@ -121,14 +110,8 @@ function GridColumnItemEdit({
 					/>
 					<NumberControl
 						label={ __('Extral Large Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									xl: count,
-								});
-							}
-						}
-						value={ attributes.xl }
+						onChange={ (xl) => setAttributes({xl}) }
+						value={ xl }
 						parentAttributes={ attributes }
 						size="xl"
 						allowReset={ true }
@@ -143,70 +126,40 @@ function GridColumnItemEdit({
 					<p>{ __('How many columns of the 12-column grid should this container be offset by at each screen size?', 'pb') }</p>
 					<NumberControl
 						label={ __('Extra Small Screen Offset', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									offsetxs: count,
-								});
-							}
-						}
-						value={ attributes.offsetxs }
+						onChange={ (offsetxs) => setAttributes({offsetxs}) }
+						value={ offsetxs }
 						allowReset={ true }
 						icon={ xsScreen }
 						max={ 11 }
 					/>
 					<NumberControl
 						label={ __('Small Screen Offset', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									offsetsm: count,
-								});
-							}
-						}
-						value={ attributes.offsetsm }
+						onChange={ (offsetsm) => setAttributes({offsetsm}) }
+						value={ offsetsm }
 						allowReset={ true }
 						icon={ smScreen }
 						max={ 11 }
 					/>
 					<NumberControl
 						label={ __('Medium Screen Offset', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									offsetmd: count,
-								});
-							}
-						}
-						value={ attributes.offsetmd }
+						onChange={ (offsetmd) => setAttributes({offsetmd}) }
+						value={ offsetmd }
 						allowReset={ true }
 						icon={ mdScreen }
 						max={ 11 }
 					/>
 					<NumberControl
 						label={ __('Large Screen Offset', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									offsetlg: count,
-								});
-							}
-						}
-						value={ attributes.offsetlg }
+						onChange={ (offsetlg) => setAttributes({offsetlg}) }
+						value={ offsetlg }
 						allowReset={ true }
 						icon={ lgScreen }
 						max={ 11 }
 					/>
 					<NumberControl
 						label={ __('Extral Large Screen Offset', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									offsetxl: count,
-								});
-							}
-						}
-						value={ attributes.offsetxl }
+						onChange={ (offsetxl) => setAttributes({offsetxl}) }
+						value={ offsetxl }
 						allowReset={ true }
 						icon={ xlScreen }
 						max={ 11 }
@@ -221,5 +174,3 @@ function GridColumnItemEdit({
 		</Fragment>
 	);
 }
-
-export default GridColumnItemEdit;
