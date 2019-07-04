@@ -17,14 +17,12 @@ export default {
 			<Path d="M18,1H2A1,1,0,0,0,1,2V18a1,1,0,0,0,1,1H18a1,1,0,0,0,1-1V2A1,1,0,0,0,18,1ZM17,17H3V3H17Z" />
 		</SVG>,
 
-	parent: ['pb/block-grid-item'],
+	parent: ['pb/block-grid'],
 
 	category: 'layout',
 
 	supports: {
 		className: false,
-		inserter: false,
 		reusable: false,
-		html: false,
 	},
 };

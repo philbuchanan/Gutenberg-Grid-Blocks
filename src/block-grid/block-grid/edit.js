@@ -55,44 +55,44 @@ import {
 	xlScreen,
 } from '../../icons';
 
-const getBlockGridTemplate = (gridItems) => {
-	var template = [];
-
-	for (var i = 0; i < gridItems; i++) {
-		template.push(['pb/block-grid-item']);
-	}
-
-	return template;
-};
 
 
-
-function GridBlockEdit({
-	clientId,
+export default ({
 	className,
 	attributes,
 	setAttributes,
-}) {
-	function verticalControl(value) {
+	isSelected,
+}) => {
+	const {
+		alignVertically,
+		alignHorizontally,
+		xs,
+		sm,
+		md,
+		lg,
+		xl,
+	} = attributes;
+
+	const verticalControl = (value) => {
 		var activeAlignment = alignmentControls[value];
 
 		return {
 			icon: activeAlignment.icon,
 			title: activeAlignment.title,
-			isActive: attributes.alignVertically === value,
+			isActive: alignVertically === value,
 			onClick: () => setAttributes({
 				'alignVertically': value,
 			}),
 		};
 	}
 
-	function horizontalControl(value) {
+	const horizontalControl = (value) => {
 		var alignment = alignmentControls[value];
 
 		return {
 			icon: alignment.icon,
 			title: alignment.title,
-			isActive: attributes.alignHorizontally === value,
+			isActive: alignHorizontally === value,
 			onClick: () => setAttributes({
 				'alignHorizontally': value,
 			}),
@@ -102,90 +102,44 @@ function GridBlockEdit({
 	return (
 		<Fragment>
 			<InspectorControls>
-				<PanelBody title={ __('Number of Block Grid Items', 'pb') }>
-					<NumberControl
-						label={ __('How many block items do you want?', 'pb') }
-						help={ __('Be careful: If you reduce the number of block items, you will loose your existing content in the items removed.', 'pb') }
-						value={ attributes.gridItems }
-						onChange={
-							(count) => {
-								setAttributes({
-									gridItems: count,
-								});
-							}
-						}
-						min={ 2 }
-						max={ 30 }
-					/>
-				</PanelBody>
-				<PanelBody title={ __('Block Grid Items / Line', 'pb') }>
+				<PanelBody title={ __('Block Grid Items Per Line', 'pb') }>
 					<p>{ __('How many items should display in a single row at each screen size?', 'pb') }</p>
 					<NumberControl
 						label={ __('Extra Small Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									xs: count,
-								});
-							}
-						}
-						value={ attributes.xs }
+						onChange={ (xs) => setAttributes({xs}) }
+						value={ xs }
 						max={ 6 }
 						allowReset={ true }
 						icon={ xsScreen }
 					/>
 					<NumberControl
 						label={ __('Small Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									sm: count,
-								});
-							}
-						}
-						value={ attributes.sm }
+						onChange={ (sm) => setAttributes({sm}) }
+						value={ sm }
 						max={ 6 }
 						allowReset={ true }
 						icon={ smScreen }
 					/>
 					<NumberControl
 						label={ __('Medium Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									md: count,
-								});
-							}
-						}
-						value={ attributes.md }
+						onChange={ (md) => setAttributes({md}) }
+						value={ md }
 						max={ 6 }
 						allowReset={ true }
 						icon={ mdScreen }
 					/>
 					<NumberControl
 						label={ __('Large Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									lg: count,
-								});
-							}
-						}
-						value={ attributes.lg }
+						onChange={ (lg) => setAttributes({lg}) }
+						value={ lg }
 						max={ 6 }
 						allowReset={ true }
 						icon={ lgScreen }
 					/>
 					<NumberControl
 						label={ __('Extral Large Screens', 'pb') }
-						onChange={
-							(count) => {
-								setAttributes({
-									xl: count,
-								});
-							}
-						}
-						value={ attributes.xl }
+						onChange={ (xl) => setAttributes({xl}) }
+						value={ xl }
 						max={ 6 }
 						allowReset={ true }
 						icon={ xlScreen }
@@ -214,17 +168,15 @@ function GridBlockEdit({
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ ['o-block-grid o-block-grid-' + attributes.lg, ...getAlignmentClasses(attributes)].join(' ') }>
+			<div className={ ['o-block-grid o-block-grid-' + lg, ...getAlignmentClasses(attributes)].join(' ') }>
 				<InnerBlocks
-					template={ getBlockGridTemplate(attributes.gridItems) }
-					templateLock="all"
-					allowedBlocks={[
-						'pb/block-grid-item'
-					]}
+					template={ [
+						['pb/block-grid-item'],
+						['pb/block-grid-item'],
+					] }
+					allowedBlocks={ ['pb/block-grid-item'] }
 				/>
 			</div>
 		</Fragment>
 	);
 }
-
-export default GridBlockEdit;

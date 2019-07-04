@@ -34,10 +34,6 @@ export default {
 	},
 
 	attributes: {
-		gridItems: {
-			type: 'number',
-			default: 3
-		},
 		alignVertically: {
 			type: 'string',
 			default: 'top',
