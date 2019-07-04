@@ -4,6 +4,14 @@
 const { __ } = wp.i18n;
 
 const {
+	withSelect,
+} = wp.data;
+
+const {
+	compose,
+} = wp.compose;
+
+const {
 	Fragment,
 } = wp.element;
 
@@ -36,11 +44,11 @@ import {
 
 
 
-export default ({
+const GridBlockEdit = ({
 	className,
 	attributes,
 	setAttributes,
-	clientId,
+	childBlocks,
 }) => {
 	const {
 		columns,
@@ -61,8 +69,14 @@ export default ({
 	const getColumnSpanClasses = () => {
 		var columnClasses = [];
 
-		select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks.map((item, index) => {
-			columnClasses.push('o-row--column-' + (index + 1) + '-span-' + item.attributes.lg);
+		childBlocks.map((item, index) => {
+			var base = 'o-row--column-' + (index + 1) + '-';
+
+			columnClasses.push(base + 'span-' + ((item.attributes.lg) ? item.attributes.lg : 12));
+
+			if (item.attributes.offsetlg) {
+				columnClasses.push(base + 'offset-' + item.attributes.offsetlg);
+			}
 		});
 
 		return columnClasses;
@@ -147,3 +161,11 @@ export default ({
 		</Fragment>
 	);
 };
+
+export default compose(
+	withSelect((select, ownProps) => {
+		return {
+			childBlocks: select('core/block-editor').getBlocksByClientId(ownProps.clientId)[0].innerBlocks,
+		};
+	}),
+)(GridBlockEdit);
