@@ -41,8 +41,25 @@ function NumberControl({
 }) {
 	const id = `number-control-${ instanceId }`;
 
+	// Set min and max defaults if not specified
+	min = (typeof min !== 'undefined') ? min : 1;
+	max = (typeof max !== 'undefined') ? max : 12;
+
 	const onChangeValue = (event) => {
-		onChange((event.target.value === '') ? '' : parseInt(event.target.value));
+		var value = event.target.value;
+
+		if (value !== '') {
+			value = parseInt(value);
+
+			if (value > max) {
+				value = max;
+			}
+			else if (value < min) {
+				value = min;
+			}
+		}
+
+		onChange(value);
 	};
 
 	const getPercentageWidth = (value) => {
@@ -110,8 +127,8 @@ function NumberControl({
 				value={ value }
 				onChange={ onChangeValue }
 				aria-describedby={ !!help ? id + '__help' : undefined }
-				min={ !!min ? min : 1 }
-				max={ !!max ? max : 12 }
+				min={ min }
+				max={ max }
 				step={ 1 }
 				{ ...props }
 			/>
