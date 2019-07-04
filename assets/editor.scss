@@ -12,7 +12,7 @@
 
 		> .block-editor-block-list__layout {
 			display: flex;
-			flex-wrap: nowrap;
+			flex-wrap: wrap;
 		}
 	}
 }
@@ -32,6 +32,10 @@
 	@for $j from 1 through 12 {
 		.o-row--column-#{$i}-span-#{$j} [data-type="pb/column"]:nth-child(#{$i}) {
 			width: $j / 12 * 100%;
+		}
+
+		.o-row--column-#{$i}-offset-#{$j} [data-type="pb/column"]:nth-child(#{$i}) {
+			margin-left: $j / 12 * 100% !important;
 		}
 	}
 }
