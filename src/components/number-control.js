@@ -113,40 +113,42 @@ function NumberControl({
 			help={ help }
 			className={ className }
 		>
-			{ !!icon &&
-				<Icon
-					icon={ icon }
-					size={ 20 }
-					className="c-number-control__icon"
+			<div>
+				{ !!icon &&
+					<Icon
+						icon={ icon }
+						size={ 20 }
+						className="c-number-control__icon"
+					/>
+				}
+				<input
+					className="c-number-control__input"
+					type="number"
+					id={ id }
+					value={ value }
+					onChange={ onChangeValue }
+					aria-describedby={ !!help ? id + '__help' : undefined }
+					min={ min }
+					max={ max }
+					step={ 1 }
+					{ ...props }
 				/>
-			}
-			<input
-				className="c-number-control__input"
-				type="number"
-				id={ id }
-				value={ value }
-				onChange={ onChangeValue }
-				aria-describedby={ !!help ? id + '__help' : undefined }
-				min={ min }
-				max={ max }
-				step={ 1 }
-				{ ...props }
-			/>
-			{ !! showPercentage && (
-				<span className="c-number-control__percentage">
-					{ getPercentageWidth(value) }
-				</span>
-			) }
-			{ !!allowReset &&
-				<Button
-					isLink
-					isDestructive
-					onClick={ () => onChange('') }
-					className="c-number-control__reset"
-				>
-					{ __('Reset', 'pb') }
-				</Button>
-			}
+				{ !! showPercentage && (
+					<span className="c-number-control__percentage">
+						{ getPercentageWidth(value) }
+					</span>
+				) }
+				{ !!allowReset &&
+					<Button
+						isLink
+						isDestructive
+						onClick={ () => onChange('') }
+						className="c-number-control__reset"
+					>
+						{ __('Reset', 'pb') }
+					</Button>
+				}
+			</div>
 		</BaseControl>
 	);
 }
