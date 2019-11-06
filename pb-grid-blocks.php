@@ -56,9 +56,7 @@ class PB_Grid_Blocks {
 		wp_enqueue_script(
 			'pb-grid-blocks-editor-scripts',
 			plugins_url('build/index.js', __FILE__),
-			array_merge($asset_file['dependencies'], array(
-				//'wp-edit-post',
-			)),
+			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
 		);
