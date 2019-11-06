@@ -14,10 +14,6 @@ if (!class_exists('PB_Grid_Blocks')) :
 
 class PB_Grid_Blocks {
 
-	public $plugin_version;
-
-
-
 	/**
 	 * Class constructor
 	 * Sets up the plugin, including: textdomain and registering scripts.
@@ -25,24 +21,11 @@ class PB_Grid_Blocks {
 	function __construct() {
 		$basename = plugin_basename(__FILE__);
 
-		$this->plugin_version = $this->get_plugin_version();
-
 		// Load text domain
 		load_plugin_textdomain('pb', false, dirname($basename) . '/languages/');
 
 		// Register blocks JavaScript and CSS
 		add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'));
-	}
-
-
-
-	/**
-	 * Current plugin version number
-	 */
-	private function get_plugin_version() {
-		$plugin_data = get_file_data(__FILE__, array('Version' => 'Version'), false);
-
-		return (defined('WP_DEBUG') && WP_DEBUG) ? time() : $plugin_data['Version'];
 	}
 
 
