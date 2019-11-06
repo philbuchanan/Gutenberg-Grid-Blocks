@@ -31,10 +31,6 @@ export default {
 	},
 
 	attributes: {
-		columns: {
-			type: 'number',
-			default: 2,
-		},
 		alignVertically: {
 			type: 'sting',
 			default: 'top',

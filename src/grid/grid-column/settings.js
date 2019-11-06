@@ -24,7 +24,7 @@ export default {
 
 	supports: {
 		className: false,
-		inserter: false,
+		reusable: false,
 	},
 
 	attributes: {

@@ -51,20 +51,9 @@ const GridBlockEdit = ({
 	childBlocks,
 }) => {
 	const {
-		columns,
 		alignVertically,
 		alignHorizontally,
 	} = attributes;
-
-	const getColumnsTemplate = (columns) => {
-		let template = [];
-
-		for (let i = 0; i < columns; i++) {
-			template.push(['pb/column']);
-		}
-
-		return template;
-	};
 
 	const getColumnSpanClasses = () => {
 		let columnClasses = [];
@@ -111,21 +100,6 @@ const GridBlockEdit = ({
 	return (
 		<Fragment>
 			<InspectorControls>
-				<PanelBody title={ __('Number of Columns', 'pb') }>
-					<NumberControl
-						label={ __('How many column containers do you want?', 'pb') }
-						help={ __('Be careful: If you reduce the number of column containers, you will loose your existing content in the containers removed.', 'pb') }
-						value={ columns }
-						onChange={
-							(nextColumns) => {
-								setAttributes({
-									columns: nextColumns,
-								});
-							}
-						}
-						max={ 6 }
-					/>
-				</PanelBody>
 				<PanelBody title={ __('Alignment', 'pb') }>
 					<BaseControl label={ __('Align Horiztonally', 'pb') }>
 						<Toolbar controls={
@@ -149,13 +123,19 @@ const GridBlockEdit = ({
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ ['o-row', 'o-row--columns-' + columns, ...getColumnSpanClasses(), ...getAlignmentClasses(attributes)].join(' ') }>
+			<div className={ ['o-row', 'o-row--columns-' + childBlocks.length, ...getColumnSpanClasses(), ...getAlignmentClasses(attributes)].join(' ') }>
 				<InnerBlocks
-					template={ getColumnsTemplate(columns) }
-					templateLock="all"
-					allowedBlocks={[
-						'pb/column'
-					]}
+					template={ [
+						['pb/column', {
+							md: 6,
+							lg: 6,
+						}],
+						['pb/column', {
+							md: 6,
+							lg: 6,
+						}],
+					] }
+					allowedBlocks={ ['pb/column'] }
 				/>
 			</div>
 		</Fragment>
