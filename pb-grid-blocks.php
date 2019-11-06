@@ -51,19 +51,15 @@ class PB_Grid_Blocks {
 	 * Enqueue the block's assets for the wp-admin editor
 	 */
 	public function enqueue_block_editor_assets() {
+		$asset_file = include(plugin_dir_path(__FILE__) . 'build/index.asset.php');
+
 		wp_enqueue_script(
 			'pb-grid-blocks-editor-scripts',
 			plugins_url('build/index.js', __FILE__),
-			array(
-				'wp-blocks',
-				'wp-data',
-				'wp-compose',
-				'wp-i18n',
-				'wp-element',
-				'wp-block-editor',
-				'underscore',
-			),
-			$this->plugin_version,
+			array_merge($asset_file['dependencies'], array(
+				//'wp-edit-post',
+			)),
+			$asset_file['version'],
 			true
 		);
 
@@ -71,7 +67,7 @@ class PB_Grid_Blocks {
 			'pb-grid-blocks-editor-styles',
 			plugins_url('assets/editor.css', __FILE__),
 			array('wp-edit-blocks'),
-			$this->plugin_version
+			$asset_file['version']
 		);
 	}
 

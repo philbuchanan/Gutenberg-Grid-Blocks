@@ -57,9 +57,9 @@ const GridBlockEdit = ({
 	} = attributes;
 
 	const getColumnsTemplate = (columns) => {
-		var template = [];
+		let template = [];
 
-		for (var i = 0; i < columns; i++) {
+		for (let i = 0; i < columns; i++) {
 			template.push(['pb/column']);
 		}
 
@@ -67,10 +67,10 @@ const GridBlockEdit = ({
 	};
 
 	const getColumnSpanClasses = () => {
-		var columnClasses = [];
+		let columnClasses = [];
 
 		childBlocks.map((item, index) => {
-			var base = 'o-row--column-' + (index + 1) + '-';
+			let base = 'o-row--column-' + (index + 1) + '-';
 
 			columnClasses.push(base + 'span-' + ((item.attributes.lg) ? item.attributes.lg : 12));
 
@@ -83,7 +83,7 @@ const GridBlockEdit = ({
 	}
 
 	const verticalControl = (value) => {
-		var activeAlignment = alignmentControls[value];
+		let activeAlignment = alignmentControls[value];
 
 		return {
 			icon: activeAlignment.icon,
@@ -96,7 +96,7 @@ const GridBlockEdit = ({
 	}
 
 	const horizontalControl = (value) => {
-		var alignment = alignmentControls[value];
+		let alignment = alignmentControls[value];
 
 		return {
 			icon: alignment.icon,

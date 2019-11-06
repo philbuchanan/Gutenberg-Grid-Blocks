@@ -46,7 +46,7 @@ function NumberControl({
 	max = (typeof max !== 'undefined') ? max : 12;
 
 	const onChangeValue = (event) => {
-		var value = event.target.value;
+		let value = event.target.value;
 
 		if (value !== '') {
 			value = parseInt(value);
@@ -63,13 +63,13 @@ function NumberControl({
 	};
 
 	const getPercentageWidth = (value) => {
-		var width = 100;
+		let width = 100;
 
 		if (value) {
 			width = Math.round(value / 12 * 100);
 		}
 		else {
-			var values = [
+			let values = [
 				parentAttributes.xs,
 				parentAttributes.sm,
 				parentAttributes.md,
@@ -77,7 +77,7 @@ function NumberControl({
 				parentAttributes.xl,
 			];
 
-			var sizes = {
+			let sizes = {
 				xs: 0,
 				sm: 1,
 				md: 2,
@@ -90,7 +90,7 @@ function NumberControl({
 			 * from smaller screens. We need to loop over each screen size to
 			 * find the next largest screen size that has a span (`value`) set.
 			 */
-			for (var i = sizes[size]; i >= 0; i -= 1) {
+			for (let i = sizes[size]; i >= 0; i -= 1) {
 				if (values[i]) {
 					width = Math.round(values[i] / 12 * 100);
 

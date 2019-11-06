@@ -12,7 +12,7 @@ const {
 
 
 /**
- * Internal dependncies
+ * Internal dependencies
  */
 import settings from './settings';
 

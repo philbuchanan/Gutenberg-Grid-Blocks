@@ -57,7 +57,7 @@ export const alignmentControls = {
 };
 
 export const getAlignmentClasses = (attributes) => {
-	var classes = [];
+	let classes = [];
 
 	if (attributes.alignHorizontally) {
 		switch(attributes.alignHorizontally) {

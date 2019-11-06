@@ -74,7 +74,7 @@ export default ({
 	} = attributes;
 
 	const verticalControl = (value) => {
-		var activeAlignment = alignmentControls[value];
+		let activeAlignment = alignmentControls[value];
 
 		return {
 			icon: activeAlignment.icon,
@@ -87,7 +87,7 @@ export default ({
 	}
 
 	const horizontalControl = (value) => {
-		var alignment = alignmentControls[value];
+		let alignment = alignmentControls[value];
 
 		return {
 			icon: alignment.icon,
