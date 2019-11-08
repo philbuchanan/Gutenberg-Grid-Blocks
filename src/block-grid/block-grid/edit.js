@@ -22,6 +22,7 @@ const {
 } = wp.blocks;
 
 const {
+	BlockControls,
 	InspectorControls,
 	InnerBlocks,
 } = wp.blockEditor;
@@ -30,7 +31,6 @@ const {
 	PanelBody,
 	BaseControl,
 	Button,
-	Toolbar,
 } = wp.components;
 
 
@@ -40,12 +40,11 @@ const {
  */
 import NumberControl from '../../components/number-control';
 
+import GridAlignmentToolbar from '../../components/alignment-toolbar';
+
 import getBlockGridClasses from './classes';
 
-import {
-	alignmentControls,
-	getAlignmentClasses,
-} from '../../alignments';
+import getAlignmentClasses from '../../alignments';
 
 import {
 	xsScreen,
@@ -73,34 +72,22 @@ export default ({
 		xl,
 	} = attributes;
 
-	const verticalControl = (value) => {
-		let activeAlignment = alignmentControls[value];
-
-		return {
-			icon: activeAlignment.icon,
-			title: activeAlignment.title,
-			isActive: alignVertically === value,
-			onClick: () => setAttributes({
-				'alignVertically': value,
-			}),
-		};
-	}
-
-	const horizontalControl = (value) => {
-		let alignment = alignmentControls[value];
-
-		return {
-			icon: alignment.icon,
-			title: alignment.title,
-			isActive: alignHorizontally === value,
-			onClick: () => setAttributes({
-				'alignHorizontally': value,
-			}),
-		};
-	}
-
 	return (
 		<Fragment>
+			<BlockControls>
+				<GridAlignmentToolbar
+					type="horizontal"
+					selected={ alignHorizontally }
+					onChange={ (alignHorizontally) => setAttributes({alignHorizontally}) }
+					isCollapsed={ true }
+				/>
+				<GridAlignmentToolbar
+					type="vertical"
+					selected={ alignVertically }
+					onChange={ (alignVertically) => setAttributes({alignVertically}) }
+					isCollapsed={ true }
+				/>
+			</BlockControls>
 			<InspectorControls>
 				<PanelBody title={ __('Block Grid Items Per Line', 'pb') }>
 					<p>{ __('How many items should display in a single row at each screen size?', 'pb') }</p>
@@ -147,24 +134,18 @@ export default ({
 				</PanelBody>
 				<PanelBody title={ __('Alignment', 'pb') }>
 					<BaseControl label={ __('Align Horiztonally', 'pb') }>
-						<Toolbar controls={
-							[
-								'left',
-								'centerHorizontal',
-								'right',
-								'spaceBetween',
-								'spaceAround',
-							].map(horizontalControl)
-						} />
+						<GridAlignmentToolbar
+							type="horizontal"
+							selected={ alignHorizontally }
+							onChange={ (alignHorizontally) => setAttributes({alignHorizontally}) }
+						/>
 					</BaseControl>
 					<BaseControl label={ __('Align Vertically', 'pb') }>
-						<Toolbar controls={
-							[
-								'top',
-								'centerVertical',
-								'bottom',
-							].map(verticalControl)
-						} />
+						<GridAlignmentToolbar
+							type="vertical"
+							selected={ alignVertically }
+							onChange={ (alignVertically) => setAttributes({alignVertically}) }
+						/>
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
