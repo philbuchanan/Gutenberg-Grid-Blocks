@@ -42,7 +42,7 @@ export default {
 		},
 		lg: {
 			type: 'number',
-			default: 6,
+			default: '',
 		},
 		xl: {
 			type: 'number',

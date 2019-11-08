@@ -61,10 +61,41 @@ const GridBlockEdit = ({
 		childBlocks.map((item, index) => {
 			let base = 'o-row--column-' + (index + 1) + '-';
 
-			columnClasses.push(base + 'span-' + ((item.attributes.lg) ? item.attributes.lg : 12));
+			let width = 12;
+			let offset = 0;
 
-			if (item.attributes.offsetlg) {
-				columnClasses.push(base + 'offset-' + item.attributes.offsetlg);
+			/**
+			 * Since larger screen sizes inherit column spans from smaller
+			 * screen sizes (if the large screen size doesn't have a span
+			 * specified), we'll loop over each screen size until we find one
+			 * with a setting, and use that span (or offset) to display content
+			 * in the editor.
+			 */
+			const sizes = [
+				'lg',
+				'md',
+				'sm',
+				'xs',
+			];
+
+			for (let i = 0; i < sizes.length; i++) {
+				if (item.attributes[sizes[i]]) {
+					width = item.attributes[sizes[i]];
+					break;
+				}
+			}
+
+			for (let i = 0; i < sizes.length; i++) {
+				if (item.attributes['offset' + sizes[i]]) {
+					offset = item.attributes['offset' + sizes[i]];
+					break;
+				}
+			};
+
+			columnClasses.push(base + 'span-' + width);
+
+			if (offset > 0) {
+				columnClasses.push(base + 'offset-' + offset);
 			}
 		});
 
@@ -123,16 +154,14 @@ const GridBlockEdit = ({
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ ['o-row', 'o-row--columns-' + childBlocks.length, ...getColumnSpanClasses(), ...getAlignmentClasses(attributes)].join(' ') }>
+			<div className={ ['o-row', ...getColumnSpanClasses(), ...getAlignmentClasses(attributes)].join(' ') }>
 				<InnerBlocks
 					template={ [
 						['pb/column', {
 							md: 6,
-							lg: 6,
 						}],
 						['pb/column', {
 							md: 6,
-							lg: 6,
 						}],
 					] }
 					allowedBlocks={ ['pb/column'] }
