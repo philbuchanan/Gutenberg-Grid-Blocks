@@ -72,6 +72,32 @@ export default ({
 		xl,
 	} = attributes;
 
+	/**
+	 * Since larger screen sizes inherit the number of block grid items per line
+	 * from smaller screen sizes (if the large screen size doesn't have a value
+	 * specified), we'll loop over each screen size until we find one with a
+	 * setting, and use that value to display content in the editor.
+	 */
+	const perLine = () => {
+		let perLine = 1;
+
+		const sizes = [
+			'lg',
+			'md',
+			'sm',
+			'xs',
+		];
+
+		for (let i = 0; i < sizes.length; i++) {
+			if (attributes[sizes[i]]) {
+				perLine = attributes[sizes[i]];
+				break;
+			}
+		}
+
+		return perLine;
+	}
+
 	return (
 		<Fragment>
 			<BlockControls>
@@ -149,7 +175,7 @@ export default ({
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ ['o-block-grid o-block-grid-' + lg, ...getAlignmentClasses(attributes)].join(' ') }>
+			<div className={ ['o-block-grid o-block-grid-' + perLine(), ...getAlignmentClasses(attributes)].join(' ') }>
 				<InnerBlocks
 					template={ [
 						['pb/block-grid-item'],
