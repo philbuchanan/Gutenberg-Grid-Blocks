@@ -20,9 +20,7 @@ import edit from './edit';
 
 import getBlockGridClasses from './classes';
 
-import {
-	getAlignmentClasses,
-} from '../../alignments';
+import getAlignmentClasses from '../../alignments';
 
 
 

@@ -24,7 +24,7 @@ export default {
 
 	supports: {
 		className: false,
-		inserter: false,
+		reusable: false,
 	},
 
 	attributes: {
@@ -42,7 +42,7 @@ export default {
 		},
 		lg: {
 			type: 'number',
-			default: 6,
+			default: '',
 		},
 		xl: {
 			type: 'number',

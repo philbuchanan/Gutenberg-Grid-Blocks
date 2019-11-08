@@ -19,10 +19,7 @@ const {
 /**
  * Internal dependncies
  */
-import {
-	alignmentControls,
-	getAlignmentClasses,
-} from '../../alignments';
+import getAlignmentClasses from '../../alignments';
 
 import settings from './settings';
 

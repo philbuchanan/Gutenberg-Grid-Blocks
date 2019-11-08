@@ -20,6 +20,7 @@ const {
 } = wp.data;
 
 const {
+	BlockControls,
 	InspectorControls,
 	InnerBlocks,
 } = wp.blockEditor;
@@ -27,7 +28,6 @@ const {
 const {
 	PanelBody,
 	BaseControl,
-	Toolbar,
 } = wp.components;
 
 
@@ -37,10 +37,9 @@ const {
  */
 import NumberControl from '../../components/number-control';
 
-import {
-	alignmentControls,
-	getAlignmentClasses,
-} from '../../alignments';
+import GridAlignmentToolbar from '../../components/alignment-toolbar';
+
+import getAlignmentClasses from '../../alignments';
 
 
 
@@ -51,20 +50,9 @@ const GridBlockEdit = ({
 	childBlocks,
 }) => {
 	const {
-		columns,
 		alignVertically,
 		alignHorizontally,
 	} = attributes;
-
-	const getColumnsTemplate = (columns) => {
-		let template = [];
-
-		for (let i = 0; i < columns; i++) {
-			template.push(['pb/column']);
-		}
-
-		return template;
-	};
 
 	const getColumnSpanClasses = () => {
 		let columnClasses = [];
@@ -72,90 +60,92 @@ const GridBlockEdit = ({
 		childBlocks.map((item, index) => {
 			let base = 'o-row--column-' + (index + 1) + '-';
 
-			columnClasses.push(base + 'span-' + ((item.attributes.lg) ? item.attributes.lg : 12));
+			let width = 12;
+			let offset = 0;
 
-			if (item.attributes.offsetlg) {
-				columnClasses.push(base + 'offset-' + item.attributes.offsetlg);
+			/**
+			 * Since larger screen sizes inherit column spans from smaller
+			 * screen sizes (if the large screen size doesn't have a span
+			 * specified), we'll loop over each screen size until we find one
+			 * with a setting, and use that span (or offset) to display content
+			 * in the editor.
+			 */
+			const sizes = [
+				'lg',
+				'md',
+				'sm',
+				'xs',
+			];
+
+			for (let i = 0; i < sizes.length; i++) {
+				if (item.attributes[sizes[i]]) {
+					width = item.attributes[sizes[i]];
+					break;
+				}
+			}
+
+			for (let i = 0; i < sizes.length; i++) {
+				if (item.attributes['offset' + sizes[i]]) {
+					offset = item.attributes['offset' + sizes[i]];
+					break;
+				}
+			};
+
+			columnClasses.push(base + 'span-' + width);
+
+			if (offset > 0) {
+				columnClasses.push(base + 'offset-' + offset);
 			}
 		});
 
 		return columnClasses;
 	}
 
-	const verticalControl = (value) => {
-		let activeAlignment = alignmentControls[value];
-
-		return {
-			icon: activeAlignment.icon,
-			title: activeAlignment.title,
-			isActive: alignVertically === value,
-			onClick: () => setAttributes({
-				'alignVertically': value,
-			}),
-		};
-	}
-
-	const horizontalControl = (value) => {
-		let alignment = alignmentControls[value];
-
-		return {
-			icon: alignment.icon,
-			title: alignment.title,
-			isActive: alignHorizontally === value,
-			onClick: () => setAttributes({
-				'alignHorizontally': value,
-			}),
-		};
-	}
-
 	return (
 		<Fragment>
+			<BlockControls>
+				<GridAlignmentToolbar
+					type="horizontal"
+					selected={ alignHorizontally }
+					onChange={ (alignHorizontally) => setAttributes({alignHorizontally}) }
+					isCollapsed={ true }
+				/>
+				<GridAlignmentToolbar
+					type="vertical"
+					selected={ alignVertically }
+					onChange={ (alignVertically) => setAttributes({alignVertically}) }
+					isCollapsed={ true }
+				/>
+			</BlockControls>
 			<InspectorControls>
-				<PanelBody title={ __('Number of Columns', 'pb') }>
-					<NumberControl
-						label={ __('How many column containers do you want?', 'pb') }
-						help={ __('Be careful: If you reduce the number of column containers, you will loose your existing content in the containers removed.', 'pb') }
-						value={ columns }
-						onChange={
-							(nextColumns) => {
-								setAttributes({
-									columns: nextColumns,
-								});
-							}
-						}
-						max={ 6 }
-					/>
-				</PanelBody>
 				<PanelBody title={ __('Alignment', 'pb') }>
 					<BaseControl label={ __('Align Horiztonally', 'pb') }>
-						<Toolbar controls={
-							[
-								'left',
-								'centerHorizontal',
-								'right',
-								'spaceBetween',
-								'spaceAround',
-							].map(horizontalControl)
-						} />
+						<GridAlignmentToolbar
+							type="horizontal"
+							selected={ alignHorizontally }
+							onChange={ (alignHorizontally) => setAttributes({alignHorizontally}) }
+						/>
 					</BaseControl>
 					<BaseControl label={ __('Align Vertically', 'pb') }>
-						<Toolbar controls={
-							[
-								'top',
-								'centerVertical',
-								'bottom',
-							].map(verticalControl)
-						} />
+						<GridAlignmentToolbar
+							type="vertical"
+							selected={ alignVertically }
+							onChange={ (alignVertically) => setAttributes({alignVertically}) }
+						/>
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ ['o-row', 'o-row--columns-' + columns, ...getColumnSpanClasses(), ...getAlignmentClasses(attributes)].join(' ') }>
+			<div className={ ['o-row', ...getColumnSpanClasses(), ...getAlignmentClasses(attributes)].join(' ') }>
 				<InnerBlocks
-					template={ getColumnsTemplate(columns) }
-					templateLock="all"
-					allowedBlocks={[
-						'pb/column'
-					]}
+					template={ [
+						['pb/column', {
+							md: 6,
+						}],
+						['pb/column', {
+							md: 6,
+						}],
+					] }
+					allowedBlocks={ ['pb/column'] }
 				/>
 			</div>
 		</Fragment>
