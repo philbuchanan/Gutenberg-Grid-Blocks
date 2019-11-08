@@ -23,12 +23,16 @@ import getAlignmentClasses from '../../alignments';
 
 import settings from './settings';
 
+import transforms from './transforms';
+
 import edit from './edit';
 
 
 
 registerBlockType('pb/row', {
 	...settings,
+
+	transforms,
 
 	edit: edit,
 

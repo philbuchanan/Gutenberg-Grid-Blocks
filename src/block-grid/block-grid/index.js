@@ -16,6 +16,8 @@ const {
  */
 import settings from './settings';
 
+import transforms from './transforms';
+
 import edit from './edit';
 
 import getBlockGridClasses from './classes';
@@ -26,6 +28,8 @@ import getAlignmentClasses from '../../alignments';
 
 registerBlockType('pb/block-grid', {
 	...settings,
+
+	transforms,
 
 	edit: edit,
 

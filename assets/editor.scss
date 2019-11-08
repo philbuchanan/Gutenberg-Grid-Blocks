@@ -65,7 +65,7 @@
 	}
 }
 
-@for $i from 2 through 6 {
+@for $i from 1 through 6 {
 	.o-block-grid-#{$i} .block-editor-block-list__layout > [data-type="pb/block-grid-item"] {
 		width: 100% / $i;
 	}
