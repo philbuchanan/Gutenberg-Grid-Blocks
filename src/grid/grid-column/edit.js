@@ -157,7 +157,7 @@ export default ({
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ getColumnClasses(attributes) }>
+			<div className={ [...getColumnClasses(attributes), className].join(' ') }>
 				<InnerBlocks
 					templateLock={ false }
 				/>

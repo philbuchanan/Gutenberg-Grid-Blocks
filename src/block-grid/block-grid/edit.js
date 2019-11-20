@@ -175,7 +175,7 @@ export default ({
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ ['o-block-grid o-block-grid-' + perLine(), ...getAlignmentClasses(attributes)].join(' ') }>
+			<div className={ ['o-block-grid o-block-grid-' + perLine(), ...getAlignmentClasses(attributes), className].join(' ') }>
 				<InnerBlocks
 					template={ [
 						['pb/block-grid-item'],

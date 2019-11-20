@@ -55,7 +55,9 @@ const GridBlockEdit = ({
 	} = attributes;
 
 	const getColumnSpanClasses = () => {
-		let columnClasses = [];
+		let columnClasses = [
+			className,
+		];
 
 		childBlocks.map((item, index) => {
 			let base = 'o-row--column-' + (index + 1) + '-';
