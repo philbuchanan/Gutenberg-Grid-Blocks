@@ -15,5 +15,5 @@ export default (attributes) => {
 	if (attributes.offsetlg) classes.push('u-offset-' + attributes.offsetlg + 'of12-lg');
 	if (attributes.offsetxl) classes.push('u-offset-' + attributes.offsetxl + 'of12-xl');
 
-	return classes.join(' ');
+	return classes;
 };

@@ -7,9 +7,11 @@ const {
 
 
 
-export default (props) => {
+export default ({
+	className,
+}) => {
 	return (
-		<div className="o-block-grid__item">
+		<div className={ 'o-block-grid__item ' + className }>
 			<InnerBlocks />
 		</div>
 	);

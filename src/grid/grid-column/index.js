@@ -34,7 +34,7 @@ registerBlockType('pb/column', {
 
 	save: (props) => {
 		return (
-			<div className={ getColumnClasses(props.attributes) }>
+			<div className={ getColumnClasses(props.attributes).join(' ') }>
 				<InnerBlocks.Content />
 			</div>
 		);
