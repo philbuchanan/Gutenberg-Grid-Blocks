@@ -1,33 +1,18 @@
 /**
  * WordPress dependencies
  */
-const {
-	__,
-	sprintf,
-} = wp.i18n;
-
-const {
-	withInstanceId,
-} = wp.compose;
-
-
-
-/**
- * Internal dependencies
- */
-const {
+import { __, sprintf } from '@wordpress/i18n';
+import {
 	BaseControl,
 	Button,
 	Icon,
-} = wp.components;
+} from '@wordpress/components';
 
-
-
-function NumberControl({
+export default ({
 	className,
 	label,
 	value,
-	instanceId,
+	clientId,
 	onChange,
 	help,
 	min,
@@ -38,8 +23,8 @@ function NumberControl({
 	allowReset,
 	icon,
 	...props
-}) {
-	const id = `number-control-${ instanceId }`;
+}) => {
+	const id = `number-control-${ clientId }`;
 
 	// Set min and max defaults if not specified
 	min = (typeof min !== 'undefined') ? min : 1;
@@ -152,5 +137,3 @@ function NumberControl({
 		</BaseControl>
 	);
 }
-
-export default withInstanceId(NumberControl);

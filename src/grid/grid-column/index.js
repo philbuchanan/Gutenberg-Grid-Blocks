@@ -1,31 +1,15 @@
 /**
  * WordPress dependencies
  */
-const {
-	registerBlockType,
-} = wp.blocks;
-
-const {
-	InnerBlocks,
-} = wp.blockEditor;
-
-const {
-	SVG,
-	Path,
-} = wp.components;
-
-
+import { registerBlockType } from '@wordpress/blocks';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
  */
 import settings from './settings';
-
 import edit from './edit';
-
 import getColumnClasses from './classes';
-
-
 
 registerBlockType('pb/column', {
 	...settings,

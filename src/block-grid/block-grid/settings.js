@@ -1,20 +1,13 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-
-
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependncies
  */
 import getBlockGridClasses from './classes';
-
-import {
-	getAlignmentClasses,
-} from '../../alignments';
-
-
+import { getAlignmentClasses } from '../../alignments';
 
 export default {
 	title: __('Block Grid', 'pb'),
@@ -56,7 +49,7 @@ export default {
 		},
 		lg: {
 			type: 'number',
-			default: 3,
+			default: '',
 		},
 		xl: {
 			type: 'number',

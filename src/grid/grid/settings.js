@@ -1,22 +1,15 @@
-
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-
-const {
-	SVG,
-	Path,
-} = wp.components;
-
-
+import { __ } from '@wordpress/i18n';
+import { SVG, Path } from '@wordpress/components';
 
 export default {
 	title: __('Columns', 'pb'),
 
 	icon: <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-			<Path d="M21 4H3L2 5v14l1 1h18l1-1V5l-1-1zM8 18H4V6h4v12zm6 0h-4V6h4v12zm6 0h-4V6h4v12z" />
-		</SVG>,
+		<Path d="M21 4H3L2 5v14l1 1h18l1-1V5l-1-1zM8 18H4V6h4v12zm6 0h-4V6h4v12zm6 0h-4V6h4v12z" />
+	</SVG>,
 
 	category: 'layout',
 

@@ -1,33 +1,17 @@
 /**
  * WordPress dependencies
  */
-const {
-	registerBlockType,
-} = wp.blocks;
-
-const {
-	InnerBlocks,
-} = wp.blockEditor;
-
-const {
-	SVG,
-	Path,
-} = wp.components;
-
-
+import { registerBlockType } from '@wordpress/blocks';
+import { InnerBlocks } from '@wordpress/block-editor';
+import { SVG, Path } from '@wordpress/components';
 
 /**
  * Internal dependncies
  */
 import getAlignmentClasses from '../../alignments';
-
 import settings from './settings';
-
 import transforms from './transforms';
-
 import edit from './edit';
-
-
 
 registerBlockType('pb/row', {
 	...settings,

@@ -1,49 +1,24 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-
-const {
-	dispatch,
-	withDispatch,
-	withSelect
-} = wp.data;
-
-const {
-	compose
-} = wp.compose;
-
-const {
-	Fragment,
-} = wp.element;
-
-const {
-	createBlock
-} = wp.blocks;
-
-const {
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
+import {
 	BlockControls,
 	InspectorControls,
 	InnerBlocks,
-} = wp.blockEditor;
-
-const {
+} from '@wordpress/block-editor';
+import {
 	PanelBody,
 	BaseControl,
-	Button,
-} = wp.components;
-
-
+} from '@wordpress/components';
 
 /**
  * Internal dependncies
  */
 import NumberControl from '../../components/number-control';
-
 import GridAlignmentToolbar from '../../components/alignment-toolbar';
-
 import getBlockGridClasses from './classes';
-
 import getAlignmentClasses from '../../alignments';
 
 import {
@@ -52,9 +27,7 @@ import {
 	mdScreen,
 	lgScreen,
 	xlScreen,
-} from '../../icons';
-
-
+} from '../../components/icons';
 
 export default ({
 	className,

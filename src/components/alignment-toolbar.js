@@ -1,14 +1,8 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-
-const {
-	Toolbar,
-} = wp.components;
-
-
-
+import { __ } from '@wordpress/i18n';
+import { Toolbar } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -22,9 +16,7 @@ import {
 	alignRight,
 	spaceBetween,
 	spaceAround,
-} from '../icons';
-
-
+} from '../components/icons';
 
 const alignmentControls = {
 	top: {

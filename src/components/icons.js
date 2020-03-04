@@ -1,7 +1,7 @@
-const {
-	SVG,
-	Path,
-} = wp.components;
+/**
+ * WordPress dependencies
+ */
+import { SVG, Path } from '@wordpress/components';
 
 export const alignTop = (
 	<SVG xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">

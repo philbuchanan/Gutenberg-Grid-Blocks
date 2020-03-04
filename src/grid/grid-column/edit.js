@@ -1,39 +1,26 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-
-const {
-	Fragment,
-} = wp.element;
-
-const {
+import { __ } from '@wordpress/i18n';
+import { Fragment } from '@wordpress/element';
+import { PanelBody } from '@wordpress/components';
+import {
 	InspectorControls,
 	InnerBlocks,
-} = wp.blockEditor;
-
-const {
-	PanelBody,
-} = wp.components;
-
-
+} from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
  */
 import NumberControl from '../../components/number-control';
-
 import {
 	xsScreen,
 	smScreen,
 	mdScreen,
 	lgScreen,
 	xlScreen,
-} from '../../icons';
-
+} from '../../components/icons';
 import getColumnClasses from './classes';
-
-
 
 export default ({
 	className,
