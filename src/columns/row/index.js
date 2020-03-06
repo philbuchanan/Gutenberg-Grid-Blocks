@@ -5,14 +5,14 @@ import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
- * Internal dependencies
+ * Internal dependncies
  */
 import settings from './settings';
 import transforms from './transforms';
 import edit from './edit';
 import classnames from '../../utils/classnames';
 
-registerBlockType('pb/block-grid', {
+registerBlockType('pb/row', {
 	...settings,
 
 	transforms,
@@ -23,28 +23,17 @@ registerBlockType('pb/block-grid', {
 		const {
 			alignVertically,
 			alignHorizontally,
-			xs,
-			sm,
-			md,
-			lg,
-			xl,
 		} = attributes;
 
 		return (
-			<div className={ classnames('o-block-grid', {
+			<div className={ classnames('o-row', {
 				'u-justify-content-center': alignHorizontally === 'centerHorizontal',
 				'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
 				'u-justify-content-space-around': alignHorizontally === 'spaceAround',
 				'u-justify-content-end': alignHorizontally === 'right',
 				'u-align-items-center': alignVertically === 'centerVertical',
 				'u-align-items-end': alignVertically === 'bottom',
-			}, [
-				xs ? `o-block-grid-${ xs }` : '',
-				sm ? `o-block-grid-${ sm }-sm` : '',
-				md ? `o-block-grid-${ md }-md` : '',
-				lg ? `o-block-grid-${ lg }-lg` : '',
-				xl ? `o-block-grid-${ xl }-xl` : '',
-			]) }>
+			}) }>
 				<InnerBlocks.Content />
 			</div>
 		);

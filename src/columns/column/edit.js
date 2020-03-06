@@ -3,6 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 import { PanelBody } from '@wordpress/components';
 import {
 	InspectorControls,
@@ -20,13 +21,14 @@ import {
 	lgScreen,
 	xlScreen,
 } from '../../components/icons';
-import getColumnClasses from './classes';
+import classnames from '../../utils/classnames';
 
-export default ({
+const ColumnEdit = ({
 	className,
 	attributes,
 	setAttributes,
-	instanceId,
+	clientId,
+	isSelected,
 }) => {
 	const {
 		xs,
@@ -40,6 +42,10 @@ export default ({
 		offsetlg,
 		offsetxl,
 	} = attributes;
+
+	const hasInnerBlocks = useSelect((select) => {
+		return select('core/block-editor').getBlocks(clientId).length > 0;
+	});
 
 	return (
 		<Fragment>
@@ -144,11 +150,29 @@ export default ({
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ [...getColumnClasses(attributes), className].join(' ') }>
+			<div className={ classnames('o-col', className, [
+					xs ? `u-${ xs }of12` : '',
+					sm ? `u-${ sm }of12-sm` : '',
+					md ? `u-${ md }of12-md` : '',
+					lg ? `u-${ lg }of12-lg` : '',
+					xl ? `u-${ xl }of12-xl` : '',
+					offsetxs ? `u-offset-${ offsetxs }of12` : '',
+					offsetsm ? `u-offset-${ offsetsm }of12-sm` : '',
+					offsetmd ? `u-offset-${ offsetmd }of12-md` : '',
+					offsetlg ? `u-offset-${ offsetlg }of12-lg` : '',
+					offsetxl ? `u-offset-${ offsetxl }of12-xl` : '',
+				], {
+					'block-has-no-inner-blocks': !hasInnerBlocks,
+				}) }>
 				<InnerBlocks
 					templateLock={ false }
+					renderAppender={ isSelected || !hasInnerBlocks ? () => (
+						<InnerBlocks.ButtonBlockAppender />
+					) : false }
 				/>
 			</div>
 		</Fragment>
 	);
 }
+
+export default ColumnEdit;

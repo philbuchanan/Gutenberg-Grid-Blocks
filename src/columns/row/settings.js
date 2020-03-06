@@ -7,8 +7,10 @@ import { SVG, Path } from '@wordpress/components';
 export default {
 	title: __('Columns', 'pb'),
 
+	description: __('Display content in multiple columns.', 'pb'),
+
 	icon: <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-		<Path d="M21 4H3L2 5v14l1 1h18l1-1V5l-1-1zM8 18H4V6h4v12zm6 0h-4V6h4v12zm6 0h-4V6h4v12z" />
+		<Path d="M21,4H3A1,1,0,0,0,2,5V19a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V5A1,1,0,0,0,21,4ZM8,18H4V6H8Zm6,0H10V6h4Zm6,0H16V6h4Z" />
 	</SVG>,
 
 	category: 'layout',

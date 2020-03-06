@@ -19,13 +19,14 @@ import {
  */
 import NumberControl from '../../components/number-control';
 import GridAlignmentToolbar from '../../components/alignment-toolbar';
-import getAlignmentClasses from '../../alignments';
+import classnames from '../../utils/classnames';
 
-export default ({
+const RowEdit = ({
 	className,
 	attributes,
 	setAttributes,
 	clientId,
+	isSelected,
 }) => {
 	const {
 		alignVertically,
@@ -36,55 +37,34 @@ export default ({
 		return select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
 	});
 
-	const getColumnSpanClasses = () => {
-		let columnClasses = [
-			className,
-		];
+	let columnClasses = [];
 
-		if (childBlocks && childBlocks.length) {
-			childBlocks.map((item, index) => {
-				let base = 'o-row--column-' + (index + 1) + '-';
+	if (childBlocks && childBlocks.length) {
+		childBlocks.map((item, index) => {
+			const base = `column-${ (index + 1) }-`;
 
-				let width = 12;
-				let offset = 0;
+			const sizes = [
+				'xs',
+				'sm',
+				'md',
+				'lg',
+				'xl',
+			];
 
-				/**
-				 * Since larger screen sizes inherit column spans from smaller
-				 * screen sizes (if the large screen size doesn't have a span
-				 * specified), we'll loop over each screen size until we find one
-				 * with a setting, and use that span (or offset) to display content
-				 * in the editor.
-				 */
-				const sizes = [
-					'lg',
-					'md',
-					'sm',
-					'xs',
-				];
+			sizes.forEach((size, index) => {
+				let breakpoint = size === 'xs' ? '' : size;
 
-				for (let i = 0; i < sizes.length; i++) {
-					if (item.attributes[sizes[i]]) {
-						width = item.attributes[sizes[i]];
-						break;
-					}
+				if (item.attributes[size]) {
+					columnClasses.push(`${ base }span-${ item.attributes[size] }-${ breakpoint }`);
 				}
 
-				for (let i = 0; i < sizes.length; i++) {
-					if (item.attributes['offset' + sizes[i]]) {
-						offset = item.attributes['offset' + sizes[i]];
-						break;
-					}
-				};
+				const offsetSize = `offset${ size }`;
 
-				columnClasses.push(base + 'span-' + width);
-
-				if (offset > 0) {
-					columnClasses.push(base + 'offset-' + offset);
+				if (item.attributes[offsetSize]) {
+					columnClasses.push(`${ base }offset-${ item.attributes[offsetSize] }-${ breakpoint }`);
 				}
 			});
-		}
-
-		return columnClasses;
+		});
 	}
 
 	return (
@@ -121,7 +101,14 @@ export default ({
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ ['o-row', ...getColumnSpanClasses(), ...getAlignmentClasses(attributes)].join(' ') }>
+			<div className={ classnames('o-row', className, columnClasses, {
+				'u-justify-content-center': alignHorizontally === 'centerHorizontal',
+				'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
+				'u-justify-content-space-around': alignHorizontally === 'spaceAround',
+				'u-justify-content-end': alignHorizontally === 'right',
+				'u-align-items-center': alignVertically === 'centerVertical',
+				'u-align-items-end': alignVertically === 'bottom',
+			}) }>
 				<InnerBlocks
 					template={ [
 						['pb/column', {
@@ -132,8 +119,13 @@ export default ({
 						}],
 					] }
 					allowedBlocks={ ['pb/column'] }
+					renderAppender={ isSelected ? () => (
+						<InnerBlocks.ButtonBlockAppender />
+					) : false }
 				/>
 			</div>
 		</Fragment>
 	);
 };
+
+export default RowEdit;
