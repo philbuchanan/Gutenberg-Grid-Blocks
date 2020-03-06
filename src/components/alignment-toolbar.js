@@ -53,13 +53,11 @@ const alignmentControls = {
 	},
 };
 
-export default ({
-	className,
+const GridAlignmentToolbar = ({
 	type,
 	selected,
 	onChange,
 	isCollapsed,
-	...props
 }) => {
 	const controls = type === 'vertical' ? [
 		'top',
@@ -90,5 +88,7 @@ export default ({
 			}) }
 			isCollapsed={ isCollapsed }
 		/>
-	)
+	);
 };
+
+export default GridAlignmentToolbar;

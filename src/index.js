@@ -1,4 +1,3 @@
 import './blacklist/blacklist';
-
-import './grid/';
+import './columns/';
 import './block-grid/';

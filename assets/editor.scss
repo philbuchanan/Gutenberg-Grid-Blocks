@@ -1,42 +1,143 @@
 // # Editor Styles
 // -----------------------------------------------------------------------------
 
+// ## Settings
+// -----------------------------------------------------------------------------
+
+$gutter: 15px;
+$column-space: $gutter * 2;
+$total-block-grid-columns: 6;
+$breakpoints: (
+	// No suffix on classes for < 475px
+	sm: 475px,
+	md: 769px,
+	lg: 1024px,
+	xl: 1200px,
+);
+
+
+
+// ## Tools: Media Queries Mixin
+// -----------------------------------------------------------------------------
+
+@mixin respond-to($breakpoint) {
+	@if $breakpoint == ">xs" {
+		@content;
+	}
+	@else if $breakpoint == ">sm" {
+		@media screen and (min-width: map-get($breakpoints, sm)) {
+			@content;
+		}
+	}
+	@else if $breakpoint == ">md" {
+		@media screen and (min-width: map-get($breakpoints, md)) {
+			@content;
+		}
+	}
+	@else if $breakpoint == ">lg" {
+		@media screen and (min-width: map-get($breakpoints, lg)) {
+			@content;
+		}
+	}
+	@else if $breakpoint == ">xl" {
+		@media screen and (min-width: map-get($breakpoints, xl)) {
+			@content;
+		}
+	}
+}
+
+
+
+// ## Shared
+// -----------------------------------------------------------------------------
+
+.o-row,
+.o-block-grid {
+	// block-editor-block-list__layout holds the child blocks
+	// (i.e. o-col, o-block-grid__item)
+	> .block-editor-inner-blocks > .block-editor-block-list__layout {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.block-list-appender {
+		width: 100%;
+	}
+}
+
+// The Gutenberg editor switches to a mobile layout with no left and right
+// margins at 600 pixels. If we add our negative margins below this breakpoint,
+// it introduces a horizontal scroll bar in the editor. See here for breakpoints:
+// https://github.com/WordPress/gutenberg/blob/master/packages/base-styles/_breakpoints.scss
+@media screen and (min-width: 600px) {
+	.o-row,
+	.o-block-grid {
+		margin-left: -$gutter;
+		margin-right: -$gutter;
+	}
+}
+
+.wp-block[data-type="pb/column"],
+.wp-block[data-type="pb/block-grid-item"] {
+	flex: 0 0 auto;
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.o-col,
+.o-block-grid__item {
+	padding-left: $gutter;
+	padding-right: $gutter;
+}
+
+// If there are no inner blocks (i.e. the column or block grid item has no
+// blocks inside it), we add a little padding to the top so the
+// `block-list-appender` lines up with the top of sibling columns.
+.block-has-no-inner-blocks {
+	padding-top: 16px;
+}
+
 
 
 // ## Grid Rows and Columns
 // -----------------------------------------------------------------------------
 
-[data-type="pb/row"] {
-	.o-row > .block-editor-inner-blocks {
-		width: 100%;
+@mixin columns-loop($breakpoint: null) {
+	@for $numerator from 1 through 12 {
+		$width: ($numerator / 12) * 100%;
 
-		> .block-editor-block-list__layout {
-			display: flex;
-			flex-wrap: wrap;
+		.column-span-#{$numerator}#{$breakpoint} {
+			width: $width;
+		}
+
+		.column-offset-#{$numerator}#{$breakpoint} {
+			margin-left: $width;
+		}
+	}
+
+	@for $index from 1 through 6 {
+		@for $numerator from 1 through 12 {
+			$width: ($numerator / 12) * 100%;
+
+			.column-#{$index}-span-#{$numerator}#{$breakpoint} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/column"]:nth-child(#{$index}) {
+				@extend .column-span-#{$numerator}#{$breakpoint};
+			}
+
+			.column-#{$index}-offset-#{$numerator}#{$breakpoint} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/column"]:nth-child(#{$index}) {
+				@extend .column-offset-#{$numerator}#{$breakpoint};
+			}
 		}
 	}
 }
 
-[data-type="pb/column"] {
-	margin-left: 0 !important;
-	margin-right: 0 !important;
+// No suffix on classes for < small breakpoint
+@include columns-loop();
 
-	.block-editor-block-list__block-edit {
-		.wp-block {
-			width: 100%;
-		}
-	}
-}
-
-@for $i from 1 through 6 {
-	@for $j from 1 through 12 {
-		.o-row--column-#{$i}-span-#{$j} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/column"]:nth-child(#{$i}) {
-			width: $j / 12 * 100%;
-		}
-
-		.o-row--column-#{$i}-offset-#{$j} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/column"]:nth-child(#{$i}) {
-			margin-left: $j / 12 * 100% !important;
-		}
+@each $name, $size in $breakpoints {
+	@include respond-to(">#{$name}") {
+		$suffix: "-#{$name}";
+		@include columns-loop($suffix);
 	}
 }
 
@@ -45,71 +146,58 @@
 // ## Block Grid
 // -----------------------------------------------------------------------------
 
-[data-type="pb/block-grid"] {
-	.block-editor-block-list__layout {
-		display: flex;
-		flex-wrap: wrap;
-	}
-}
+@mixin block-grid-loop($breakpoint: null) {
+	@for $i from 1 through $total-block-grid-columns {
+		$width: 100% / $i;
 
-[data-type="pb/block-grid-item"] {
-	margin-left: 0 !important;
-	margin-right: 0 !important;
-	margin-bottom: 30px !important;
-
-	.block-editor-block-list__block-edit {
-		margin-top: 0 !important;
-
-		.wp-block {
-			width: 100%;
+		.o-block-grid-#{$i}#{$breakpoint} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/block-grid-item"] {
+			width: $width;
 		}
 	}
 }
 
-@for $i from 1 through 6 {
-	.o-block-grid-#{$i} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/block-grid-item"] {
-		width: 100% / $i;
-	}
-}
+@include block-grid-loop();
 
-.o-block-grid {
-	> .editor-inner-blocks > .editor-block-list__layout {
-		[data-block] {
-			margin-top: 0;
-			margin-bottom: 0;
-		}
+@each $name, $size in $breakpoints {
+	@include respond-to(">#{$name}") {
+		$suffix: "-#{$name}";
+		@include block-grid-loop($suffix);
 	}
 }
 
 
 
-// ### Alignments
+// ## Alignments
 // -----------------------------------------------------------------------------
 
-.u-align-items-center [data-type="pb/column"],
-.u-align-items-center [data-type="pb/block-grid-item"] {
-	align-self: center;
-}
+// Specificity required becuase we don't want child grids to inherit their
+// parents settings if the user nests one grid inside another. E.g. if the use
+// sets `justify-content: space-between` on a `Columns` block, then nests a
+// block grid inside one of the columns, the block grid should _not_ have
+// `justify-content: space-between` applied.
 
-.u-align-items-end [data-type="pb/column"],
-.u-align-items-end [data-type="pb/block-grid-item"] {
-	align-self: flex-end;
-}
-
-.u-justify-content-center .block-editor-block-list__layout {
+.u-justify-content-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
 	justify-content: center;
 }
 
-.u-justify-content-end .block-editor-block-list__layout {
+.u-justify-content-end > .block-editor-inner-blocks > .block-editor-block-list__layout {
 	justify-content: flex-end;
 }
 
-.u-justify-content-space-between .block-editor-block-list__layout {
+.u-justify-content-space-between > .block-editor-inner-blocks > .block-editor-block-list__layout {
 	justify-content: space-between;
 }
 
-.u-justify-content-space-around .block-editor-block-list__layout {
+.u-justify-content-space-around > .block-editor-inner-blocks > .block-editor-block-list__layout {
 	justify-content: space-around;
+}
+
+.u-align-items-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	align-items: center;
+}
+
+.u-align-items-end > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	align-items: flex-end;
 }
 
 

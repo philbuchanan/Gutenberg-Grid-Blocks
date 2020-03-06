@@ -18,8 +18,7 @@ import {
  */
 import NumberControl from '../../components/number-control';
 import GridAlignmentToolbar from '../../components/alignment-toolbar';
-import getBlockGridClasses from './classes';
-import getAlignmentClasses from '../../alignments';
+import classnames from '../../utils/classnames';
 
 import {
 	xsScreen,
@@ -29,7 +28,7 @@ import {
 	xlScreen,
 } from '../../components/icons';
 
-export default ({
+const BlockGridEdit = ({
 	className,
 	attributes,
 	setAttributes,
@@ -44,32 +43,6 @@ export default ({
 		lg,
 		xl,
 	} = attributes;
-
-	/**
-	 * Since larger screen sizes inherit the number of block grid items per line
-	 * from smaller screen sizes (if the large screen size doesn't have a value
-	 * specified), we'll loop over each screen size until we find one with a
-	 * setting, and use that value to display content in the editor.
-	 */
-	const perLine = () => {
-		let perLine = 1;
-
-		const sizes = [
-			'lg',
-			'md',
-			'sm',
-			'xs',
-		];
-
-		for (let i = 0; i < sizes.length; i++) {
-			if (attributes[sizes[i]]) {
-				perLine = attributes[sizes[i]];
-				break;
-			}
-		}
-
-		return perLine;
-	}
 
 	return (
 		<Fragment>
@@ -148,15 +121,33 @@ export default ({
 					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ ['o-block-grid o-block-grid-' + perLine(), ...getAlignmentClasses(attributes), className].join(' ') }>
+			<div className={ classnames('o-block-grid', className, {
+				'u-justify-content-center': alignHorizontally === 'centerHorizontal',
+				'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
+				'u-justify-content-space-around': alignHorizontally === 'spaceAround',
+				'u-justify-content-end': alignHorizontally === 'right',
+				'u-align-items-center': alignVertically === 'centerVertical',
+				'u-align-items-end': alignVertically === 'bottom',
+			}, [
+				xs ? `o-block-grid-${ xs }` : '',
+				sm ? `o-block-grid-${ sm }-sm` : '',
+				md ? `o-block-grid-${ md }-md` : '',
+				lg ? `o-block-grid-${ lg }-lg` : '',
+				xl ? `o-block-grid-${ xl }-xl` : '',
+			]) }>
 				<InnerBlocks
 					template={ [
 						['pb/block-grid-item'],
 						['pb/block-grid-item'],
 					] }
 					allowedBlocks={ ['pb/block-grid-item'] }
+					renderAppender={ !!isSelected ? () => (
+						<InnerBlocks.ButtonBlockAppender/>
+					) : false }
 				/>
 			</div>
 		</Fragment>
 	);
 }
+
+export default BlockGridEdit;

@@ -8,7 +8,7 @@ import {
 	Icon,
 } from '@wordpress/components';
 
-export default ({
+const NumberControl = ({
 	className,
 	label,
 	value,
@@ -34,7 +34,7 @@ export default ({
 		let value = event.target.value;
 
 		if (value !== '') {
-			value = parseInt(value);
+			value = parseInt(value, 10);
 
 			if (value > max) {
 				value = max;
@@ -62,6 +62,10 @@ export default ({
 				parentAttributes.xl,
 			];
 
+			/**
+			 * These values serve as the starting index for `i` in the
+			 * proceeding for loop.
+			 */
 			let sizes = {
 				xs: 0,
 				sm: 1,
@@ -89,7 +93,7 @@ export default ({
 		}
 
 		return sprintf(__('%d%% wide', 'pb'), width);
-	}
+	};
 
 	return (
 		<BaseControl
@@ -137,3 +141,5 @@ export default ({
 		</BaseControl>
 	);
 }
+
+export default NumberControl;
