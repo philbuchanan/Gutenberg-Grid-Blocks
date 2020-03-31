@@ -48,7 +48,7 @@ export default {
 		},
 		lg: {
 			type: 'number',
-			default: 3,
+			default: '',
 		},
 		xl: {
 			type: 'number',
