@@ -36,23 +36,18 @@ export default {
 		},
 		xs: {
 			type: 'number',
-			default: '',
 		},
 		sm: {
 			type: 'number',
-			default: '',
 		},
 		md: {
 			type: 'number',
-			default: '',
 		},
 		lg: {
 			type: 'number',
-			default: '',
 		},
 		xl: {
 			type: 'number',
-			default: '',
 		},
 	},
 };

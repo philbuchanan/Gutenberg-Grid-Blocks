@@ -23,43 +23,33 @@ export default {
 	attributes: {
 		xs: {
 			type: 'number',
-			default: '',
 		},
 		sm: {
 			type: 'number',
-			default: '',
 		},
 		md: {
 			type: 'number',
-			default: '',
 		},
 		lg: {
 			type: 'number',
-			default: '',
 		},
 		xl: {
 			type: 'number',
-			default: '',
 		},
 		offsetxs: {
 			type: 'number',
-			default: '',
 		},
 		offsetsm: {
 			type: 'number',
-			default: '',
 		},
 		offsetmd: {
 			type: 'number',
-			default: '',
 		},
 		offsetlg: {
 			type: 'number',
-			default: '',
 		},
 		offsetxl: {
 			type: 'number',
-			default: '',
 		},
 	},
 };
