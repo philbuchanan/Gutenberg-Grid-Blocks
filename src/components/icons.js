@@ -4,88 +4,80 @@
 import { SVG, Path } from '@wordpress/components';
 
 export const alignTop = (
-	<SVG xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-		<Path fill="none" d="M0 0h24v24H0V0z"/>
-		<Path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M5,4V5.5H19V4Zm3.39,7.11h2.86V20h1.5V11.11h2.86L12,7.5Z"/>
 	</SVG>
 );
 
 export const alignCenterVertical = (
-	<SVG xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-		<Path fill="none" d="M0 0h24v24H0V0z"/>
-		<Path d="M8 19h3v4h2v-4h3l-4-4-4 4zm8-14h-3V1h-2v4H8l4 4 4-4zM4 11v2h16v-2H4z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M5,11.25v1.5H19v-1.5ZM15.61,5.64H12.75V2h-1.5V5.64H8.39L12,9.25ZM8.39,18.36h2.86V22h1.5V18.36h2.86L12,14.75Z"/>
 	</SVG>
 );
 
 export const alignBottom = (
-	<SVG xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-		<Path fill="none" d="M0 0h24v24H0V0z"/>
-		<Path d="M16 13h-3V3h-2v10H8l4 4 4-4zM4 19v2h16v-2H4z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M5,18.5V20H19V18.5Zm10.61-5.61H12.75V4h-1.5v8.89H8.39L12,16.5Z"/>
 	</SVG>
 );
 
 export const alignLeft = (
-	<SVG xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-		<Path fill="none" d="M0 0h24v24H0V0z"/>
-		<Path d="M11,16V13H21V11H11V8L7,12ZM3,20H5V4H3Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+		<Path d="M4,19H5.5V5H4Zm7.11-7.75V8.39L7.5,12l3.61,3.61V12.75H20v-1.5Z"/>
 	</SVG>
 );
 
 export const alignCenterHorizontal = (
-	<SVG xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-		<Path fill="none" d="M0 0h24v24H0V0z"/>
-		<Path d="M19,16V13h4V11H19V8l-4,4ZM5,8v3H1v2H5v3l4-4Zm6,12h2V4H11Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M11.25,19h1.5V5h-1.5Zm7.11-7.75V8.39L14.75,12l3.61,3.61V12.75H22v-1.5Zm-12.72,0H2v1.5H5.64v2.86L9.25,12,5.64,8.39Z"/>
 	</SVG>
 );
 
 export const alignRight = (
-	<SVG xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-		<Path fill="none" d="M0 0h24v24H0V0z"/>
-		<Path d="M13,8v3H3v2H13v3l4-4Zm8-4H19V20h2Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M18.5,5V19H20V5Zm-5.61,6.25H4v1.5h8.89v2.86L16.5,12,12.89,8.39Z"/>
 	</SVG>
 );
 
 export const spaceBetween = (
-	<SVG xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-		<Path fill="none" d="M0 0h24v24H0V0z"/>
-		<path d="M3,20H5V4H3ZM13,1H11V5H8l4,4,4-4H13Zm6,3V20h2V4Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M4,19H5.5V5H4ZM18.5,5V19H20V5ZM12.75,2h-1.5V5.64H8.39L12,9.25l3.61-3.61H12.75Z"/>
 	</SVG>
 );
 
 export const spaceAround = (
-	<SVG xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-		<Path fill="none" d="M0 0h24v24H0V0z"/>
-		<Path d="M11,20h2V4H11ZM6,1H4V5H1L5,9,9,5H6ZM20,5V1H18V5H15l4,4,4-4Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M11.25,19h1.5V5h-1.5ZM19.12,5.64V2h-1.5V5.64H14.77l3.61,3.61L22,5.64ZM6.38,2H4.88V5.64H2l3.6,3.61L9.23,5.64H6.38Z"/>
 	</SVG>
 );
 
 // Screen sizes
 export const xsScreen = (
-	<SVG viewBox="0 0 24 24">
-		<Path d="M9,6v5l5-5Zm7.5-4H6.5A1.5,1.5,0,0,0,5,3.5v17A1.5,1.5,0,0,0,6.5,22h10A1.5,1.5,0,0,0,18,20.5V3.5A1.5,1.5,0,0,0,16.5,2ZM16,17H7V4h9Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M10,7.75V10.5l2.83-3H10.25A.25.25,0,0,0,10,7.75ZM15,5H9A1.5,1.5,0,0,0,7.5,6.5v11A1.5,1.5,0,0,0,9,19h6a1.5,1.5,0,0,0,1.5-1.5V6.5A1.5,1.5,0,0,0,15,5Zm0,12a.5.5,0,0,1-.5.5h-5A.5.5,0,0,1,9,17V7a.5.5,0,0,1,.5-.5h5A.5.5,0,0,1,15,7Z"/>
 	</SVG>
 );
 
 export const smScreen = (
-	<SVG viewBox="0 0 24 24">
-		<Path d="M8,5v6l6-6ZM18.5,1H5.5A1.5,1.5,0,0,0,4,2.5v19A1.5,1.5,0,0,0,5.5,23h13A1.5,1.5,0,0,0,20,21.5V2.5A1.5,1.5,0,0,0,18.5,1ZM18,21H6V3H18Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M8.5,6.75V10.5l5.83-4H8.75A.25.25,0,0,0,8.5,6.75ZM16.5,4h-9A1.5,1.5,0,0,0,6,5.5v13A1.5,1.5,0,0,0,7.5,20h9A1.5,1.5,0,0,0,18,18.5V5.5A1.5,1.5,0,0,0,16.5,4Zm0,14a.5.5,0,0,1-.5.5H8a.5.5,0,0,1-.5-.5V6A.5.5,0,0,1,8,5.5h8a.5.5,0,0,1,.5.5Z"/>
 	</SVG>
 );
 
 export const mdScreen = (
-	<SVG viewBox="0 0 24 24">
-		<Path d="M21.5,4H2.5A1.5,1.5,0,0,0,1,5.5v13A1.5,1.5,0,0,0,2.5,20h19A1.5,1.5,0,0,0,23,18.5V5.5A1.5,1.5,0,0,0,21.5,4ZM21,18H3V6H21ZM5,8v6l6-6Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M6.5,8.75V12.5l7.83-4H6.75A.25.25,0,0,0,6.5,8.75ZM18.5,6H5.5A1.5,1.5,0,0,0,4,7.5v9A1.5,1.5,0,0,0,5.5,18h13A1.5,1.5,0,0,0,20,16.5v-9A1.5,1.5,0,0,0,18.5,6Zm0,10a.5.5,0,0,1-.5.5H6a.5.5,0,0,1-.5-.5V8A.5.5,0,0,1,6,7.5H18a.5.5,0,0,1,.5.5Z"/>
 	</SVG>
 );
 
 export const lgScreen = (
-	<SVG viewBox="0 0 24 24">
-		<Path d="M0,20v1.5A1.5,1.5,0,0,0,1.5,23h21A1.5,1.5,0,0,0,24,21.5V20Zm5-8L18,6H5ZM2.46,19H21.54A1.47,1.47,0,0,0,23,17.54V3.46A1.47,1.47,0,0,0,21.54,2H2.46A1.47,1.47,0,0,0,1,3.46V17.54A1.47,1.47,0,0,0,2.46,19ZM3,4H21V17H3Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M2.5,17.75v1a.5.5,0,0,0,.5.5H21a.5.5,0,0,0,.5-.5v-1Zm2-1h15a.5.5,0,0,0,.5-.5v-10a1.5,1.5,0,0,0-1.5-1.5H5.5A1.5,1.5,0,0,0,4,6.25v10A.5.5,0,0,0,4.5,16.75Zm1-10a.5.5,0,0,1,.5-.5H18a.5.5,0,0,1,.5.5v8a.5.5,0,0,1-.5.5H6a.5.5,0,0,1-.5-.5Zm1.25.5a.25.25,0,0,0-.25.25v3.75l7.83-4Z"/>
 	</SVG>
 );
 
 export const xlScreen = (
-	<SVG viewBox="0 0 24 24">
-		<Path d="M22.5,0H1.5A1.5,1.5,0,0,0,0,1.5v15A1.5,1.5,0,0,0,1.5,18H9v3H7a2,2,0,0,0-2,2v1H19V23a2,2,0,0,0-2-2H15V18h7.5A1.5,1.5,0,0,0,24,16.5V1.5A1.5,1.5,0,0,0,22.5,0ZM21,14H3V3H21ZM4.5,4.5v6l13-6Z"/>
+	<SVG xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+		<Path d="M5.5,6.25V11L16.33,6H5.75A.25.25,0,0,0,5.5,6.25Zm14-2.75H4.5A1.5,1.5,0,0,0,3,5V15a1.5,1.5,0,0,0,1.5,1.5h6.75V19H7v1.5H17V19H12.75V16.5H19.5A1.5,1.5,0,0,0,21,15V5A1.5,1.5,0,0,0,19.5,3.5Zm0,11a.5.5,0,0,1-.5.5H5a.5.5,0,0,1-.5-.5v-9A.5.5,0,0,1,5,5H19a.5.5,0,0,1,.5.5Z"/>
 	</SVG>
 );
