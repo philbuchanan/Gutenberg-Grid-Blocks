@@ -51,5 +51,25 @@ export default {
 		offsetxl: {
 			type: 'number',
 		},
+		hidexs: {
+			type: 'boolean',
+			default: false,
+		},
+		hidesm: {
+			type: 'boolean',
+			default: false,
+		},
+		hidemd: {
+			type: 'boolean',
+			default: false,
+		},
+		hidelg: {
+			type: 'boolean',
+			default: false,
+		},
+		hidexl: {
+			type: 'boolean',
+			default: false,
+		},
 	},
 };

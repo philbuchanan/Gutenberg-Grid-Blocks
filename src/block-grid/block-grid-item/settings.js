@@ -19,4 +19,27 @@ export default {
 		className: false,
 		reusable: false,
 	},
+
+	attributes: {
+		hidexs: {
+			type: 'boolean',
+			default: false,
+		},
+		hidesm: {
+			type: 'boolean',
+			default: false,
+		},
+		hidemd: {
+			type: 'boolean',
+			default: false,
+		},
+		hidelg: {
+			type: 'boolean',
+			default: false,
+		},
+		hidexl: {
+			type: 'boolean',
+			default: false,
+		},
+	},
 };

@@ -14,6 +14,7 @@ import {
  * Internal dependencies
  */
 import NumberControl from '../../components/number-control';
+import HidePanel from '../../components/hide-panel';
 import {
 	xsScreen,
 	smScreen,
@@ -149,6 +150,10 @@ const ColumnEdit = ({
 						max={ 11 }
 					/>
 				</PanelBody>
+				<HidePanel
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+				/>
 			</InspectorControls>
 			<div className={ classnames('o-col', className, [
 					xs ? `u-${ xs }of12` : '',

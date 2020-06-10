@@ -28,6 +28,11 @@ registerBlockType('pb/column', {
 			offsetmd,
 			offsetlg,
 			offsetxl,
+			hidexs,
+			hidesm,
+			hidemd,
+			hidelg,
+			hidexl,
 		} = attributes;
 
 		return (
@@ -42,6 +47,11 @@ registerBlockType('pb/column', {
 				offsetmd ? `u-offset-${ offsetmd }of12-md` : '',
 				offsetlg ? `u-offset-${ offsetlg }of12-lg` : '',
 				offsetxl ? `u-offset-${ offsetxl }of12-xl` : '',
+				hidexs ? `u-hidden-xs` : '',
+				hidesm ? `u-hidden-sm` : '',
+				hidemd ? `u-hidden-md` : '',
+				hidelg ? `u-hidden-lg` : '',
+				hidexl ? `u-hidden-xl` : '',
 			]) }>
 				<InnerBlocks.Content />
 			</div>
