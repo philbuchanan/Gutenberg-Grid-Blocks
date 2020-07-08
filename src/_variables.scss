@@ -1,0 +1,42 @@
+// # Variables
+// -----------------------------------------------------------------------------
+
+$gutter: 10px;
+$column-space: $gutter * 2;
+$total-block-grid-columns: 6;
+$breakpoints: (
+	// No suffix on classes for < 475px
+	sm: 475px,
+	md: 769px,
+	lg: 1024px,
+	xl: 1200px,
+);
+
+// # Tools: Media Queries Mixin
+// -----------------------------------------------------------------------------
+
+@mixin respond-to($breakpoint) {
+	@if $breakpoint == ">xs" {
+		@content;
+	}
+	@else if $breakpoint == ">sm" {
+		@media screen and (min-width: map-get($breakpoints, sm)) {
+			@content;
+		}
+	}
+	@else if $breakpoint == ">md" {
+		@media screen and (min-width: map-get($breakpoints, md)) {
+			@content;
+		}
+	}
+	@else if $breakpoint == ">lg" {
+		@media screen and (min-width: map-get($breakpoints, lg)) {
+			@content;
+		}
+	}
+	@else if $breakpoint == ">xl" {
+		@media screen and (min-width: map-get($breakpoints, xl)) {
+			@content;
+		}
+	}
+}

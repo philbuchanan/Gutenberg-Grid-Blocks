@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Grid Blocks
  * Description: Gutenberg blocks for creating responsive grid rows, columns and block grids.
- * Version: 2.4.0
+ * Version: 2.4.1
  * Author: Phil Buchanan
  * Author URI: https://philbuchanan.com
  */
@@ -46,7 +46,7 @@ class PB_Grid_Blocks {
 
 		wp_enqueue_style(
 			'pb-grid-blocks-editor-styles',
-			plugins_url('assets/editor.css', __FILE__),
+			plugins_url('build/index.css', __FILE__),
 			array('wp-edit-blocks'),
 			$asset_file['version']
 		);

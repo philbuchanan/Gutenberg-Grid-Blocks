@@ -8,6 +8,8 @@ import {
 	Icon,
 } from '@wordpress/components';
 
+import './number-control.scss';
+
 const NumberControl = ({
 	className,
 	label,

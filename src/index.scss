@@ -1,0 +1,77 @@
+@import "_variables.scss";
+
+// # Shared
+// -----------------------------------------------------------------------------
+
+.o-row,
+.o-block-grid {
+	// block-editor-block-list__layout holds the child blocks
+	// (i.e. o-col, o-block-grid__item)
+	> .block-editor-inner-blocks > .block-editor-block-list__layout {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.block-list-appender {
+		width: 100%;
+	}
+}
+
+// 1. The `.wp-block` class sets margin left and right to auto, which centres
+//    columns or block grid items if there aren't enough to fill a full row.
+//    E.g. if there are 2 block grid items in a row that is set to display 3
+//    across, the two block grid items will be centred  regardless of the
+//    alignment class set (like flex-start).
+.wp-block[data-type="pb/column"],
+.wp-block[data-type="pb/block-grid-item"] {
+	flex: 0 0 auto;
+	width: 100%;
+	margin-left: 0; // [1]
+	margin-right: 0; // [1]
+}
+
+.o-col,
+.o-block-grid__item {
+	padding-left: $gutter;
+	padding-right: $gutter;
+}
+
+// If there are no inner blocks (i.e. the column or block grid item has no
+// blocks inside it), we add a little padding to the top so the
+// `block-list-appender` lines up with the top of sibling columns.
+.block-has-no-inner-blocks {
+	padding-top: 20px;
+}
+
+// # Alignments
+// -----------------------------------------------------------------------------
+
+// Specificity required because we don't want child grids to inherit their
+// parents settings if the user nests one grid inside another. E.g. if the user
+// sets `justify-content: space-between` on a `Columns` block, then nests a
+// block grid inside one of the columns, the block grid should _not_ have
+// `justify-content: space-between` applied.
+
+.u-justify-content-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: center;
+}
+
+.u-justify-content-end > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: flex-end;
+}
+
+.u-justify-content-space-between > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: space-between;
+}
+
+.u-justify-content-space-around > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: space-around;
+}
+
+.u-align-items-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	align-items: center;
+}
+
+.u-align-items-end > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	align-items: flex-end;
+}
