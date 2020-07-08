@@ -1,0 +1,23 @@
+@import "../_variables.scss";
+
+// # Block Grid
+// -----------------------------------------------------------------------------
+
+@mixin block-grid-loop($breakpoint: null) {
+	@for $i from 1 through $total-block-grid-columns {
+		$width: 100% / $i;
+
+		.o-block-grid-#{$i}#{$breakpoint} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/block-grid-item"] {
+			width: $width;
+		}
+	}
+}
+
+@include block-grid-loop();
+
+@each $name, $size in $breakpoints {
+	@include respond-to(">#{$name}") {
+		$suffix: "-#{$name}";
+		@include block-grid-loop($suffix);
+	}
+}

@@ -1,0 +1,40 @@
+@import "../_variables.scss";
+
+// # Grid Rows and Columns
+// -----------------------------------------------------------------------------
+
+@mixin columns-loop($breakpoint: null) {
+	@for $numerator from 1 through 12 {
+		$width: ($numerator / 12) * 100%;
+
+		.column-span-#{$numerator}#{$breakpoint} {
+			width: $width;
+		}
+
+		.column-offset-#{$numerator}#{$breakpoint} {
+			margin-left: $width;
+		}
+	}
+
+	@for $index from 1 through 6 {
+		@for $numerator from 1 through 12 {
+			.column-#{$index}-span-#{$numerator}#{$breakpoint} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/column"]:nth-child(#{$index}) {
+				@extend .column-span-#{$numerator}#{$breakpoint};
+			}
+
+			.column-#{$index}-offset-#{$numerator}#{$breakpoint} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/column"]:nth-child(#{$index}) {
+				@extend .column-offset-#{$numerator}#{$breakpoint};
+			}
+		}
+	}
+}
+
+// No suffix on classes for < small breakpoint
+@include columns-loop();
+
+@each $name, $size in $breakpoints {
+	@include respond-to(">#{$name}") {
+		$suffix: "-#{$name}";
+		@include columns-loop($suffix);
+	}
+}

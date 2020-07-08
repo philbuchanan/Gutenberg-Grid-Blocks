@@ -1,0 +1,20 @@
+.c-number-control__input {
+	width: 50px;
+}
+
+.c-number-control__percentage {
+	display: inline-block;
+	width: 70px;
+	margin-left: 10px;
+}
+
+.c-number-control__icon {
+	fill: #555d66;
+	position: relative;
+	top: 9px;
+	margin-right: 6px;
+}
+
+.components-button.is-link.c-number-control__reset {
+	margin-left: 20px;
+}
