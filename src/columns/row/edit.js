@@ -6,13 +6,8 @@ import { useSelect } from '@wordpress/data';
 import { Fragment } from '@wordpress/element';
 import {
 	BlockControls,
-	InspectorControls,
 	InnerBlocks,
 } from '@wordpress/block-editor';
-import {
-	PanelBody,
-	BaseControl,
-} from '@wordpress/components';
 
 /**
  * Internal dependncies
@@ -83,24 +78,6 @@ const RowEdit = ({
 					isCollapsed={ true }
 				/>
 			</BlockControls>
-			<InspectorControls>
-				<PanelBody title={ __('Alignment', 'pb') }>
-					<BaseControl label={ __('Align Horiztonally', 'pb') }>
-						<GridAlignmentToolbar
-							type="horizontal"
-							selected={ alignHorizontally }
-							onChange={ (alignHorizontally) => setAttributes({alignHorizontally}) }
-						/>
-					</BaseControl>
-					<BaseControl label={ __('Align Vertically', 'pb') }>
-						<GridAlignmentToolbar
-							type="vertical"
-							selected={ alignVertically }
-							onChange={ (alignVertically) => setAttributes({alignVertically}) }
-						/>
-					</BaseControl>
-				</PanelBody>
-			</InspectorControls>
 			<div className={ classnames('o-row', className, columnClasses, {
 				'u-justify-content-center': alignHorizontally === 'centerHorizontal',
 				'u-justify-content-space-between': alignHorizontally === 'spaceBetween',

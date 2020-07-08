@@ -14,10 +14,7 @@ import {
 	InspectorControls,
 	InnerBlocks,
 } from '@wordpress/block-editor';
-import {
-	PanelBody,
-	BaseControl,
-} from '@wordpress/components';
+import { PanelBody } from '@wordpress/components';
 
 /**
  * Internal dependncies
@@ -162,22 +159,6 @@ const BlockGridEdit = ({
 						allowReset={ true }
 						icon={ xlScreen }
 					/>
-				</PanelBody>
-				<PanelBody title={ __('Alignment', 'pb') }>
-					<BaseControl label={ __('Align Horiztonally', 'pb') }>
-						<GridAlignmentToolbar
-							type="horizontal"
-							selected={ alignHorizontally }
-							onChange={ (alignHorizontally) => setAttributes({alignHorizontally}) }
-						/>
-					</BaseControl>
-					<BaseControl label={ __('Align Vertically', 'pb') }>
-						<GridAlignmentToolbar
-							type="vertical"
-							selected={ alignVertically }
-							onChange={ (alignVertically) => setAttributes({alignVertically}) }
-						/>
-					</BaseControl>
 				</PanelBody>
 			</InspectorControls>
 			<div className={ classnames('o-block-grid', className, {
