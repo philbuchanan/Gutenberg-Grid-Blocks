@@ -182,7 +182,7 @@ const BlockGridEdit = ({
 					allowedBlocks={ ['pb/block-grid-item'] }
 					renderAppender={ !!isSelected ? () => (
 						<InnerBlocks.ButtonBlockAppender/>
-					) : false }
+					) : null }
 				/>
 			</div>
 		</Fragment>

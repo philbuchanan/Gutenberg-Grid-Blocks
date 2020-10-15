@@ -44,7 +44,7 @@ const BlockGridItemEdit = ({
 				<InnerBlocks
 					renderAppender={ isSelected || !hasInnerBlocks ? () => (
 						<InnerBlocks.ButtonBlockAppender />
-					) : false }
+					) : null }
 				/>
 			</div>
 		</Fragment>
