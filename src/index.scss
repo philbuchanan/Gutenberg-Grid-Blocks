@@ -17,12 +17,6 @@
 	}
 }
 
-.wp-block[data-type="pb/row"],
-.wp-block[data-type="pb/block-grid"] {
-	margin-left: -($gutter);
-	margin-right: -($gutter);
-}
-
 // 1. The `.wp-block` class sets margin left and right to auto, which centres
 //    columns or block grid items if there aren't enough to fill a full row.
 //    E.g. if there are 2 block grid items in a row that is set to display 3

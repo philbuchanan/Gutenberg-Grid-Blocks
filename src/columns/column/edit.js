@@ -173,7 +173,7 @@ const ColumnEdit = ({
 					templateLock={ false }
 					renderAppender={ isSelected || !hasInnerBlocks ? () => (
 						<InnerBlocks.ButtonBlockAppender />
-					) : false }
+					) : null }
 				/>
 			</div>
 		</Fragment>

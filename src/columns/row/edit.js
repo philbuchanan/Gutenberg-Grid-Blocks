@@ -98,7 +98,7 @@ const RowEdit = ({
 					allowedBlocks={ ['pb/column'] }
 					renderAppender={ isSelected ? () => (
 						<InnerBlocks.ButtonBlockAppender />
-					) : false }
+					) : null }
 				/>
 			</div>
 		</Fragment>
