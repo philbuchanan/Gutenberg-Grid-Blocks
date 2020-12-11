@@ -16,7 +16,6 @@ const BlockGridItemEdit = ({
 	attributes,
 	setAttributes,
 	clientId,
-	isSelected,
 }) => {
 	const {
 		hidexs,
@@ -26,9 +25,9 @@ const BlockGridItemEdit = ({
 		hidexl,
 	} = attributes;
 
-	const hasInnerBlocks = useSelect((select) => {
+	const hasChildBlocks = useSelect((select) => {
 		return select('core/block-editor').getBlocks(clientId).length > 0;
-	});
+	}, [clientId]);
 
 	return (
 		<Fragment>
@@ -38,13 +37,12 @@ const BlockGridItemEdit = ({
 					setAttributes={ setAttributes }
 				/>
 			</InspectorControls>
-			<div className={ classnames('o-block-grid__item', className, {
-				'block-has-no-inner-blocks': !hasInnerBlocks,
-			}) }>
+			<div className={ classnames('o-block-grid__item', className) }>
 				<InnerBlocks
-					renderAppender={ isSelected || !hasInnerBlocks ? () => (
-						<InnerBlocks.ButtonBlockAppender />
-					) : null }
+					renderAppender={ hasChildBlocks
+						? undefined
+						: InnerBlocks.ButtonBlockAppender
+					}
 				/>
 			</div>
 		</Fragment>

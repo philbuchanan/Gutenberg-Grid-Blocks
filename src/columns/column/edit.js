@@ -29,7 +29,6 @@ const ColumnEdit = ({
 	attributes,
 	setAttributes,
 	clientId,
-	isSelected,
 }) => {
 	const {
 		xs,
@@ -44,9 +43,9 @@ const ColumnEdit = ({
 		offsetxl,
 	} = attributes;
 
-	const hasInnerBlocks = useSelect((select) => {
+	const hasChildBlocks = useSelect((select) => {
 		return select('core/block-editor').getBlocks(clientId).length > 0;
-	});
+	}, [clientId]);
 
 	return (
 		<Fragment>
@@ -166,14 +165,13 @@ const ColumnEdit = ({
 					offsetmd ? `u-offset-${ offsetmd }of12-md` : '',
 					offsetlg ? `u-offset-${ offsetlg }of12-lg` : '',
 					offsetxl ? `u-offset-${ offsetxl }of12-xl` : '',
-				], {
-					'block-has-no-inner-blocks': !hasInnerBlocks,
-				}) }>
+				]) }>
 				<InnerBlocks
 					templateLock={ false }
-					renderAppender={ isSelected || !hasInnerBlocks ? () => (
-						<InnerBlocks.ButtonBlockAppender />
-					) : null }
+					renderAppender={ hasChildBlocks
+						? undefined
+						: InnerBlocks.ButtonBlockAppender
+					}
 				/>
 			</div>
 		</Fragment>

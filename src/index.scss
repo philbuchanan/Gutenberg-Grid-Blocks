@@ -11,10 +11,6 @@
 		display: flex;
 		flex-wrap: wrap;
 	}
-
-	.block-list-appender {
-		width: 100%;
-	}
 }
 
 // 1. The `.wp-block` class sets margin left and right to auto, which centres
@@ -36,11 +32,11 @@
 	padding-right: $gutter;
 }
 
-// If there are no inner blocks (i.e. the column or block grid item has no
-// blocks inside it), we add a little padding to the top so the
-// `block-list-appender` lines up with the top of sibling columns.
-.block-has-no-inner-blocks {
-	padding-top: 20px;
+div.o-col,
+div.o-block-grid__item {
+	.wp-block {
+		max-width: none;
+	}
 }
 
 // # Alignments

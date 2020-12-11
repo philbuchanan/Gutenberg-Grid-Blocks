@@ -8,17 +8,23 @@ import { uniqueId } from 'lodash';
  */
 import { __ } from '@wordpress/i18n';
 import { Fragment, useEffect } from '@wordpress/element';
-import { useDispatch } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import {
 	BlockControls,
 	InspectorControls,
 	InnerBlocks,
+	__experimentalBlockVariationPicker,
 } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
+import {
+	createBlocksFromInnerBlocksTemplate,
+} from '@wordpress/blocks';
 
 /**
  * Internal dependncies
  */
+import variations from './variations';
+import icon from './icon.js';
 import NumberControl from '../../components/number-control';
 import GridAlignmentToolbar from '../../components/alignment-toolbar';
 import classnames from '../../utils/classnames';
@@ -35,7 +41,6 @@ const BlockGridEdit = ({
 	className,
 	attributes,
 	setAttributes,
-	isSelected,
 	clientId,
 }) => {
 	const {
@@ -47,6 +52,10 @@ const BlockGridEdit = ({
 		lg,
 		xl,
 	} = attributes;
+
+	const hasChildBlocks = useSelect((select) => {
+		return select('core/block-editor').getBlocks(clientId).length > 0;
+	}, [clientId]);
 
 	/**
 	 * Since we removed the default value for `lg` from settings.js, any
@@ -99,6 +108,8 @@ const BlockGridEdit = ({
 			);
 		}
 	}, []);
+
+	const { replaceInnerBlocks } = useDispatch('core/block-editor');
 
 	return (
 		<Fragment>
@@ -161,30 +172,50 @@ const BlockGridEdit = ({
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<div className={ classnames('o-block-grid', className, {
-				'u-justify-content-center': alignHorizontally === 'centerHorizontal',
-				'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
-				'u-justify-content-space-around': alignHorizontally === 'spaceAround',
-				'u-justify-content-end': alignHorizontally === 'right',
-				'u-align-items-center': alignVertically === 'centerVertical',
-				'u-align-items-end': alignVertically === 'bottom',
-			}, [
-				xs ? `o-block-grid-${ xs }` : '',
-				sm ? `o-block-grid-${ sm }-sm` : '',
-				md ? `o-block-grid-${ md }-md` : '',
-				lg ? `o-block-grid-${ lg }-lg` : '',
-				xl ? `o-block-grid-${ xl }-xl` : '',
-			]) }>
-				<InnerBlocks
-					template={ [
-						['pb/block-grid-item'],
-					] }
-					allowedBlocks={ ['pb/block-grid-item'] }
-					renderAppender={ !!isSelected ? () => (
-						<InnerBlocks.ButtonBlockAppender/>
-					) : null }
+			{ hasChildBlocks && (
+				<div className={ classnames('o-block-grid', className, {
+					'u-justify-content-center': alignHorizontally === 'centerHorizontal',
+					'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
+					'u-justify-content-space-around': alignHorizontally === 'spaceAround',
+					'u-justify-content-end': alignHorizontally === 'right',
+					'u-align-items-center': alignVertically === 'centerVertical',
+					'u-align-items-end': alignVertically === 'bottom',
+				}, [
+					xs ? `o-block-grid-${ xs }` : '',
+					sm ? `o-block-grid-${ sm }-sm` : '',
+					md ? `o-block-grid-${ md }-md` : '',
+					lg ? `o-block-grid-${ lg }-lg` : '',
+					xl ? `o-block-grid-${ xl }-xl` : '',
+				]) }>
+					<InnerBlocks
+						template={ [
+							['pb/block-grid-item'],
+						] }
+						allowedBlocks={ ['pb/block-grid-item'] }
+					/>
+				</div>
+			) }
+			{ !hasChildBlocks && (
+				<__experimentalBlockVariationPicker
+					icon={ icon }
+					label={ __('Block Grid', 'pb') }
+					variations={ variations }
+					onSelect={ (nextVariation = defaultVariation) => {
+						if (nextVariation.attributes) {
+							setAttributes(nextVariation.attributes);
+						}
+						if (nextVariation.innerBlocks) {
+							replaceInnerBlocks(
+								clientId,
+								createBlocksFromInnerBlocksTemplate(
+									nextVariation.innerBlocks
+								),
+								true
+							);
+						}
+					} }
 				/>
-			</div>
+			) }
 		</Fragment>
 	);
 }
