@@ -5,10 +5,11 @@ import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
- * Internal dependncies
+ * Internal dependencies
  */
 import settings from './settings';
 import transforms from './transforms';
+import variations from './variations';
 import edit from './edit';
 import classnames from '../../utils/classnames';
 
@@ -16,6 +17,8 @@ registerBlockType('pb/row', {
 	...settings,
 
 	transforms,
+
+	variations,
 
 	edit: edit,
 

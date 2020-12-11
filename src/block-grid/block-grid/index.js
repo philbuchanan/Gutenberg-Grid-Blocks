@@ -9,6 +9,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
  */
 import settings from './settings';
 import transforms from './transforms';
+import variations from './variations';
 import edit from './edit';
 import classnames from '../../utils/classnames';
 
@@ -16,6 +17,8 @@ registerBlockType('pb/block-grid', {
 	...settings,
 
 	transforms,
+
+	variations,
 
 	edit: edit,
 

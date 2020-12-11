@@ -2,16 +2,22 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import { Fragment } from '@wordpress/element';
 import {
 	BlockControls,
 	InnerBlocks,
+	__experimentalBlockVariationPicker,
 } from '@wordpress/block-editor';
+import { columns } from '@wordpress/icons';
+import {
+	createBlocksFromInnerBlocksTemplate,
+} from '@wordpress/blocks';
 
 /**
- * Internal dependncies
+ * Internal dependencies
  */
+import variations from './variations';
 import NumberControl from '../../components/number-control';
 import GridAlignmentToolbar from '../../components/alignment-toolbar';
 import classnames from '../../utils/classnames';
@@ -21,7 +27,6 @@ const RowEdit = ({
 	attributes,
 	setAttributes,
 	clientId,
-	isSelected,
 }) => {
 	const {
 		alignVertically,
@@ -62,6 +67,8 @@ const RowEdit = ({
 		});
 	}
 
+	const { replaceInnerBlocks } = useDispatch('core/block-editor');
+
 	return (
 		<Fragment>
 			<BlockControls>
@@ -78,29 +85,41 @@ const RowEdit = ({
 					isCollapsed={ true }
 				/>
 			</BlockControls>
-			<div className={ classnames('o-row', className, columnClasses, {
-				'u-justify-content-center': alignHorizontally === 'centerHorizontal',
-				'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
-				'u-justify-content-space-around': alignHorizontally === 'spaceAround',
-				'u-justify-content-end': alignHorizontally === 'right',
-				'u-align-items-center': alignVertically === 'centerVertical',
-				'u-align-items-end': alignVertically === 'bottom',
-			}) }>
-				<InnerBlocks
-					template={ [
-						['pb/column', {
-							md: 6,
-						}],
-						['pb/column', {
-							md: 6,
-						}],
-					] }
-					allowedBlocks={ ['pb/column'] }
-					renderAppender={ isSelected ? () => (
-						<InnerBlocks.ButtonBlockAppender />
-					) : null }
+			{ !!childBlocks && childBlocks.length > 0 && (
+				<div className={ classnames('o-row', className, columnClasses, {
+					'u-justify-content-center': alignHorizontally === 'centerHorizontal',
+					'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
+					'u-justify-content-space-around': alignHorizontally === 'spaceAround',
+					'u-justify-content-end': alignHorizontally === 'right',
+					'u-align-items-center': alignVertically === 'centerVertical',
+					'u-align-items-end': alignVertically === 'bottom',
+				}) }>
+					<InnerBlocks
+						allowedBlocks={ ['pb/column'] }
+					/>
+				</div>
+			) }
+			{ !childBlocks || childBlocks.length === 0 && (
+				<__experimentalBlockVariationPicker
+					icon={ columns }
+					label={ __('Columns', 'pb') }
+					variations={ variations }
+					onSelect={ (nextVariation = defaultVariation) => {
+						if (nextVariation.attributes) {
+							setAttributes(nextVariation.attributes);
+						}
+						if (nextVariation.innerBlocks) {
+							replaceInnerBlocks(
+								clientId,
+								createBlocksFromInnerBlocksTemplate(
+									nextVariation.innerBlocks
+								),
+								true
+							);
+						}
+					} }
 				/>
-			</div>
+			) }
 		</Fragment>
 	);
 };
