@@ -1,11 +1,14 @@
 <?php
 /**
  * Plugin Name: Grid Blocks
- * Description: Gutenberg blocks for creating responsive grid rows, columns and block grids.
- * Version: 5.6.1
+ * Description: Gutenberg blocks for creating responsive grid rows, columns, and block grids.
+ * Version: 5.6.2
  * Requires at least: 5.6
+ * Requires PHP: 7.3
  * Author: Phil Buchanan
  * Author URI: https://philbuchanan.com
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 
 defined('ABSPATH') || exit;
