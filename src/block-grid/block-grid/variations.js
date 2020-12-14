@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 const variations = [
 	{
 		name: 'two-up',
-		title: __('Two up', 'pb'),
+		title: __('Two per row', 'pb'),
 		description: __('Two block grid items per row', 'pb'),
 		icon: (
 			<SVG
@@ -35,7 +35,7 @@ const variations = [
 	},
 	{
 		name: 'three-up',
-		title: __('Three Up', 'pb'),
+		title: __('Three per row', 'pb'),
 		description: __('Three block grid items per row', 'pb'),
 		icon: (
 			<SVG
@@ -63,7 +63,7 @@ const variations = [
 	},
 	{
 		name: 'four-up',
-		title: __('Four Up', 'pb'),
+		title: __('Four per row', 'pb'),
 		description: __('Four block grid items per row', 'pb'),
 		icon: (
 			<SVG
