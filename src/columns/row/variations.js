@@ -8,7 +8,7 @@ const variations = [
 	{
 		name: 'two-columns-equal',
 		title: __('50 / 50', 'pb'),
-		description: __('Two columns; equal split', 'pb'),
+		description: __('Two columns: equal split', 'pb'),
 		icon: (
 			<SVG
 				width="48"
@@ -33,7 +33,7 @@ const variations = [
 	{
 		name: 'two-columns-one-third-two-thirds',
 		title: __('30 / 70', 'pb'),
-		description: __('Two columns; one-third, two-thirds split', 'pb'),
+		description: __('Two columns: one-third, two-thirds split', 'pb'),
 		icon: (
 			<SVG
 				width="48"
@@ -57,7 +57,7 @@ const variations = [
 	{
 		name: 'two-columns-two-thirds-one-third',
 		title: __('70 / 30', 'pb'),
-		description: __('Two columns; two-thirds, one-third split', 'pb'),
+		description: __('Two columns: two-thirds, one-third split', 'pb'),
 		icon: (
 			<SVG
 				width="48"
