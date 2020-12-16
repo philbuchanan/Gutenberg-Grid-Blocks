@@ -13,6 +13,8 @@ Gutenberg blocks for creating responsive grid rows, columns, and block grids.
 
 == Description ==
 
+*Note:* This plugin requires a compatible theme developed by Aubs & Mugg Inc.
+
 Gutenberg blocks is a plugin for creating advanced responsive grid rows, columns, and block grids. This plugin replaces the default Gutenberg Columns block.
 
 == Changelog ==
