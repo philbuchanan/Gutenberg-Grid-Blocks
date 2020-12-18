@@ -25,8 +25,8 @@ const variations = [
 		),
 		isDefault: true,
 		innerBlocks: [
-			['pb/column'],
-			['pb/column'],
+			['pb/column', { md: 6 }],
+			['pb/column', { md: 6 }],
 		],
 		scope: ['block'],
 	},
