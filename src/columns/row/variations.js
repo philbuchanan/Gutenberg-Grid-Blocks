@@ -78,6 +78,32 @@ const variations = [
 		],
 		scope: ['block'],
 	},
+	{
+		name: 'one-column-centered',
+		title: __('Centered', 'pb'),
+		description: __('One column centered', 'pb'),
+		icon: (
+			<SVG
+				width="48"
+				height="48"
+				viewBox="0 0 48 48"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<Path
+					fillRule="evenodd"
+					clipRule="evenodd"
+					d="M39,12a2,2,0,0,1,2,2V34a2,2,0,0,1-2,2H9a2,2,0,0,1-2-2V14a2,2,0,0,1,2-2ZM31,34V14H17V34Z"
+				/>
+			</SVG>
+		),
+		attributes: {
+			alignHorizontally: 'centerHorizontal',
+		},
+		innerBlocks: [
+			['pb/column', { md: 8 }],
+		],
+		scope: ['block'],
+	},
 ];
 
 export default variations;
