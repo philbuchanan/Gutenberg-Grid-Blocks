@@ -4,7 +4,7 @@ Author URI: https://philbuchanan.com/
 Tags: columns, block grid, gutenberg, block, responsive
 Requires at least: 5.6
 Tested up to: 5.6
-Stable tag: 5.6.3
+Stable tag: 5.6.4
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -19,6 +19,9 @@ Gutenberg blocks is a plugin for creating advanced responsive grid rows, columns
 
 == Changelog ==
 
+= 5.6.4 =
+* Fixed: Added horizontal orientation to InnerBlocks component of row and block grid blocks.
+
 = 5.6.3 =
 * New: Added centered column variation
 * Fixed: 50/50 split column now sets attributes properly
@@ -27,6 +30,9 @@ Gutenberg blocks is a plugin for creating advanced responsive grid rows, columns
 * Plugin submitted to plugin repo
 
 == Upgrade Notice ==
+
+= 5.6.4 =
+Added horizontal orientation to InnerBlocks component of row and block grid blocks.
 
 = 5.6.3 =
 New block variations added.

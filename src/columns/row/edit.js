@@ -96,6 +96,7 @@ const RowEdit = ({
 				}) }>
 					<InnerBlocks
 						allowedBlocks={ ['pb/column'] }
+						orientation="horizontal"
 					/>
 				</div>
 			) }

@@ -192,6 +192,7 @@ const BlockGridEdit = ({
 							['pb/block-grid-item'],
 						] }
 						allowedBlocks={ ['pb/block-grid-item'] }
+						orientation="horizontal"
 					/>
 				</div>
 			) }
