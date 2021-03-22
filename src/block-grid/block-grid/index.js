@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -33,8 +33,8 @@ registerBlockType('pb/block-grid', {
 			xl,
 		} = attributes;
 
-		return (
-			<div className={ classnames('o-block-grid', {
+		const blockProps = useBlockProps.save({
+			className: classnames('o-block-grid', {
 				'u-justify-content-center': alignHorizontally === 'centerHorizontal',
 				'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
 				'u-justify-content-space-around': alignHorizontally === 'spaceAround',
@@ -47,7 +47,11 @@ registerBlockType('pb/block-grid', {
 				md ? `o-block-grid-${ md }-md` : '',
 				lg ? `o-block-grid-${ lg }-lg` : '',
 				xl ? `o-block-grid-${ xl }-xl` : '',
-			]) }>
+			]),
+		});
+
+		return (
+			<div { ...blockProps }>
 				<InnerBlocks.Content />
 			</div>
 		);

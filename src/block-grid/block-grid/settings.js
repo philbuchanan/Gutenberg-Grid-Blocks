@@ -9,6 +9,8 @@ import { __ } from '@wordpress/i18n';
 import icon from './icon.js';
 
 export default {
+	apiVersion: 2,
+
 	title: __('Block Grid', 'pb'),
 
 	description: __('Place a number of items in a tidy grid of equal sized columns.', 'pb'),

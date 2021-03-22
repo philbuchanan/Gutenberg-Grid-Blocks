@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { Fragment } from '@wordpress/element';
-import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
+import { InspectorControls, InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 
 /**
@@ -12,7 +12,6 @@ import classnames from '../../utils/classnames';
 import HidePanel from '../../components/hide-panel';
 
 const BlockGridItemEdit = ({
-	className,
 	attributes,
 	setAttributes,
 	clientId,
@@ -24,6 +23,10 @@ const BlockGridItemEdit = ({
 		hidelg,
 		hidexl,
 	} = attributes;
+
+	const blockProps = useBlockProps({
+		className: 'o-block-grid__item',
+	});
 
 	const hasChildBlocks = useSelect((select) => {
 		return select('core/block-editor').getBlocks(clientId).length > 0;
@@ -37,7 +40,7 @@ const BlockGridItemEdit = ({
 					setAttributes={ setAttributes }
 				/>
 			</InspectorControls>
-			<div className={ classnames('o-block-grid__item', className) }>
+			<div { ...blockProps }>
 				<InnerBlocks
 					renderAppender={ hasChildBlocks
 						? undefined

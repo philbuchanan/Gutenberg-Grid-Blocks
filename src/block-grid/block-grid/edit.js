@@ -13,6 +13,7 @@ import {
 	BlockControls,
 	InspectorControls,
 	InnerBlocks,
+	useBlockProps,
 	__experimentalBlockVariationPicker,
 } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
@@ -38,7 +39,6 @@ import {
 } from '../../components/icons';
 
 const BlockGridEdit = ({
-	className,
 	attributes,
 	setAttributes,
 	clientId,
@@ -52,6 +52,23 @@ const BlockGridEdit = ({
 		lg,
 		xl,
 	} = attributes;
+
+	const blockProps = useBlockProps({
+		className: classnames('o-block-grid', {
+			'u-justify-content-center': alignHorizontally === 'centerHorizontal',
+			'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
+			'u-justify-content-space-around': alignHorizontally === 'spaceAround',
+			'u-justify-content-end': alignHorizontally === 'right',
+			'u-align-items-center': alignVertically === 'centerVertical',
+			'u-align-items-end': alignVertically === 'bottom',
+		}, [
+			xs ? `o-block-grid-${ xs }` : '',
+			sm ? `o-block-grid-${ sm }-sm` : '',
+			md ? `o-block-grid-${ md }-md` : '',
+			lg ? `o-block-grid-${ lg }-lg` : '',
+			xl ? `o-block-grid-${ xl }-xl` : '',
+		]),
+	});
 
 	const hasChildBlocks = useSelect((select) => {
 		return select('core/block-editor').getBlocks(clientId).length > 0;
@@ -173,20 +190,7 @@ const BlockGridEdit = ({
 				</PanelBody>
 			</InspectorControls>
 			{ hasChildBlocks && (
-				<div className={ classnames('o-block-grid', className, {
-					'u-justify-content-center': alignHorizontally === 'centerHorizontal',
-					'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
-					'u-justify-content-space-around': alignHorizontally === 'spaceAround',
-					'u-justify-content-end': alignHorizontally === 'right',
-					'u-align-items-center': alignVertically === 'centerVertical',
-					'u-align-items-end': alignVertically === 'bottom',
-				}, [
-					xs ? `o-block-grid-${ xs }` : '',
-					sm ? `o-block-grid-${ sm }-sm` : '',
-					md ? `o-block-grid-${ md }-md` : '',
-					lg ? `o-block-grid-${ lg }-lg` : '',
-					xl ? `o-block-grid-${ xl }-xl` : '',
-				]) }>
+				<div { ...blockProps }>
 					<InnerBlocks
 						template={ [
 							['pb/block-grid-item'],

@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -35,8 +35,8 @@ registerBlockType('pb/column', {
 			hidexl,
 		} = attributes;
 
-		return (
-			<div className={ classnames('o-col', [
+		const blockProps = useBlockProps.save({
+			className: classnames('o-col', [
 				xs ? `u-${ xs }of12` : '',
 				sm ? `u-${ sm }of12-sm` : '',
 				md ? `u-${ md }of12-md` : '',
@@ -52,7 +52,11 @@ registerBlockType('pb/column', {
 				hidemd ? `u-hidden-md` : '',
 				hidelg ? `u-hidden-lg` : '',
 				hidexl ? `u-hidden-xl` : '',
-			]) }>
+			]),
+		});
+
+		return (
+			<div { ...blockProps }>
 				<InnerBlocks.Content />
 			</div>
 		);

@@ -7,6 +7,7 @@ import { Fragment } from '@wordpress/element';
 import {
 	BlockControls,
 	InnerBlocks,
+	useBlockProps,
 	__experimentalBlockVariationPicker,
 } from '@wordpress/block-editor';
 import { columns } from '@wordpress/icons';
@@ -23,7 +24,6 @@ import GridAlignmentToolbar from '../../components/alignment-toolbar';
 import classnames from '../../utils/classnames';
 
 const RowEdit = ({
-	className,
 	attributes,
 	setAttributes,
 	clientId,
@@ -33,39 +33,20 @@ const RowEdit = ({
 		alignHorizontally,
 	} = attributes;
 
+	const blockProps = useBlockProps({
+		className: classnames('o-row', {
+			'u-justify-content-center': alignHorizontally === 'centerHorizontal',
+			'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
+			'u-justify-content-space-around': alignHorizontally === 'spaceAround',
+			'u-justify-content-end': alignHorizontally === 'right',
+			'u-align-items-center': alignVertically === 'centerVertical',
+			'u-align-items-end': alignVertically === 'bottom',
+		}),
+	});
+
 	const childBlocks = useSelect((select) => {
 		return select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
 	});
-
-	let columnClasses = [];
-
-	if (childBlocks && childBlocks.length) {
-		childBlocks.map((item, index) => {
-			const base = `column-${ (index + 1) }-`;
-
-			const sizes = [
-				'xs',
-				'sm',
-				'md',
-				'lg',
-				'xl',
-			];
-
-			sizes.forEach((size, index) => {
-				let breakpoint = size === 'xs' ? '' : size;
-
-				if (item.attributes[size]) {
-					columnClasses.push(`${ base }span-${ item.attributes[size] }-${ breakpoint }`);
-				}
-
-				const offsetSize = `offset${ size }`;
-
-				if (item.attributes[offsetSize]) {
-					columnClasses.push(`${ base }offset-${ item.attributes[offsetSize] }-${ breakpoint }`);
-				}
-			});
-		});
-	}
 
 	const { replaceInnerBlocks } = useDispatch('core/block-editor');
 
@@ -86,14 +67,7 @@ const RowEdit = ({
 				/>
 			</BlockControls>
 			{ !!childBlocks && childBlocks.length > 0 && (
-				<div className={ classnames('o-row', className, columnClasses, {
-					'u-justify-content-center': alignHorizontally === 'centerHorizontal',
-					'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
-					'u-justify-content-space-around': alignHorizontally === 'spaceAround',
-					'u-justify-content-end': alignHorizontally === 'right',
-					'u-align-items-center': alignVertically === 'centerVertical',
-					'u-align-items-end': alignVertically === 'bottom',
-				}) }>
+				<div { ...blockProps }>
 					<InnerBlocks
 						allowedBlocks={ ['pb/column'] }
 						orientation="horizontal"

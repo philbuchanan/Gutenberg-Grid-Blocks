@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -28,15 +28,19 @@ registerBlockType('pb/row', {
 			alignHorizontally,
 		} = attributes;
 
-		return (
-			<div className={ classnames('o-row', {
+		const blockProps = useBlockProps.save({
+			className: classnames('o-row', {
 				'u-justify-content-center': alignHorizontally === 'centerHorizontal',
 				'u-justify-content-space-between': alignHorizontally === 'spaceBetween',
 				'u-justify-content-space-around': alignHorizontally === 'spaceAround',
 				'u-justify-content-end': alignHorizontally === 'right',
 				'u-align-items-center': alignVertically === 'centerVertical',
 				'u-align-items-end': alignVertically === 'bottom',
-			}) }>
+			}),
+		});
+
+		return (
+			<div { ...blockProps }>
 				<InnerBlocks.Content />
 			</div>
 		);

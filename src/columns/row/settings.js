@@ -6,6 +6,8 @@ import { SVG, Path } from '@wordpress/components';
 import { columns } from '@wordpress/icons';
 
 export default {
+	apiVersion: 2,
+
 	title: __('Columns', 'pb'),
 
 	description: __('Display content in multiple columns.', 'pb'),

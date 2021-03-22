@@ -8,6 +8,7 @@ import { PanelBody } from '@wordpress/components';
 import {
 	InspectorControls,
 	InnerBlocks,
+	useBlockProps,
 } from '@wordpress/block-editor';
 
 /**
@@ -25,7 +26,6 @@ import {
 import classnames from '../../utils/classnames';
 
 const ColumnEdit = ({
-	className,
 	attributes,
 	setAttributes,
 	clientId,
@@ -42,6 +42,21 @@ const ColumnEdit = ({
 		offsetlg,
 		offsetxl,
 	} = attributes;
+
+	const blockProps = useBlockProps({
+		className: classnames('o-col', [
+			xs ? `u-${ xs }of12` : '',
+			sm ? `u-${ sm }of12-sm` : '',
+			md ? `u-${ md }of12-md` : '',
+			lg ? `u-${ lg }of12-lg` : '',
+			xl ? `u-${ xl }of12-xl` : '',
+			offsetxs ? `u-offset-${ offsetxs }of12` : '',
+			offsetsm ? `u-offset-${ offsetsm }of12-sm` : '',
+			offsetmd ? `u-offset-${ offsetmd }of12-md` : '',
+			offsetlg ? `u-offset-${ offsetlg }of12-lg` : '',
+			offsetxl ? `u-offset-${ offsetxl }of12-xl` : '',
+		]),
+	});
 
 	const hasChildBlocks = useSelect((select) => {
 		return select('core/block-editor').getBlocks(clientId).length > 0;
@@ -154,18 +169,7 @@ const ColumnEdit = ({
 					setAttributes={ setAttributes }
 				/>
 			</InspectorControls>
-			<div className={ classnames('o-col', className, [
-					xs ? `u-${ xs }of12` : '',
-					sm ? `u-${ sm }of12-sm` : '',
-					md ? `u-${ md }of12-md` : '',
-					lg ? `u-${ lg }of12-lg` : '',
-					xl ? `u-${ xl }of12-xl` : '',
-					offsetxs ? `u-offset-${ offsetxs }of12` : '',
-					offsetsm ? `u-offset-${ offsetsm }of12-sm` : '',
-					offsetmd ? `u-offset-${ offsetmd }of12-md` : '',
-					offsetlg ? `u-offset-${ offsetlg }of12-lg` : '',
-					offsetxl ? `u-offset-${ offsetxl }of12-xl` : '',
-				]) }>
+			<div { ...blockProps }>
 				<InnerBlocks
 					templateLock={ false }
 					renderAppender={ hasChildBlocks

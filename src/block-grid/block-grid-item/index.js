@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -25,14 +25,18 @@ registerBlockType('pb/block-grid-item', {
 			hidexl,
 		} = attributes;
 
-		return (
-			<div className={ classnames('o-block-grid__item', [
+		const blockProps = useBlockProps.save({
+			className: classnames('o-block-grid__item', [
 				hidexs ? `u-hidden-xs` : '',
 				hidesm ? `u-hidden-sm` : '',
 				hidemd ? `u-hidden-md` : '',
 				hidelg ? `u-hidden-lg` : '',
 				hidexl ? `u-hidden-xl` : '',
-			]) }>
+			]),
+		});
+
+		return (
+			<div { ...blockProps }>
 				<InnerBlocks.Content />
 			</div>
 		);
