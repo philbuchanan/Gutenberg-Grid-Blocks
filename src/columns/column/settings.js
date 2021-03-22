@@ -6,6 +6,8 @@ import { SVG, Path } from '@wordpress/components';
 import { column } from '@wordpress/icons';
 
 export default {
+	apiVersion: 2,
+
 	title: __('Column', 'pb'),
 
 	icon: column,

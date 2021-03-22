@@ -5,6 +5,8 @@ import { __ } from '@wordpress/i18n';
 import { SVG, Path } from '@wordpress/components';
 
 export default {
+	apiVersion: 2,
+
 	title: __('Block Grid Item', 'pb'),
 
 	icon: <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

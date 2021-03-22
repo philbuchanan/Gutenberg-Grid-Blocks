@@ -3,38 +3,37 @@
 // # Grid Rows and Columns
 // -----------------------------------------------------------------------------
 
-@mixin columns-loop($breakpoint: null) {
-	@for $numerator from 1 through 12 {
-		$width: ($numerator / 12) * 100%;
+$fractions: (12);
 
-		.column-span-#{$numerator}#{$breakpoint} {
-			width: $width;
-		}
+@mixin widths($columns, $breakpoint: null) {
+	// Loop through the number of columns for each denominator of our fractions.
+	@each $denominator in $columns {
 
-		.column-offset-#{$numerator}#{$breakpoint} {
-			margin-left: $width;
-		}
-	}
-
-	@for $index from 1 through 6 {
-		@for $numerator from 1 through 12 {
-			.column-#{$index}-span-#{$numerator}#{$breakpoint} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/column"]:nth-child(#{$index}) {
-				@extend .column-span-#{$numerator}#{$breakpoint};
+		// Begin creating a numerator for our fraction up until we hit the
+		// denominator.
+		@for $numerator from 1 through $denominator {
+			.u-#{$numerator}of#{$denominator}#{$breakpoint} {
+				width: ($numerator / $denominator) * 100% !important;
 			}
 
-			.column-#{$index}-offset-#{$numerator}#{$breakpoint} > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="pb/column"]:nth-child(#{$index}) {
-				@extend .column-offset-#{$numerator}#{$breakpoint};
+			.u-offset-#{$numerator}of#{$denominator}#{$breakpoint} {
+				margin-left: ($numerator / $denominator) * 100% !important;
 			}
 		}
 	}
 }
 
+
+
+// Add classes for each of the $fractions in `variables.scss`
+// e.g. .u-6of12, .u-8of12-lg, .u-9of12-md
+
 // No suffix on classes for < small breakpoint
-@include columns-loop();
+@include widths($fractions);
 
 @each $name, $size in $breakpoints {
 	@include respond-to(">#{$name}") {
 		$suffix: "-#{$name}";
-		@include columns-loop($suffix);
+		@include widths($fractions, $suffix);
 	}
 }
