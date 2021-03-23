@@ -26,8 +26,10 @@ import {
  */
 import variations from './variations';
 import icon from './icon.js';
-import NumberControl from '../../components/number-control';
-import GridAlignmentToolbar from '../../components/alignment-toolbar';
+import {
+	NumberControl,
+	GridAlignmentToolbar,
+} from '../../components/';
 import classnames from '../../utils/classnames';
 
 import {

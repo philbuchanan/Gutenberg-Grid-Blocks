@@ -19,6 +19,10 @@ Gutenberg blocks is a plugin for creating advanced responsive grid rows, columns
 
 == Changelog ==
 
+= 5.7.0 =
+* Added: Column span and column offsets to block grid items
+* Added: Now uses block API v2
+
 = 5.6.4 =
 * Fixed: Added horizontal orientation to InnerBlocks component of row and block grid blocks.
 
@@ -30,6 +34,9 @@ Gutenberg blocks is a plugin for creating advanced responsive grid rows, columns
 * Plugin submitted to plugin repo
 
 == Upgrade Notice ==
+
+= 5.7.0 =
+Uses block API v2 and adds column span and column offsets to block grid items.
 
 = 5.6.4 =
 Added horizontal orientation to InnerBlocks component of row and block grid blocks.
