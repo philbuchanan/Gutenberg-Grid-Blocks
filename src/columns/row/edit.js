@@ -19,8 +19,7 @@ import {
  * Internal dependencies
  */
 import variations from './variations';
-import NumberControl from '../../components/number-control';
-import GridAlignmentToolbar from '../../components/alignment-toolbar';
+import { GridAlignmentToolbar } from '../../components/';
 import classnames from '../../utils/classnames';
 
 const RowEdit = ({

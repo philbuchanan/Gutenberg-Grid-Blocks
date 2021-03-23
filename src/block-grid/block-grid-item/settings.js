@@ -23,6 +23,36 @@ export default {
 	},
 
 	attributes: {
+		xs: {
+			type: 'number',
+		},
+		sm: {
+			type: 'number',
+		},
+		md: {
+			type: 'number',
+		},
+		lg: {
+			type: 'number',
+		},
+		xl: {
+			type: 'number',
+		},
+		offsetxs: {
+			type: 'number',
+		},
+		offsetsm: {
+			type: 'number',
+		},
+		offsetmd: {
+			type: 'number',
+		},
+		offsetlg: {
+			type: 'number',
+		},
+		offsetxl: {
+			type: 'number',
+		},
 		hidexs: {
 			type: 'boolean',
 			default: false,
