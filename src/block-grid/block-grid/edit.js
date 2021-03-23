@@ -46,6 +46,7 @@ const BlockGridEdit = ({
 	clientId,
 }) => {
 	const {
+		className,
 		alignVertically,
 		alignHorizontally,
 		xs,
@@ -191,8 +192,8 @@ const BlockGridEdit = ({
 					/>
 				</PanelBody>
 			</InspectorControls>
-			{ hasChildBlocks && (
-				<div { ...blockProps }>
+			<div { ...blockProps }>
+				{ !!hasChildBlocks && (
 					<InnerBlocks
 						template={ [
 							['pb/block-grid-item'],
@@ -200,29 +201,29 @@ const BlockGridEdit = ({
 						allowedBlocks={ ['pb/block-grid-item'] }
 						orientation="horizontal"
 					/>
-				</div>
-			) }
-			{ !hasChildBlocks && (
-				<__experimentalBlockVariationPicker
-					icon={ icon }
-					label={ __('Block Grid', 'pb') }
-					variations={ variations }
-					onSelect={ (nextVariation = defaultVariation) => {
-						if (nextVariation.attributes) {
-							setAttributes(nextVariation.attributes);
-						}
-						if (nextVariation.innerBlocks) {
-							replaceInnerBlocks(
-								clientId,
-								createBlocksFromInnerBlocksTemplate(
-									nextVariation.innerBlocks
-								),
-								true
-							);
-						}
-					} }
-				/>
-			) }
+				) }
+				{ !hasChildBlocks && (
+					<__experimentalBlockVariationPicker
+						icon={ icon }
+						label={ __('Block Grid', 'pb') }
+						variations={ variations }
+						onSelect={ (nextVariation = defaultVariation) => {
+							if (nextVariation.attributes) {
+								setAttributes(nextVariation.attributes);
+							}
+							if (nextVariation.innerBlocks) {
+								replaceInnerBlocks(
+									clientId,
+									createBlocksFromInnerBlocksTemplate(
+										nextVariation.innerBlocks
+									),
+									true
+								);
+							}
+						} }
+					/>
+				) }
+			</div>
 		</Fragment>
 	);
 }

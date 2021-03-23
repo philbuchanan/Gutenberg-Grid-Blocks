@@ -65,35 +65,35 @@ const RowEdit = ({
 					isCollapsed={ true }
 				/>
 			</BlockControls>
-			{ !!childBlocks && childBlocks.length > 0 && (
-				<div { ...blockProps }>
+			<div { ...blockProps }>
+				{ !!childBlocks && childBlocks.length > 0 && (
 					<InnerBlocks
 						allowedBlocks={ ['pb/column'] }
 						orientation="horizontal"
 					/>
-				</div>
-			) }
-			{ !childBlocks || childBlocks.length === 0 && (
-				<__experimentalBlockVariationPicker
-					icon={ columns }
-					label={ __('Columns', 'pb') }
-					variations={ variations }
-					onSelect={ (nextVariation = defaultVariation) => {
-						if (nextVariation.attributes) {
-							setAttributes(nextVariation.attributes);
-						}
-						if (nextVariation.innerBlocks) {
-							replaceInnerBlocks(
-								clientId,
-								createBlocksFromInnerBlocksTemplate(
-									nextVariation.innerBlocks
-								),
-								true
-							);
-						}
-					} }
-				/>
-			) }
+				) }
+				{ !childBlocks || childBlocks.length === 0 && (
+					<__experimentalBlockVariationPicker
+						icon={ columns }
+						label={ __('Columns', 'pb') }
+						variations={ variations }
+						onSelect={ (nextVariation = defaultVariation) => {
+							if (nextVariation.attributes) {
+								setAttributes(nextVariation.attributes);
+							}
+							if (nextVariation.innerBlocks) {
+								replaceInnerBlocks(
+									clientId,
+									createBlocksFromInnerBlocksTemplate(
+										nextVariation.innerBlocks
+									),
+									true
+								);
+							}
+						} }
+					/>
+				) }
+			</div>
 		</Fragment>
 	);
 };
