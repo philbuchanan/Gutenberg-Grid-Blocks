@@ -21,7 +21,7 @@ const HidePanel = ({
 	return (
 		<PanelBody
 			title={ __('Hide Item', 'pb') }
-			initialOpen={ false }
+			initialOpen={ !!(hidexs || hidesm || hidemd || hidelg || hidexl) }
 		>
 			{ completelyHidden && (
 				<div style={ {margin: '0 -15px 24px'} }>

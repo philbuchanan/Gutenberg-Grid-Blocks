@@ -19,7 +19,6 @@ import {
 const OffsetPanel = ({
 	attributes,
 	setAttributes,
-	initialOpen = false,
 }) => {
 	const {
 		offsetxs,
@@ -32,7 +31,7 @@ const OffsetPanel = ({
 	return (
 		<PanelBody
 			title={ __('Column Offsets', 'pb') }
-			initialOpen={ initialOpen }
+			initialOpen={ !!(offsetxs || offsetsm || offsetmd || offsetlg || offsetxl) }
 		>
 			<p>{ __('How many columns of the 12-column grid should this container be offset by at each screen size?', 'pb') }</p>
 			<NumberControl

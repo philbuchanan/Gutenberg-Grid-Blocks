@@ -69,7 +69,7 @@ const BlockGridItemEdit = ({
 				<ColumnSpanPanel
 					attributes={ attributes }
 					setAttributes={ setAttributes }
-					initialOpen={ false }
+					initialOpen={ !!(xs || sm || md || lg || xl) }
 					help={ __('This setting will override the “Block Grid Items Per Line” setting on the parent container.', 'pb') }
 				/>
 				<OffsetPanel
