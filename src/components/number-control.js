@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { uniqueId } from 'lodash';
+
+/**
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
@@ -14,7 +19,6 @@ const NumberControl = ({
 	className,
 	label,
 	value,
-	clientId,
 	onChange,
 	help,
 	min,
@@ -26,7 +30,7 @@ const NumberControl = ({
 	icon,
 	...props
 }) => {
-	const id = `number-control-${ clientId }`;
+	const id = uniqueId('number-control-');
 
 	// Set min and max defaults if not specified
 	min = (typeof min !== 'undefined') ? min : 1;
