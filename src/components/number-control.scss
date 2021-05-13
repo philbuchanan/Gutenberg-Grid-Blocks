@@ -1,3 +1,8 @@
+.c-number-control {
+	display: flex;
+	align-items: center;
+}
+
 .c-number-control__input {
 	width: 50px;
 }
@@ -9,9 +14,7 @@
 }
 
 .c-number-control__icon {
-	fill: #555d66;
-	position: relative;
-	top: 9px;
+	fill: #1e1e1e;
 	margin-right: 6px;
 }
 
