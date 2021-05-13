@@ -1,13 +1,8 @@
 /**
- * External dependencies
- */
-import { uniqueId } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Fragment, useEffect } from '@wordpress/element';
+import { Fragment } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
 import {
 	BlockControls,
@@ -22,7 +17,7 @@ import {
 } from '@wordpress/blocks';
 
 /**
- * Internal dependncies
+ * Internal dependencies
  */
 import variations from './variations';
 import icon from './icon.js';
@@ -76,58 +71,6 @@ const BlockGridEdit = ({
 	const hasChildBlocks = useSelect((select) => {
 		return select('core/block-editor').getBlocks(clientId).length > 0;
 	}, [clientId]);
-
-	/**
-	 * Since we removed the default value for `lg` from settings.js, any
-	 * `o-block-grid-3-lg` classes will be set as part of the block's className
-	 * property and no value will be shown in the NumberControl for the `lg`
-	 * attribute. This function automatically checks if there is a className for
-	 * the `lg` screen size and, if so, sets the appropriate `lg` attribute
-	 * value. It then notifies the user of the adjustment so they can review.
-	 *
-	 * Using `useEffect` with `[]` since this only needs to run once, not every
-	 * time the component updates.
-	 *
-	 * Fixes issue #47
-	 */
-	const { createWarningNotice, removeNotice } = useDispatch('core/notices');
-	const { selectBlock } = useDispatch('core/block-editor');
-
-	useEffect(() => {
-		if (!lg && className) {
-			const matches = className.match(/o-block-grid-\d-lg/);
-
-			if (!matches || !matches.length) {
-				return;
-			}
-
-			const num = parseInt(matches[0].match(/\d+/)[0], 10);
-
-			if (num < 0 || num > 6) {
-				return;
-			}
-
-			setAttributes({lg: num});
-
-			const noticeId = uniqueId('pbBlockGridSettingsChange');
-
-			createWarningNotice(
-				__('Due to a recent update the appearance of one of your Block Grids may have changed. Please ensure it is displaying as expected and save the post to apply the changes.', 'pb'),
-				{
-					id: noticeId,
-					actions: [
-						{
-							label: __( 'Go to block settings' ),
-							onClick: () => {
-								selectBlock(clientId);
-								removeNotice(noticeId);
-							},
-						},
-					],
-				}
-			);
-		}
-	}, []);
 
 	const { replaceInnerBlocks } = useDispatch('core/block-editor');
 
