@@ -104,11 +104,11 @@ const NumberControl = ({
 			help={ help }
 			className={ className }
 		>
-			<div>
+			<div className="c-number-control">
 				{ !!icon &&
 					<Icon
 						icon={ icon }
-						size={ 20 }
+						size={ 30 }
 						className="c-number-control__icon"
 					/>
 				}
