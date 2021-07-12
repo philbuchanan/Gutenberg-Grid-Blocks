@@ -8,6 +8,7 @@ import {
 	InspectorControls,
 	InnerBlocks,
 	useBlockProps,
+	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
 } from '@wordpress/block-editor';
 
 /**
@@ -64,6 +65,13 @@ const ColumnEdit = ({
 		return select('core/block-editor').getBlocks(clientId).length > 0;
 	}, [clientId]);
 
+	const innerBlocksProps = useInnerBlocksProps(blockProps, {
+		templateLock: false,
+		renderAppender: hasChildBlocks
+			? undefined
+			: InnerBlocks.ButtonBlockAppender,
+	});
+
 	return (
 		<Fragment>
 			<InspectorControls>
@@ -80,15 +88,7 @@ const ColumnEdit = ({
 					setAttributes={ setAttributes }
 				/>
 			</InspectorControls>
-			<div { ...blockProps }>
-				<InnerBlocks
-					templateLock={ false }
-					renderAppender={ hasChildBlocks
-						? undefined
-						: InnerBlocks.ButtonBlockAppender
-					}
-				/>
-			</div>
+			<div { ...innerBlocksProps } />
 		</Fragment>
 	);
 }

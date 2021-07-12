@@ -6,8 +6,8 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { Fragment } from '@wordpress/element';
 import {
 	BlockControls,
-	InnerBlocks,
 	useBlockProps,
+	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
 	__experimentalBlockVariationPicker,
 } from '@wordpress/block-editor';
 import { columns } from '@wordpress/icons';
@@ -43,6 +43,11 @@ const RowEdit = ({
 		}),
 	});
 
+	const innerBlocksProps = useInnerBlocksProps(blockProps, {
+		allowedBlocks: ['pb/column'],
+		orientation: 'horizontal',
+	});
+
 	const childBlocks = useSelect((select) => {
 		return select('core/block-editor').getBlocksByClientId(clientId)[0].innerBlocks;
 	});
@@ -65,35 +70,30 @@ const RowEdit = ({
 					isCollapsed={ true }
 				/>
 			</BlockControls>
-			<div { ...blockProps }>
-				{ !!childBlocks && childBlocks.length > 0 && (
-					<InnerBlocks
-						allowedBlocks={ ['pb/column'] }
-						orientation="horizontal"
-					/>
-				) }
-				{ !childBlocks || childBlocks.length === 0 && (
-					<__experimentalBlockVariationPicker
-						icon={ columns }
-						label={ __('Columns', 'pb') }
-						variations={ variations }
-						onSelect={ (nextVariation = defaultVariation) => {
-							if (nextVariation.attributes) {
-								setAttributes(nextVariation.attributes);
-							}
-							if (nextVariation.innerBlocks) {
-								replaceInnerBlocks(
-									clientId,
-									createBlocksFromInnerBlocksTemplate(
-										nextVariation.innerBlocks
-									),
-									true
-								);
-							}
-						} }
-					/>
-				) }
-			</div>
+			{ !!childBlocks && childBlocks.length > 0 && (
+				<div { ...innerBlocksProps } />
+			) }
+			{ !childBlocks || childBlocks.length === 0 && (
+				<__experimentalBlockVariationPicker
+					icon={ columns }
+					label={ __('Columns', 'pb') }
+					variations={ variations }
+					onSelect={ (nextVariation = defaultVariation) => {
+						if (nextVariation.attributes) {
+							setAttributes(nextVariation.attributes);
+						}
+						if (nextVariation.innerBlocks) {
+							replaceInnerBlocks(
+								clientId,
+								createBlocksFromInnerBlocksTemplate(
+									nextVariation.innerBlocks
+								),
+								true
+							);
+						}
+					} }
+				/>
+			) }
 		</Fragment>
 	);
 };
