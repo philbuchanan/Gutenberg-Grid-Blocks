@@ -3,7 +3,12 @@
  */
 import { __ } from '@wordpress/i18n';
 import { Fragment } from '@wordpress/element';
-import { InspectorControls, InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import {
+	InspectorControls,
+	InnerBlocks,
+	useBlockProps,
+	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
+} from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 
 /**
@@ -63,6 +68,12 @@ const BlockGridItemEdit = ({
 		return select('core/block-editor').getBlocks(clientId).length > 0;
 	}, [clientId]);
 
+	const innerBlocksProps = useInnerBlocksProps(blockProps, {
+		renderAppender: hasChildBlocks
+			? undefined
+			: InnerBlocks.ButtonBlockAppender,
+	});
+
 	return (
 		<Fragment>
 			<InspectorControls>
@@ -81,14 +92,7 @@ const BlockGridItemEdit = ({
 					setAttributes={ setAttributes }
 				/>
 			</InspectorControls>
-			<div { ...blockProps }>
-				<InnerBlocks
-					renderAppender={ hasChildBlocks
-						? undefined
-						: InnerBlocks.ButtonBlockAppender
-					}
-				/>
-			</div>
+			<div { ...innerBlocksProps } />
 		</Fragment>
 	);
 }
