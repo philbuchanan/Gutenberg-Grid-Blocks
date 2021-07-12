@@ -5,12 +5,8 @@
 
 .o-row,
 .o-block-grid {
-	// block-editor-block-list__layout holds the child blocks
-	// (i.e. o-col, o-block-grid__item)
-	> .block-editor-inner-blocks > .block-editor-block-list__layout {
-		display: flex;
-		flex-wrap: wrap;
-	}
+	display: flex;
+	flex-wrap: wrap;
 }
 
 // 1. The `.wp-block` class sets margin left and right to auto, which centres
@@ -30,11 +26,8 @@
 .o-block-grid__item {
 	padding-left: $gutter;
 	padding-right: $gutter;
-}
 
-div.o-col,
-div.o-block-grid__item {
-	.wp-block {
+	div.wp-block {
 		max-width: none;
 	}
 }
@@ -48,26 +41,26 @@ div.o-block-grid__item {
 // block grid inside one of the columns, the block grid should _not_ have
 // `justify-content: space-between` applied.
 
-.u-justify-content-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.u-justify-content-center {
 	justify-content: center;
 }
 
-.u-justify-content-end > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.u-justify-content-end {
 	justify-content: flex-end;
 }
 
-.u-justify-content-space-between > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.u-justify-content-space-between {
 	justify-content: space-between;
 }
 
-.u-justify-content-space-around > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.u-justify-content-space-around {
 	justify-content: space-around;
 }
 
-.u-align-items-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.u-align-items-center {
 	align-items: center;
 }
 
-.u-align-items-end > .block-editor-inner-blocks > .block-editor-block-list__layout {
+.u-align-items-end {
 	align-items: flex-end;
 }
