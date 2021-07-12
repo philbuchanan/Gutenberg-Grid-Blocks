@@ -1,0 +1,71 @@
+{
+	"apiVersion": "2",
+	"name": "pb/block-grid",
+	"title": "Block Grid Item",
+	"category": "design",
+	"textdomain": "pb",
+	"parent": ["pb/block-grid"],
+	"keywords": [
+		"blockgrid",
+		"grid",
+		"columns"
+	],
+	"attributes": {
+		"xs": {
+			"type": "number"
+		},
+		"sm": {
+			"type": "number"
+		},
+		"md": {
+			"type": "number"
+		},
+		"lg": {
+			"type": "number"
+		},
+		"xl": {
+			"type": "number"
+		},
+		"offsetxs": {
+			"type": "number"
+		},
+		"offsetsm": {
+			"type": "number"
+		},
+		"offsetmd": {
+			"type": "number"
+		},
+		"offsetlg": {
+			"type": "number"
+		},
+		"offsetxl": {
+			"type": "number"
+		},
+		"hidexs": {
+			"type": "boolean",
+			"default": false
+		},
+		"hidesm": {
+			"type": "boolean",
+			"default": false
+		},
+		"hidemd": {
+			"type": "boolean",
+			"default": false
+		},
+		"hidelg": {
+			"type": "boolean",
+			"default": false
+		},
+		"hidexl": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"supports": {
+		"className": false,
+		"reusable": false
+	},
+	"editorScript": "file:../../../build/index.js",
+	"editorStyle": "file:../../../build/index.css"
+}

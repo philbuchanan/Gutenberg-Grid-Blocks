@@ -7,14 +7,14 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import settings from './settings';
 import transforms from './transforms';
 import variations from './variations';
 import edit from './edit';
+import icon from './icon';
 import classnames from '../../utils/classnames';
 
 registerBlockType('pb/block-grid', {
-	...settings,
+	icon,
 
 	transforms,
 
