@@ -1,6 +1,6 @@
 {
 	"apiVersion": "2",
-	"name": "pb/block-grid",
+	"name": "pb/block-grid-item",
 	"title": "Block Grid Item",
 	"category": "design",
 	"textdomain": "pb",
@@ -65,7 +65,5 @@
 	"supports": {
 		"className": false,
 		"reusable": false
-	},
-	"editorScript": "file:../../../build/index.js",
-	"editorStyle": "file:../../../build/index.css"
+	}
 }

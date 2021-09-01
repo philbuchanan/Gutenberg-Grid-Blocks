@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Grid Blocks
  * Description: Gutenberg blocks for creating responsive grid rows, columns, and block grids.
- * Version: 5.8.0
+ * Version: 5.8.1
  * Requires at least: 5.8
  * Requires PHP: 7.3
  * Author: Phil Buchanan
@@ -23,10 +23,39 @@ class PB_Grid_Blocks {
 	}
 
 	public function register_blocks() {
-		register_block_type_from_metadata(__DIR__ . '/src/block-grid/block-grid/block.json');
-		register_block_type_from_metadata(__DIR__ . '/src/block-grid/block-grid-item/block.json');
-		register_block_type_from_metadata(__DIR__ . '/src/columns/row/block.json');
-		register_block_type_from_metadata(__DIR__ . '/src/columns/column/block.json');
+		$asset_file = include(get_template_directory() . '/blocks/build/index.asset.php');
+
+		wp_register_script(
+			'pb-grid-blocks-editor-scripts',
+			plugins_url('build/index.js', __FILE__),
+			$asset_file['dependencies'],
+			$asset_file['version'],
+			true
+		);
+
+		wp_register_style(
+			'pb-grid-blocks-editor-styles',
+			plugins_url('build/index.css', __FILE__),
+			array('wp-edit-blocks'),
+			$asset_file['version']
+		);
+
+		$register_blocks = array(
+			'block-grid/block-grid',
+			'block-grid/block-grid-item',
+			'columns/row',
+			'columns/column',
+		);
+
+		foreach($register_blocks as $json_file) {
+			register_block_type(
+				plugin_dir_path(__FILE__) . 'src/' . $json_file . '/block.json',
+				array(
+					'editor_script' => 'pb-grid-blocks-editor-scripts',
+					'editor_style'  => 'pb-grid-blocks-editor-styles',
+				)
+			);
+		}
 	}
 
 }
