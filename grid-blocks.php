@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Grid Blocks
  * Description: Gutenberg blocks for creating responsive grid rows, columns, and block grids.
- * Version: 5.8.0
+ * Version: 5.8.1
  * Requires at least: 5.8
  * Requires PHP: 7.3
  * Author: Phil Buchanan
@@ -18,29 +18,14 @@ if (!class_exists('PB_Grid_Blocks')) :
 
 class PB_Grid_Blocks {
 
-	/**
-	 * Class constructor
-	 * Sets up the plugin, including: textdomain and registering scripts.
-	 */
 	function __construct() {
-		$basename = plugin_basename(__FILE__);
-
-		// Load text domain
-		load_plugin_textdomain('pb', false, dirname($basename) . '/languages/');
-
-		// Register blocks JavaScript and CSS
-		add_action('enqueue_block_editor_assets', array($this, 'enqueue_block_editor_assets'));
+		add_action('init', array($this, 'register_blocks'));
 	}
 
+	public function register_blocks() {
+		$asset_file = include(get_template_directory() . '/blocks/build/index.asset.php');
 
-
-	/**
-	 * Enqueue the block's assets for the wp-admin editor
-	 */
-	public function enqueue_block_editor_assets() {
-		$asset_file = include(plugin_dir_path(__FILE__) . 'build/index.asset.php');
-
-		wp_enqueue_script(
+		wp_register_script(
 			'pb-grid-blocks-editor-scripts',
 			plugins_url('build/index.js', __FILE__),
 			$asset_file['dependencies'],
@@ -48,12 +33,29 @@ class PB_Grid_Blocks {
 			true
 		);
 
-		wp_enqueue_style(
+		wp_register_style(
 			'pb-grid-blocks-editor-styles',
 			plugins_url('build/index.css', __FILE__),
 			array('wp-edit-blocks'),
 			$asset_file['version']
 		);
+
+		$register_blocks = array(
+			'block-grid/block-grid',
+			'block-grid/block-grid-item',
+			'columns/row',
+			'columns/column',
+		);
+
+		foreach($register_blocks as $json_file) {
+			register_block_type(
+				plugin_dir_path(__FILE__) . 'src/' . $json_file . '/block.json',
+				array(
+					'editor_script' => 'pb-grid-blocks-editor-scripts',
+					'editor_style'  => 'pb-grid-blocks-editor-styles',
+				)
+			);
+		}
 	}
 
 }

@@ -3,16 +3,16 @@
  */
 import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { column } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
-import settings from './settings';
 import edit from './edit';
 import classnames from '../../utils/classnames';
 
 registerBlockType('pb/column', {
-	...settings,
+	icon: column,
 
 	edit: edit,
 

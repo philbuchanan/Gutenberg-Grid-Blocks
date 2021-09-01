@@ -1,0 +1,26 @@
+{
+	"apiVersion": "2",
+	"name": "pb/row",
+	"title": "Columns",
+	"description": "Display content in multiple columns.",
+	"category": "design",
+	"textdomain": "pb",
+	"keywords": [
+		"row",
+		"grid",
+		"span"
+	],
+	"attributes": {
+		"alignVertically": {
+			"type": "string",
+			"default": "top"
+		},
+		"alignHorizontally": {
+			"type": "string",
+			"default": "left"
+		}
+	},
+	"supports": {
+		"className": false
+	}
+}
