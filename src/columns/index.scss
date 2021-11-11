@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../_variables.scss";
 
 // # Grid Rows and Columns
@@ -13,11 +15,11 @@ $fractions: (12);
 		// denominator.
 		@for $numerator from 1 through $denominator {
 			.u-#{$numerator}of#{$denominator}#{$breakpoint} {
-				width: ($numerator / $denominator) * 100% !important;
+				width: math.div($numerator, $denominator) * 100% !important;
 			}
 
 			.u-offset-#{$numerator}of#{$denominator}#{$breakpoint} {
-				margin-left: ($numerator / $denominator) * 100% !important;
+				margin-left: math.div($numerator, $denominator) * 100% !important;
 			}
 		}
 	}

@@ -8,7 +8,7 @@ import {
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
-	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
+	useInnerBlocksProps,
 	__experimentalBlockVariationPicker,
 } from '@wordpress/block-editor';
 import { PanelBody } from '@wordpress/components';
