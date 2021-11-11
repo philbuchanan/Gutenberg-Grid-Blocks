@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../_variables.scss";
 
 // # Block Grid
@@ -5,7 +7,7 @@
 
 @mixin block-grid-loop($breakpoint: null) {
 	@for $i from 1 through $total-block-grid-columns {
-		$width: 100% / $i;
+		$width: math.div(100%, $i);
 
 		.o-block-grid-#{$i}#{$breakpoint} .o-block-grid__item {
 			width: $width;

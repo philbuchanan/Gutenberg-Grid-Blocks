@@ -4,7 +4,7 @@ Author URI: https://philbuchanan.com/
 Tags: columns, block grid, gutenberg, block, responsive
 Requires at least: 5.8
 Tested up to: 5.8
-Stable tag: 5.8.1
+Stable tag: 5.9.0
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,6 +18,10 @@ Gutenberg blocks for creating responsive grid rows, columns, and block grids.
 Gutenberg blocks is a plugin for creating advanced responsive grid rows, columns, and block grids. This plugin replaces the default Gutenberg Columns block.
 
 == Changelog ==
+
+= 5.9.0 =
+* Fixed: __experimentalUseInnerBlocksProps has been deprecated—now uses useInnerBlocksProps.save()
+* Fixed: Use sass:math for division
 
 = 5.8.1 =
 * Fixed: Now registering blocks via block.json files
@@ -46,6 +50,9 @@ Gutenberg blocks is a plugin for creating advanced responsive grid rows, columns
 * Plugin submitted to plugin repo
 
 == Upgrade Notice ==
+
+= 5.9.0 =
+Fixes __experimentalUseInnerBlocksProps deprecation.
 
 = 5.8.1 =
 Blocks now registered via block.json files.

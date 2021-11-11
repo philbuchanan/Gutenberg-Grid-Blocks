@@ -7,7 +7,7 @@ import { Fragment } from '@wordpress/element';
 import {
 	BlockControls,
 	useBlockProps,
-	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
+	useInnerBlocksProps,
 	__experimentalBlockVariationPicker,
 } from '@wordpress/block-editor';
 import { columns } from '@wordpress/icons';

@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import { columns } from '@wordpress/icons';
 
 /**
@@ -39,10 +39,8 @@ registerBlockType('pb/row', {
 			}),
 		});
 
-		return (
-			<div { ...blockProps }>
-				<InnerBlocks.Content />
-			</div>
-		);
+		const innerBlocksProps = useInnerBlocksProps.save(blockProps);
+
+		return <div { ...innerBlocksProps } />;
 	},
 });
