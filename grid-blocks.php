@@ -3,7 +3,7 @@
  * Plugin Name: Grid Blocks
  * Description: Gutenberg blocks for creating responsive grid rows, columns, and block grids.
  * Version: 5.9.0
- * Requires at least: 5.8
+ * Requires at least: 5.9
  * Requires PHP: 7.3
  * Author: Phil Buchanan
  * Author URI: https://philbuchanan.com

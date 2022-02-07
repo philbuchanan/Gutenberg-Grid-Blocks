@@ -2,8 +2,8 @@
 Contributors: philbuchanan
 Author URI: https://philbuchanan.com/
 Tags: columns, block grid, gutenberg, block, responsive
-Requires at least: 5.8
-Tested up to: 5.8
+Requires at least: 5.9
+Tested up to: 5.9
 Stable tag: 5.9.0
 Requires PHP: 7.3
 License: GPLv2 or later
