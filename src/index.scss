@@ -9,27 +9,14 @@
 	flex-wrap: wrap;
 }
 
-// 1. The `.wp-block` class sets margin left and right to auto, which centres
-//    columns or block grid items if there aren't enough to fill a full row.
-//    E.g. if there are 2 block grid items in a row that is set to display 3
-//    across, the two block grid items will be centred regardless of the
-//    alignment class set (like flex-start).
-.wp-block[data-type="pb/column"],
-.wp-block[data-type="pb/block-grid-item"] {
-	flex: 0 0 auto;
-	width: 100%;
-	margin-left: 0; // [1]
-	margin-right: 0; // [1]
-}
-
 .o-col,
 .o-block-grid__item {
+	box-sizing: border-box;
+	flex: 0 0 auto;
+	width: 100%;
+	margin-bottom: $gutter * 2;
 	padding-left: $gutter;
 	padding-right: $gutter;
-
-	div.wp-block {
-		max-width: none;
-	}
 }
 
 // # Alignments
