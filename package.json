@@ -1,6 +1,6 @@
 {
   "name": "grid-blocks",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "description": "Gutenberg blocks to create complex grid layouts.",
   "main": "src/index.js",
   "scripts": {

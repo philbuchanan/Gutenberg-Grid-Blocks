@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { uniqueId } from 'lodash';
-
-/**
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
@@ -12,6 +7,7 @@ import {
 	Button,
 	Icon,
 } from '@wordpress/components';
+import { useInstanceId } from '@wordpress/compose';
 
 import './number-control.scss';
 
@@ -30,7 +26,7 @@ const NumberControl = ({
 	icon,
 	...props
 }) => {
-	const id = uniqueId('number-control-');
+	const id = useInstanceId(NumberControl, 'number-control', undefined);
 
 	// Set min and max defaults if not specified
 	min = (typeof min !== 'undefined') ? min : 1;
